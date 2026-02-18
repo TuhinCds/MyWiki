@@ -322,7 +322,7 @@ function ShowPost(posts){
                             <div class="post-main">
                                 <div class="post-img">
                                     <div class="post-img-cover">
-                                        <img src="/imgs/${post.image ? "post_imgs/" + post.image : `default_img/${ShowDefaultImg[randomDefaultImg]}`}" alt="">
+                                        <img src="imgs/${post.image ? "post_imgs/" + post.image : `default_img/${ShowDefaultImg[randomDefaultImg]}`}" alt="">
                                     </div>
                                 </div>
                                 <div class="post-details">
@@ -408,7 +408,7 @@ function PostDetailsViewFunc(post, randomDefaultImg){
                                         <button id="ToggleHideShowImg"><i class="fa-solid fa-chevron-left"></i></button>
                                     </div>
                                 </div>
-                                 <img src="/imgs/${post.image ? "post_imgs/" + post.image : `default_img/${ShowDefaultImg[randomDefaultImg]}`}" alt="">
+                                 <img src="imgs/${post.image ? "post_imgs/" + post.image : `default_img/${ShowDefaultImg[randomDefaultImg]}`}" alt="">
                                  <div class="post_customize">
                                     <div clss="post_customize_wraper">
                                         <div class="font_cus">
@@ -462,7 +462,7 @@ function PostDetailsViewFunc(post, randomDefaultImg){
                                 <div class="postViewfooter">
                                     <div class="postViewLeft">
                                         <div class="postViewImgCover">
-                                            <img src="/imgs/${MyProfile.profile_img}" alt="">
+                                            <img src="imgs/${MyProfile.profile_img}" alt="">
                                         </div>
                                         <span>${MyProfile.name}</span>
                                     </div>
