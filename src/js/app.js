@@ -287,7 +287,7 @@ function Header(){
 Header()
 
 
-let postClickMemory = JSON.parse(localStorage.getItem("postClickMemory")) || null;
+let postClickMemory = JSON.parse(localStorage.getItem("postClickMemory")) || [];
 let postClicked = localStorage.getItem("postClicked") || ""
 let randomImgLen = Number(localStorage.getItem("randomImgLen")) || 0
 
@@ -375,13 +375,13 @@ function ShowPost(posts){
         })
     })
 }
-console.log(4 % 2 )
 
-if (Object.entries(postClickMemory).length > 1) {
+
+if (postClickMemory && Object.entries(postClickMemory).length > 1) {
     PostDetailsViewFunc(postClickMemory, randomImgLen)
 }
 
-
+console.log(postClickMemory)
 
 function PostDetailsViewFunc(post, randomDefaultImg){
     if (!post) return
