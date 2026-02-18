@@ -305,7 +305,7 @@ function ShowPost(posts){
                             <div class="post-header">
                                 <div class="profile-pic">
                                     <div class="profile-cover">
-                                        <img src="/imgs/${MyProfile.profile_img}" alt="">
+                                        <img src="imgs/${MyProfile.profile_img}" alt="">
                                     </div>
                                     <span class="PostUserName">${MyProfile.name.toUpperCase().slice(0, 1) + MyProfile.name.toLowerCase().slice(1)}</span>
                                 </div>
