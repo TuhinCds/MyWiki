@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MyWiki</title>
+    <link rel="stylesheet" href="assets/fonts/fontawesome-free-7.0.0-web/css/all.min.css">
+    <link rel="stylesheet" href="src/css/header.css">
+    <link rel="stylesheet" href="src/css/main.css">
+    <link rel="stylesheet" href="src/css/sidebar.css">
+    <link rel="stylesheet" href="src/css/responsive.css">
+    <link rel="stylesheet" href="src/css/footer.css">
+    <link rel="stylesheet" href="src/css/style.css">
+    <link rel="stylesheet" href="src/css/custom.css">
+</head>
+<body>
+    <div id="overly"></div>
+    <header class="header">
+        <div class="leftSideHead">
+            <span class="LogoSee"></span>
+        </div>
+        <div class="moddleSideHead">
+            <ul id="headerContentLi">
+                <!-- header links -->
+            </ul>
+        </div>
+        <div class="rightSideHead">
+            <div class="rightSideHeadContent">
+                <a href="index.html"><i class="fa-solid fa-arrow-rotate-left"></i></a>
+                <a href="#posts" id="ShowPostbtn">
+                    <i class="fa-solid fa-window-restore"></i>
+                    <div id="showPostLength">1</div>
+                </a>
+            </div>
+            <button id="SidebarToggleBtn"><i class="fa-solid fa-bars"></i></button>
+        </div>
+    </header>
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-wraper-content">
+            <div class="sidebar-head">
+            <div class="logo-side">
+                <div class="logo">
+                    <span class="LogoSee"></span>
+                </div>
+                <button id="closeSidebar"><i class="fa-solid fa-chevron-left"></i></button>
+            </div>
+        </div>
+        <div class="sidebarMainContainer">
+            <ul id="sidebarMainContent">
+
+            </ul>
+        </div>
+        </div>
+        <div class="sidebar-footer">
+            <div class="sidebar-footer-wraper">
+                <div class="theme-setting">
+                    <div class="theme-setting-btn">
+                        <span class="showThemeStatus">light</span>
+                        <button id="themeTogglerBtn" class="">
+                            <span class="btn-circle"></span>
+                        </button>
+                    </div>
+                    <span class="theme-color-show"></span>
+                </div>
+            </div>
+        </div>
+    </aside>
+    <main class="main">
+        <section class="hero_section" id="hero_section_main">
+                <div class="hero_center">
+                    <div class="hero-text">
+                        <h2 class="hero-heading-text"><span class="invisble-effect-left">Learn and</span> <span class="color-g-1-effect">boost your brain in every</span><span class="invisble-effect-right"> situation</span></h2>
+                        <p class="hero-sub-text">Build real skills step by step with simple lessons, practical examples, and hands-on practice that actually improves how you think, solve problems, and grow every single day.</p>
+                    </div>
+                    <div class="hero-btns">
+                        <button class="start-btn"><i class="fa-solid fa-book-open"></i>Start Learning</button>
+                        <button class="ReadBlogs"><i class="fa-solid fa-blog"></i></button>
+                    </div>
+                </div>
+        </section>
+        <section class="posts" id="posts">
+            <div class="posts_section_header">
+                <div class="posts_section_header_btns">
+                    <button id="SearchBtn"><i class="fa-solid fa-magnifying-glass"></i></button>
+                    <span class="border-w1-strok"></span>
+                    <button><i class="fa-regular fa-bookmark"></i></button>
+                    <button><i class="fa-solid fa-plus"></i></button>
+                    <button><i class="fa-regular fa-pen-to-square"></i></button>
+                    <button><i class="fa-solid fa-feather-pointed"></i></button>
+                </div>
+                <div class="post-show-type">
+                    <button class="selected">All</button>
+                    <button>My Posts</button>
+                </div>
+                <div class="searchContainer hideAnimate0">
+                    <button id="filterPost"><i class="fa-solid fa-filter"></i></button>
+                    <div class="inputsearch">
+                        <div class="searchcontainersec">
+                            <input type="text" id="searchInput">
+                            <span class="searchPlaceholder"><i class="fa-solid fa-magnifying-glass"></i>Search posts..</span>
+                        </div>
+                        <button id="searchBtn"><i class="fa-solid fa-magnifying-glass"></i></button>
+                    </div>
+                </div>
+            </div>
+            <div class="posts_section_main">
+                <div class="posts-container">
+                    <div id="postDetailsView" class="HideAnimateScale0">
+
+                    </div>
+                    <div id="ShowPosts">
+                    </div>
+                    <div class="EmptyPostMessage hideAnimate0">
+                        <div class="emptyHead">
+                            <h3>Not found <span class="changeEmptyWord"></span></h3>
+                            <p>from all post not found this data</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer class="footer"></footer>
+    <script type="module" src="src/js/app.js"></script>
+</body> 
+</html>

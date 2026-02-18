@@ -1,0 +1,127 @@
+@media (max-width: 790px){
+    .moddleSideHead {
+        display: none;
+    }
+    .logoName {
+        display: none !important;
+    }
+    .leftSideHead span i {
+        font-size: 1.6rem;
+    }
+    #overly.active{
+        transform: scale(1);
+        opacity: 1;
+    }
+   .sidebar {
+   width: var(--mobile-sidebar-width) !important;
+}
+body {
+    grid-template-columns: 0 1fr !important;
+    grid-template-rows: var(--header-height) 1fr auto;
+    grid-template-areas:
+    "sidebar header"
+    "sidebar main"
+    "footer footer"
+     ;
+     transition:  grid-template-columns .4s;
+}
+.sidebar-head {
+    height: 0;
+    padding: 0;
+    opacity: 0;
+    margin: 0;
+    overflow: hidden;
+}
+}
+@media (min-width: 791px){
+    .sidebarMainContainer {
+        margin-top: 50px;
+    }
+    .leftSideHead span{
+        font-weight: bold;
+        font-size: 2.6rem;
+    }
+    .hero-heading-text {
+    font-size: 3.8rem !important;
+    }
+    .searchContainer .inputsearch input {
+        width: 360px !important;
+    }
+    
+
+
+}
+@media (min-width: 890px){
+    body.closeSidebar {
+     grid-template-columns: var(--sidebar-width) 1fr !important;
+}
+#postDetailsView {
+    display: flex;
+    flex-direction: row !important;
+    gap: 20px;
+    padding: 20px;
+}
+
+.postDetailsheader {
+    width: 50%;
+}
+.viewPostDetailsMain{
+    width: 50%;
+    margin-top: 0px !important;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+.postImgs {
+    height: calc(100% - 0px);
+    white-space: nowrap;
+}
+.postDetailsheader img {
+    object-fit: cover;
+    height: calc(100% - 80px) !important;
+}
+.postDetailsheader .postDetailsViewHead{
+    display: none;
+}
+.imgHead {
+    display: flex !important;
+    align-items: center;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.postImgs.close {
+    width: 59px !important;
+    border-radius: 1000px;
+}
+.postImgs.close .imgHead button#HidepostDetailsViewBtn2{
+    display: none;
+}
+.postImgs.close img {
+    border-radius: 1000px;
+}
+.postImgs.close .imgHead {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.postImgs.close .imgHead .right-head #ToggleHideShowImg {
+    transform: rotate(180deg);
+}
+.postDetailsheader.close {
+    width: 59px !important;
+}
+.viewPostDetailsMain.isclose{
+    width: calc( 100% - 59px) !important;
+}
+}
+
+@media (min-width: 1024px){
+    .viewPostDetailsMain{
+    width: 100% !important;
+    }
+
+.postDetailsheader {
+    width: 40% !important;
+}
+
+}

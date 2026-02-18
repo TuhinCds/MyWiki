@@ -1,0 +1,87 @@
+.moddleSideHead {
+    display: flex;
+    align-items: center;
+}
+.moddleSideHead ul#headerContentLi {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+    list-style: none;
+}
+.moddleSideHead ul#headerContentLi a{
+    text-decoration: none;
+    font-size: .9rem;
+    color: var(--text-color)
+}
+.leftSideHead span {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 2.3rem;
+    font-weight: 550;
+    font-family: "Josefin Sans", sans-serif;
+    background: var(--logo-color);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-family: "Bungee", sans-serif;
+}
+.rightSideHead {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.rightSideHeadContent {
+    background: var(--light-color-tra-30);
+    border-radius: 1000px;
+    padding: 5px;
+    gap: 9px;
+    display: flex;
+    align-items: center;
+}
+.rightSideHeadContent a {
+    border-radius: 1000px;
+    width: 36px;
+    height: 30px;
+    border: none;
+    background: transparent;
+    color: var(--text-color-80);
+    transition: background .2s, color .2s;
+    cursor: pointer;
+    display: flex;
+    text-decoration: none;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.01rem;
+}
+.rightSideHeadContent button:hover {
+    background: var(--light-color-tra-35);
+    color: var(--text-color)
+}
+#SidebarToggleBtn {
+    width: 40px;
+    height: 40px;
+    background: var(--light-color-tra-30);
+    color: var(--text-color-80);
+    border-radius: 1000px;
+    border: none;
+    font-size: 1.01rem;
+    cursor: pointer;
+}
+.logoName {
+    font-weight: bold;
+}
+#headerContentLi button{
+    border: none;
+    background: transparent;
+    color: var(--text-color);
+    cursor: pointer;
+    font-size: .95rem;
+    font-weight: 370;
+}
+
+.moddleSideHead {
+    display: none;
+}
+.rightSideHeadContent {
+
+}

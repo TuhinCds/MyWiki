@@ -1,0 +1,20 @@
+.mark.red {
+    color: rgb(203, 0, 0);
+    background: rgba(255, 0, 0, 0.165);
+}
+.mark.blue {
+    color: rgb(33, 141, 255);
+    background: rgba(0, 110, 255, 0.165);
+}
+.mark.white {
+    color: var(--text-color);
+    background: rgba(255, 255, 255, 0.107);
+}
+.mark.orange {
+    color: rgb(250, 129, 16);
+    background: rgba(255, 109, 18, 0.165);
+}
+.mark.blue-light {
+    color: rgb(5, 234, 237);
+    background: rgba(0, 255, 242, 0.165);
+}
