@@ -843,6 +843,7 @@ body {
     color: var(--text-color);
     width: 65px;
     border-radius: 6px;
+    text-align: center;
 }
 .fontFamily_cus {
     position: relative;
@@ -951,11 +952,60 @@ body {
     flex-direction: column;
 }
 
-
-
-
-
-
+#sidebarMainContent li a , #sidebarMainContent li button{
+    cursor: pointer;
+}
+li {
+    cursor: pointer;
+}
+a {
+    cursor: pointer;
+}
+button{
+    cursor: pointer;
+}
+#sidebarMainContent {
+    font-family: "Montserrat", sans-serif !important;
+}
+.conMain {
+    font-family: "Montserrat", sans-serif !important;
+    font-weight: 460;
+    font-size: .92rem;
+}
+.oth-link-con-n {
+    font-weight: 500;
+    font-size: .92rem;
+}
+.status.old-space {
+    width: 8px !important;
+    height: 8px !important;
+    padding: 0 !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 100px;
+    background: rgba(255, 0, 0, 0.642)
+}
+.status.updated-space {
+    width: 8px !important;
+    height: 8px !important;
+    padding: 0 !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 100px;
+    background: rgba(255, 143, 30, 0.739)
+}
+.status.pro-space {
+    width: 8px !important;
+    height: 8px !important;
+    padding: 0 !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 100px;
+    background: rgba(0, 201, 205, 0.739)
+}
 
 
 

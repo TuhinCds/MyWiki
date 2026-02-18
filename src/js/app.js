@@ -126,10 +126,10 @@ website.sidebar.sidebarLinks.forEach((item, index) => {
     let createLinkContainer = document.createElement("li")
     createLinkContainer.innerHTML = `
     <div class="wraper">
-                        <${item.overWrite.length > 0 ? "button" : item.link ?  `a href="${item.link}" ${item.target ? `target="${item.target}"` : ""}` : "button"} class="item-btn">
+                        <${item.overWrite.length > 0 ? "button" : item.link ?  `a href="${item.link}" ${item.target ? `target="${item.target}"` : `target="_blank"`}` : "button"} class="item-btn">
                             <span class="link-content">
-                                <span class="link-con-n">${item.icon} ${item.content}</span>
-                                <span class="status ${item.status}">${item.status}</span>
+                                <span class="link-con-n">${item.icon} ${item.status ? item.content.length > 13 ? item.content.slice(0, 13) + "..." : item.content : item.content.length > 13 ? item.content.slice(0, 13) + '...' : item.content}</span>
+                                <span class="status ${item.status === "new" ? item.status : item.status + "-space"}">${item.status === "new" ? item.status : ""}</span>
                             </span>
                             ${item.overWrite.length < 1 ? "" : `<span class="arrow-icon"><i class="fa-solid fa-angle-down"></i></span>`}
                         </${item.overWrite.length > 0 ? "button" : item.link ? "a" : "button"}>
@@ -154,9 +154,9 @@ website.sidebar.sidebarLinks.forEach((item, index) => {
             createOverWriteA.innerHTML = `
                                     <li>
                                         <div class="oth-wraper">
-                                            <${ovItemA.overWrite.length > 0 ? "button" : ovItemA.link ? `a href="${ovItemA.link}" ${ovItemA.target ? `target="${ovItemA.target}"` : ""}` : "button"}  data-element-length="${ovItemA.overWrite.length}"class="oth-item-btn">
+                                            <${ovItemA.overWrite.length > 0 ? "button" : ovItemA.link ? `a href="${ovItemA.link}" ${ovItemA.target ? `target="${ovItemA.target}"` : `target="_blank"`}` : "button"}  data-element-length="${ovItemA.overWrite.length}"class="oth-item-btn">
                                                 <span class="oth-link-content">
-                                                    <span class="oth-link-con-n conMain ${ovItemA.overWrite.length < 1 ? "link" : ""}">${ovItemA.content}</span>
+                                                    <span class="oth-link-con-n conMain ${ovItemA.overWrite.length < 1 ? "link" : ""}">${ovItemA.content.length > 13 ? ovItemA.content.slice(0, 13) + "..." : ovItemA.content}</span>
                                                     <span class="statusCir ${ovItemA.status}"></span>
                                                 </span>
                                                 <span class="arrow-icon"></span>
@@ -182,9 +182,9 @@ website.sidebar.sidebarLinks.forEach((item, index) => {
                 createOverWriteB.innerHTML =  
                  `
                                                     <li>
-                                                        <${ovItemB.link === "" ? "button" : "a"} ${ovItemB.link === "" ? "" : `href=${ovItemB.link}`} class="oth-item-btn">
+                                                        <${ovItemB.link === "" ? "button" : "a"} ${ovItemB.link === "" ? "" : `href=${ovItemB.link} target="${ovItemB.target ? ovItemB.target : "_blank"}"`} class="oth-item-btn">
                                                             <span class="oth-link-content">
-                                                                <span class="oth-link-con-n">${ovItemB.content}</span>
+                                                                <span class="oth-link-con-n">${ovItemB.content.length > 13 ? ovItemB.content.slice(0, 13) + "..." : ovItemB.content}</span>
                                                                 <span class="statusCir ${ovItemB.status}"></span>
                                                             </span>
                                                             
@@ -494,7 +494,7 @@ const fontMenuMainBtns = document.querySelectorAll(".font-menu-main button")
 
 
 
-let savedFontFamily = localStorage.getItem("savedFontFamily") || "Outfit"
+let savedFontFamily = localStorage.getItem("savedFontFamily") || "default"
 
 
 ShowLinksData.innerHTML = ""

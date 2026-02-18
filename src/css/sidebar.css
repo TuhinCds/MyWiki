@@ -266,11 +266,11 @@
 }
 .sidebar-wraper-content {
     overflow-y: auto;
-    height: calc(100vh - 88px);
+    height: calc(100vh - 55px);
     scrollbar-width: none;
 }
 .sidebarMainContainer {
-    padding-bottom: 50px;
+    padding-bottom: 10px;
 }
 .theme-setting {
     display: flex;
