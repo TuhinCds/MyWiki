@@ -18,34 +18,18 @@ const website = {
             {
                 content: "Home",
                 class: "home", link: "index.html",
-                target: "", icon: `<i class="fa-solid fa-tent"></i>`,
+                target: "_self", icon: `<i class="fa-solid fa-tent"></i>`,
                 status: "",
                 overWrite: []
             },
+            {content: "Blogs", class: "", link: "", target: "", icon: `<i class="fa-solid fa-blog"></i>`, status: "", overWrite: []},
             {
                 content: "Posts",
                 class: "posts",
-                link: "", target: "", 
-                icon: `<i class="fa-solid fa-blog"></i>`, 
+                link: "#posts", target: "_self", 
+                icon: `<i class="fa-solid fa-tv"></i>`, 
                 status: "new", 
-                overWrite: [
-                    // {
-                    //     content: "Readed posts", class: "read", link: "m", target: "", icon: ``, status: "",
-                    //     overWrite: [
-                    //         { content: "post child ", class: "post child", link: `https://chatgpt.com/c/6993155c-d030-8323-9dec-628c73350dc8`, target: "", icon: ``, status: "updated",overWrite: [] },
-                    //         { content: "post child ", class: "post child", link: `https://chatgpt.com/c/6993155c-d030-8323-9dec-628c73350dc8`, target: "", icon: ``, status: "updated",overWrite: [] },
-                    //     ]
-
-                    // },
-                    // {
-                    //     content: "Readed posts", class: "read", link: "", target: "", icon: ``, status: "",
-                    //     overWrite: [
-                    //         { content: "post child ", class: "post child", link: `https://chatgpt.com/c/6993155c-d030-8323-9dec-628c73350dc8`, target: "", icon: ``, status: "updated",overWrite: [] },
-                    //         { content: "post child ", class: "post child", link: `https://chatgpt.com/c/6993155c-d030-8323-9dec-628c73350dc8`, target: "", icon: ``, status: "updated",overWrite: [] },
-                    //     ]
-
-                    // },
-                ]
+                overWrite: []
             },
             {
                 content: "Reading", class: "", link: "", target: "", icon: `<i class="fa-solid fa-comment"></i>`, status: "",
@@ -53,7 +37,8 @@ const website = {
                     {content: "Elonmask speech", class: "", link: "", target: "", icon: ``, status: "", overWrite: []},
                 ]
             },
-            {content: "Social media's", class: "", link: "", target: "", icon: `<i class="fa-solid fa-circle-stop"></i>`, status: "", overWrite: []},
+
+            {content: "Social media's", class: "", link: "#ShowChannels", target: "_self", icon: `<i class="fa-solid fa-circle-stop"></i>`, status: "", overWrite: []},
             {content: "Exarsice", class: "", link: "", target: "", icon: `<i class="fa-solid fa-person-biking"></i>`, status: "", overWrite: [
                 {
                     content: "To be thin", class: "", link: "", target: "", icon: `<i class="fa-solid fa-person-biking"></i>`, status: "", overWrite: [
@@ -83,15 +68,55 @@ const website = {
                 {content: "Story", class: "", link: "", target: "", icon: ``, status: "new",
                 overWrite: [
                     {
-                        content: "Google", class: "", link: "https://w.wiki/48J6", target: "", icon: ``, status: "new", overWrite: []
-
+                        content: "bn: Google", class: "", link: "https://w.wiki/48J6", target: "", icon: ``, status: "new", overWrite: [],
+                       
+                    },
+                    {
+                        content: "en: Google", class: "", link: "https://w.wiki/34Em", target: "", icon: ``, status: "new", overWrite: [],
+                       
+                    },
+                    {
+                        content: "en: Alphabet Inc", class: "", link: "https://w.wiki/3hp5", target: "", icon: ``, status: "new", overWrite: [],
+                       
+                    },
+                    {
+                        content: "bn: Alphabet Inc", class: "", link: "https://w.wiki/53w9", target: "", icon: ``, status: "new", overWrite: [],
+                       
+                    },
+                    {
+                         content: "bn: C Programming", class: "", link: "https://w.wiki/4zQP", target: "", icon: ``, status: "new", overWrite: [],
+                    },
+                    {
+                         content: "en: C Programming", class: "", link: "https://w.wiki/8Ri", target: "", icon: ``, status: "new", overWrite: [],
                     }
                 ]
             },
             ]
             },
-            {content: "Learning", class: "", link: "", target: "", icon: `<i class="fa-solid fa-graduation-cap"></i>`, status: "", overWrite: []},
+            {content: "Learn Programming", class: "", link: "", target: "", icon: `<i class="fa-solid fa-code"></i>`, status: "", overWrite: [
+                {content: "JavaScript", class: "", link: "", target: "", icon: ``, status: "", overWrite: []},
+                {content: "TypeScript", class: "", link: "", target: "", icon: ``, status: "", overWrite: []},
+                {content: "C Programming", class: "", link: "", target: "", icon: ``, status: "", overWrite: []},
+                {content: "C++", class: "", link: "", target: "", icon: ``, status: "", overWrite: []},
+                {content: "Java", class: "", link: "", target: "", icon: ``, status: "", overWrite: []},
+                {content: "Go", class: "", link: "", target: "", icon: ``, status: "", overWrite: []},
+                {content: "Rust", class: "", link: "", target: "", icon: ``, status: "", overWrite: []},
+                {content: "Kotlin", class: "", link: "", target: "", icon: ``, status: "", overWrite: []},
+                {content: "Dart (Flutter)", class: "", link: "", target: "", icon: ``, status: "", overWrite: []},
+                {content: "Erlang/Elixir", class: "", link: "", target: "", icon: ``, status: "", overWrite: []},
+                {content: "PHP", class: "", link: "", target: "", icon: ``, status: "", overWrite: []},
+                {content: "C#", class: "", link: "", target: "", icon: ``, status: "", overWrite: []},
+                {content: "Swift", class: "", link: "", target: "", icon: ``, status: "", overWrite: []},
+                {content: "Ruby", class: "", link: "", target: "", icon: ``, status: "", overWrite: []},
+                {content: "Perl", class: "", link: "", target: "", icon: ``, status: "", overWrite: []},
+                {content: "Scala", class: "", link: "", target: "", icon: ``, status: "", overWrite: []},
+                {content: "Lua", class: "", link: "", target: "", icon: ``, status: "", overWrite: []},
+                {content: "Bash", class: "", link: "", target: "", icon: ``, status: "", overWrite: []},
+                {content: "Terraform (HCL)", class: "", link: "", target: "", icon: ``, status: "", overWrite: []},
+                {content: "JavaScript", class: "", link: "", target: "", icon: ``, status: "", overWrite: []},
+            ]},
             {content: "Computer science", class: "", link: "", target: "", icon: `<i class="fa-solid fa-laptop-code"></i>`, status: "", overWrite: []},
+            {content: "Learning", class: "", link: "", target: "", icon: `<i class="fa-solid fa-graduation-cap"></i>`, status: "", overWrite: []},
             {content: "learn Technology", class: "", link: "", target: "", icon: `<i class="fa-solid fa-microchip"></i>`, status: "", overWrite: []},
             {content: "Notes", class: "", link: "", target: "", icon: `<i class="fa-solid fa-book-open"></i>`, status: "", overWrite: []},
             {content: "Prodcast's", class: "", link: "", target: "", icon: `<i class="fa-solid fa-podcast"></i>`, status: "", overWrite: []},
@@ -105,6 +130,7 @@ const website = {
             {content: "Learn Talk", class: "", link: "", target: "", icon: `<i class="fa-solid fa-square-poll-horizontal"></i>`, status: "", overWrite: []},
             {content: "Course's", class: "", link: "", target: "", icon: `<i class="fa-brands fa-youtube"></i>`, status: "", overWrite: []},
             {content: "Science", class: "", link: "", target: "", icon: `<i class="fa-solid fa-rocket"></i>`, status: "", overWrite: []},
+            {content: "Solve MCQ", class: "", link: "", target: "", icon: `<i class="fa-solid fa-question"></i>`, status: "", overWrite: []},
             
         ]
     }
@@ -115,13 +141,66 @@ const MyProfile = {
     email: "",
 
 }
-export {website, MyProfile}
-
-
-
 
 const ShowDefaultImg = [
     "im1.png", "im2.png", "im3.png", "im4.png", "im5.png",
      "im6.png", "im7.png", "im8.png", "im9.png"
 ]
-export {ShowDefaultImg}
+
+const icons = [
+    {
+        platform: "youtube",
+        icon: `<i class="fa-brands fa-youtube"></i>`
+    },
+    {
+        platform: "facebook",
+        icon: `<i class="fa-brands fa-facebook"></i>`
+    },
+    {
+        platform: "twitter",
+        icon: `<i class="fa-brands fa-twitter"></i>`
+    },
+    {
+        platform: "linkedin",
+        icon: `<i class="fa-brands fa-linkedin"></i>`
+    },
+    {
+        platform: "github",
+        icon: `<i class="fa-brands fa-github"></i>`
+    },
+    {
+        platform: "instagram",
+        icon: `<i class="fa-brands fa-instagram"></i>`
+    },
+    {
+        platform: "twitch",
+        icon: `<i class="fa-brands fa-twitch"></i>`
+    },
+    {
+        platform: "discord",
+        icon: `<i class="fa-brands fa-discord"></i>`
+    },
+    {
+        platform: "reddit",
+        icon: `<i class="fa-brands fa-reddit"></i>`
+    },
+    {
+        platform: "stackoverflow",
+        icon: `<i class="fa-brands fa-stack-overflow"></i>`
+    },
+    {
+        platform: "medium",
+        icon: `<i class="fa-brands fa-medium"></i>`
+    },
+    {
+        platform: "devto",
+        icon: `<i class="fa-brands fa-dev"></i>`
+    },
+    {
+        platform: "hashnode",
+        icon: `<i class="fa-solid fa-hashtag"></i>`
+    },
+]
+
+
+export {ShowDefaultImg, icons, website, MyProfile}

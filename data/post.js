@@ -37,4 +37,31 @@ const Posts = {
     ]
 }
 
-export {Posts}
+let Blogs = {
+    AllBlogs:
+    [
+        {
+            title: "How to Work google",
+            blog: `
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum perferendis commodi porro libero nostrum minus iure fuga dolorem doloribus, vel eum dolore suscipit laboriosam dolores in ea sunt. Sunt, placeat.`,
+            type: ["tech", "programming"],
+        },
+        {
+            title: "Artificial Intelligence",
+            blog: `
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum perferendis commodi porro libero nostrum minus iure fuga dolorem doloribus, vel eum dolore suscipit laboriosam dolores in ea sunt. Sunt, placeat.`,
+            type: ["ai", "robotic"],
+        },
+    ]
+}
+
+
+
+
+
+
+
+export {Posts, Blogs}
+
+
+

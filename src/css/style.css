@@ -7,6 +7,7 @@
 :root {
     --bg-color: rgb(0, 0, 0);
     --white-color: white;
+    --white-colorBn: rgb(192, 192, 192);
     --header-height: 75px;
     --logo-color: linear-gradient(40deg, rgba(0, 84, 218, 0.23), rgb(0, 140, 255));
     --mobile-sidebar-width: 276px;
@@ -14,6 +15,7 @@
     --linkBtn-color: rgb(43, 117, 255);
 }
 :root[data-theme="light"] {
+    --white-colorBn: rgb(255, 255, 255);
    --bg-color: rgb(239, 239, 239); 
    --bg-color-95: rgb(255, 255, 255); 
    --bg-color-90: rgba(240, 240, 240, 0.802); 
@@ -30,6 +32,7 @@
    --sidebar-color: rgb(255, 255, 255);
    --logo-color: linear-gradient(40deg, rgba(0, 91, 238, 0.471), rgb(0, 99, 221));
    --sidebar-footer-color: rgb(222, 222, 222);
+   --block-color: var(--sidebar-color)
 }
 :root[data-theme="dark"] {
     --bg-color: rgb(0, 0, 0);
@@ -47,6 +50,7 @@
     --light-color-tra-20:rgba(0, 0, 0, 0.133);
    --sidebar-color: rgb(18, 20, 23);
    --sidebar-footer-color: rgb(33, 35, 44);
+   --block-color: rgb(25, 28, 33);
 }
 
 *,
@@ -192,6 +196,7 @@ body {
     justify-content: start;
 
 }
+
 .hero-sub-text {
     color: var(--text-color-60);
     text-align: center;
@@ -243,6 +248,7 @@ body {
 .posts {
     display: flex;
     flex-direction: column;
+    height: auto;
 }
 .posts_section_header_btns {
     background: var(--light-color-tra-30);
@@ -943,7 +949,7 @@ body {
     color: var(--text-color-80);
     opacity: 1;
     transform: scale(1);
-    transition: transform .01, opacity .4s;
+    transition: transform .04, opacity .4s;
 }
 .emptyHead {
     display: flex;
@@ -1006,21 +1012,531 @@ button{
     border-radius: 100px;
     background: rgba(0, 201, 205, 0.739)
 }
+.YoutubeChannels {
+    height: auto;
+    padding-top: 20px;
+    border-top: 1px solid var(--light-color-tra-35);
+    margin-top: 30px;
+}
+.YoutubeChannelsWraper {
+    width: 100% ;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    height: 100%;
+}
+.SelectChannels {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+.SelectChannelsWraper {
+    width: 95%;
+    max-width: 440px;
+    height: calc(100% - (var(--header-height) + 30px));
+}
 
-
-
-
-
-/*  multi used classes */
-.border-h1 {
-    margin: 0 60px;
-    height: 1px;
+#ShowChanelTypes {
+    background: var(--block-color);
+    border: 1px solid var(--light-color-tra-25);
+    width: 100%;
+    max-width: 500px;
+    height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+    border-radius: 20px;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+#ShowChanelTypes .chan_type {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    gap: 17px;
+    width: 100%;
+    padding: 17px 12px;
+    border: none;
+    border-radius: 0;
+    text-align: start;
+    color: var(--text-color-80);
+    background: transparent;
+    border-bottom: 1px solid var(--light-color-tra-25);
+}
+#ShowChanelTypes .chan_type:last-child {
+    border: none;
+}
+.chan_type .indicate {
+    width: 20px;
+    height: 20px;
     background: var(--light-color-tra-25);
+    border-radius: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.chan_type .indicate .circle_indicate{
+    width: 12px;
+    height: 12px;
+    background: transparent;
+    border-radius: 100px;
+    transition: background .4s;
+}
+.chan_type.selected .indicate .circle_indicate {
+    background: var(--white-colorBn);
+}
+.YoutubeChannelsSectionHead {
+    text-align: center;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 6px;
+}
+.YoutubeChannelsSectionHead h3 {
+    color: var(--text-color-80);
+    display: flex;
+    align-items: center;
+    gap: 6px;
 
 }
-.border-h1-w90 {
-    margin: 0 10px;
-    height: 1px;
-    background: var(--light-color-tra-25);
+.YoutubeChannelsSectionHead p {
+    color: var(--text-color-60);
 
+}
+
+.youtubeChannelsContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 2px;
+    height: 100%;
+    padding: 20px;
+}
+.ShowChannels {
+    height: 30%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+}
+.channel {
+    padding: 10px;
+}
+.channel img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 1000px;
+}
+.channelHead {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 6px;
+}
+.YoutubeChannelsWraper {
+    margin-top: 30px;
+    height: 100% !important;
+}
+.SelectChannelsWraper {
+    height: 100%;
+}
+
+.YoutubeChannelsWraper {
+    padding: 10px;
+}
+.channelHead .ChannelName{
+    font-size: 1.3rem;
+    font-weight: 550;
+    color: var(--text-color-80);
+}
+.channelHead .description{
+    font-size: .9rem;
+    font-weight: 400;
+    color: var(--text-color-60);
+    width: 200px;
+    text-align: center;
+}
+
+
+
+.ShowChannels .ShowAll {
+    width: 100px;
+    height: 100px;
+    border-radius: 1000px;
+    border: none;
+    font-size: 1.5rem;
+    font-family: "DM sans", sans-serif;
+    background: var(--light-color-tra-30);
+    color: var(--text-color-60);
+}
+.ShowChannels .ShowAll:hover {
+    background: var(--light-color-tra-40);
+    color: var(--text-color);
+}
+.YoutubeChannels {
+    position: relative;
+}
+#ShowAllChannelsOverly {
+    position: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    width: 100%;
+    background: var(--bg-color);
+
+    z-index: 9999999;
+    padding-top: 20px;
+    transform: scale(1);
+    opacity: 1;
+    transition: opacity .4s;
+}
+#ShowAllChannelsFromData  {
+    overflow-y: auto;
+    overflow-x: hidden;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    height: calc(100vh - (var(--header-height) + 30px));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#ShowAllChannelsFromData .description {
+    width: 300px;
+}
+.ShowAllChannelsOverlyHeader {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: end;
+    padding: 10px 20px;
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0
+    
+}
+.ShowAllChannelsOverlyHeader button{
+    width: 40px;
+    height: 40px;
+    border-radius: 1000px;
+    border: none;
+    color: var(--text-color-80);
+    background: var(--light-color-tra-30)
+}
+.ShowChannelsBestVideos {
+    background: var(--block-color);
+    height: 100%;
+    border: 1px solid var(--light-color-tra-25);
+    border-radius: 10px;
+}
+.ShowChannelsPics {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    gap: 25px;
+}
+#ShowChannelsBestVideosList {
+    display: flex;
+    flex-direction: column;
+    gap: 0px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+#ShowChannelsBestVideosList li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 7px;
+    color: var(--text-color-80)
+}
+#ShowAllLinksFromData {
+    display: flex;
+    flex-direction: column;
+    gap: 0px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+#ShowAllLinksFromData li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 7px;
+    color: var(--text-color-80)
+}
+.ShowChannelsPics {
+    margin-top: 30px;
+}
+.AddChannels {
+    width: 100%;
+}
+#ShowChannelsBestVideosList li {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+#ShowAllLinksFromData li {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+#ShowChannelsBestVideosList li .ShowLink .channelnameShow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    font-size: .8rem;
+}
+#ShowAllLinksFromData li {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+#ShowAllLinksFromData li .ShowLink .channelnameShow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    font-size: .8rem;
+}
+
+.ShowLink {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 19px 10px;
+}
+.videoDetails h4 {
+    font-size: .9rem;
+}
+.videoDetails p {
+    font-size: .8rem;
+}
+.videoDetails p .dotPoint{
+    width: 3px;
+    height: 3px;
+    background: var(--text-color-60);
+    border-radius: 100px;
+    display: inline-block;
+
+
+}
+.videoDetails{
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+.videoDetails p{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+.ShowChannelsBestVideos {
+    height: max-content;
+}
+.videoPic a {
+    color: var(--text-color-80);
+    text-decoration: none;
+}
+
+#ShowAllLinksOverly {
+    position: fixed;
+    inset: 0;
+    transform: scale(1);
+    opacity: 1;
+    transition: opacity .4s, transform .3s;
+    height: 100%;
+    background: var(--bg-color);
+    z-index: 999999999;
+}
+.ShowAllLinksOverlyHead {
+    text-align: end;
+    padding: 10px 20px;
+}
+.ShowAllLinksOverlyHead button {
+    width: 40px;
+    height: 40px;
+    border-radius: 1000px;
+    border: none;
+    color: var(--text-color-80);
+    background: var(--light-color-tra-35)
+}
+
+#ShowAllLinksFromData {
+    display: flex !important;
+    align-items: center !important;
+    flex-wrap: wrap !important;
+    text-wrap: wrap;
+
+    justify-content: center;
+    gap: 20px;
+    overflow-y: auto;
+    height: calc(100vh - (var(--header-height) + 30px));
+    overflow-x: hidden;
+    padding-bottom: 15px;
+}
+#ShowAllLinksFromData li .videoPic a{
+    font-size: 1.3rem;
+}
+.platformName {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+.platformName .icon {
+    font-size: .8rem;
+    color: var(--text-color-60)
+}
+.sidebar-footer {
+    box-shadow: 3px 40px 40px var(--sidebar-color);
+}
+.posts {
+    margin-bottom: 100px !important;
+}
+.Blogs {
+    margin-top: 50px;
+    padding: 10px;
+}
+.blogheadText {
+    width: 100%;
+}
+.blogheadText .blogHeadHeading {
+    text-align: center;
+    color: var(--text-color-80);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+}
+.blogsMain {
+    margin-top: 30px;
+}
+
+.searchInputGroup {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    background: var(--block-color);
+    border-radius: 40px;
+    padding: 5px 5px; 
+}
+.searchContainer {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    position: relative;
+    width: 100%;
+}
+.searchContainer span {
+    position: absolute;
+    top: 50%;
+    left: 21px;
+    transform: translateY(-50%);
+    font-size: .9rem;
+    color: var(--text-color-60);
+    pointer-events: none;
+}
+.searchContainer input {
+    padding: 15px;
+    border: none;
+    background: transparent;
+    color: var(--text-color-80);
+    border-radius: 9px;
+    width: 100%;
+    outline: none;
+}
+
+.searchInputGroup button {
+        padding: 15px;
+        border: none;
+        background: var(--light-color-tra-25);
+        color: var(--text-color);
+        border-radius: 600px;
+        font-size: .9rem;
+
+    }
+    
+.searchSuggestContainer {
+    width: 100%;
+}
+#searchSuggest{
+    width: 100%;
+}
+.searchBlogsWraper {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 7px;
+    width: 92%;
+    max-width: 600px;
+}
+.SearchBlogs {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.searchSuggestContainer {
+  background: var(--bg-color);
+  min-height: 20vh;
+  max-height: 40vh;
+  border-radius: 10px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+.searchBlogsWraper {
+    background: var(--bg-color);
+    border-radius: 27px;
+    overflow: hidden;
+    padding: 5px;
+
+}
+.searchSuggestContainer {
+    border-top: 1px solid var(--light-color-tra-20);
+    border-radius: 0px;
+    padding-top: 6px;
+    margin-top: 10px;
+}
+#searchSuggest li{
+    list-style: none;
+       
+ }
+#searchSuggest li button {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    gap: 7px;
+    padding: 7px 15px;
+    background: transparent;
+    border: none;
+    color: var(--text-color-80);
+    font-size: 1rem;
+}
+#searchSuggest li button i {
+    font-size: .8rem;
+}
+
+
+.searchBlogsWraper {
+    display: flex;
+    flex-direction: column;
+}
+#searchSuggest {
+    display: flex;
+    flex-direction: column;
 }

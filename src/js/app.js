@@ -1,5 +1,6 @@
-import { website, MyProfile, ShowDefaultImg} from '../../data/website.js'
-import { Posts } from '../../data/post.js'
+import { website, MyProfile, ShowDefaultImg, icons} from '../../data/website.js'
+import { Posts, Blogs } from '../../data/post.js'
+import {allYoutubeChannels, ChannelsTypes} from '../../data/data.js'
 
 // ShowPosts
 
@@ -33,6 +34,23 @@ const searchInput = document.getElementById("searchInput")
 const searchPlaceholder = document.querySelector(".searchPlaceholder")
 const EmptyPostMessage = document.querySelector(".EmptyPostMessage")
 
+// website
+
+const postShowType = document.querySelectorAll(".post-show-type button")
+const ShowChanelTypes = document.getElementById("ShowChanelTypes")
+const ShowAllChannelsOverly = document.getElementById("ShowAllChannelsOverly")
+const CloseChannelsFolder = document.getElementById("CloseChannelsFolder")
+const ShowAllChannelsFromData = document.getElementById("ShowAllChannelsFromData")
+
+// overlys
+const ShowAllLinksFromData = document.getElementById("ShowAllLinksFromData")
+const ShowAllLinksOverly = document.getElementById("ShowAllLinksOverly")
+
+// links show section
+
+const ShowChannelsBestVideosList = document.getElementById("ShowChannelsBestVideosList")
+const CloseLinksFolder = document.getElementById("CloseLinksFolder")
+
 
 // theme 
 const showThemeStatus = document.querySelector(".showThemeStatus")
@@ -40,6 +58,16 @@ const themeTogglerBtn = document.getElementById("themeTogglerBtn")
 const btnCircle = document.querySelector(".btn-circle")
 const root = document.documentElement;
 
+// ShowChannels
+const ShowChannels = document.getElementById("ShowChannels")
+
+
+// blogs 
+
+const searchSuggest = document.getElementById("searchSuggest")
+const SearchBlogInput = document.getElementById("SearchBlogInput")
+const SearchBlogbtn = document.getElementById("SearchBlogbtn")
+const searchBlogPlaceholder = document.querySelector(".searchplaceholder")
 
 // theme function
 let theme = localStorage.getItem("theme") || "dark"
@@ -126,16 +154,16 @@ website.sidebar.sidebarLinks.forEach((item, index) => {
     let createLinkContainer = document.createElement("li")
     createLinkContainer.innerHTML = `
     <div class="wraper">
-                        <${item.overWrite.length > 0 ? "button" : item.link ?  `a href="${item.link}" ${item.target ? `target="${item.target}"` : `target="_blank"`}` : "button"} class="item-btn">
+                        <${item.overWrite.length > 0 ? "button" : item.link ?  `a href="${item.link}" ${item.target ? `target="${item.target}"` : `target="_blank"`}` : "button"} class="item-btn" data-element-type="${item.link ? "link": "button"}">
                             <span class="link-content">
                                 <span class="link-con-n">${item.icon} ${item.status ? item.content.length > 13 ? item.content.slice(0, 13) + "..." : item.content : item.content.length > 13 ? item.content.slice(0, 13) + '...' : item.content}</span>
                                 <span class="status ${item.status === "new" ? item.status : item.status + "-space"}">${item.status === "new" ? item.status : ""}</span>
                             </span>
-                            ${item.overWrite.length < 1 ? "" : `<span class="arrow-icon"><i class="fa-solid fa-angle-down"></i></span>`}
+                            ${item.overWrite.length < 1 ? "" : `<span class="arrow-icon ${item.overWrite.length > 10 ? "rotateY0" : ""}"><i class="fa-solid fa-angle-down"></i></span>`}
                         </${item.overWrite.length > 0 ? "button" : item.link ? "a" : "button"}>
                         ${
                             item.overWrite.length < 1 ? "" :
-                             `<div class="s-other-content">
+                             `<div class="s-other-content ${item.overWrite.length > 10 ? "height0A" : ""}">
                             <ul class="oth-content">
                                                 
                             </ul>
@@ -154,7 +182,7 @@ website.sidebar.sidebarLinks.forEach((item, index) => {
             createOverWriteA.innerHTML = `
                                     <li>
                                         <div class="oth-wraper">
-                                            <${ovItemA.overWrite.length > 0 ? "button" : ovItemA.link ? `a href="${ovItemA.link}" ${ovItemA.target ? `target="${ovItemA.target}"` : `target="_blank"`}` : "button"}  data-element-length="${ovItemA.overWrite.length}"class="oth-item-btn">
+                                            <${ovItemA.overWrite.length > 0 ? "button" : ovItemA.link ? `a href="${ovItemA.link}" ${ovItemA.target ? `target="${ovItemA.target}"` : `target="_blank"`}` : "button"}  data-element-length="${ovItemA.overWrite.length}"class="oth-item-btn" data-element-type="${ovItemA.link ? "link": "button"}>
                                                 <span class="oth-link-content">
                                                     <span class="oth-link-con-n conMain ${ovItemA.overWrite.length < 1 ? "link" : ""}">${ovItemA.content.length > 13 ? ovItemA.content.slice(0, 13) + "..." : ovItemA.content}</span>
                                                     <span class="statusCir ${ovItemA.status}"></span>
@@ -163,7 +191,7 @@ website.sidebar.sidebarLinks.forEach((item, index) => {
                                             </${ovItemA.overWrite.length > 0 ? "button" : ovItemA.link ? "a" : "button"}>
                                             ${
                                                 ovItemA.overWrite.length < 1 ? "" :
-                                                 `<div class="oth-s-other-content">
+                                                 `<div class="oth-s-other-content ${ovItemA.overWrite.length > 5 ? "height0A" : ""}">
                                                 <ul class="oth-content">
                                                 </ul>
                                             </div>`
@@ -182,7 +210,7 @@ website.sidebar.sidebarLinks.forEach((item, index) => {
                 createOverWriteB.innerHTML =  
                  `
                                                     <li>
-                                                        <${ovItemB.link === "" ? "button" : "a"} ${ovItemB.link === "" ? "" : `href=${ovItemB.link} target="${ovItemB.target ? ovItemB.target : "_blank"}"`} class="oth-item-btn">
+                                                        <${ovItemB.link === "" ? "button" : "a"} ${ovItemB.link === "" ? "" : `href=${ovItemB.link} target="${ovItemB.target ? ovItemB.target : "_blank"}"`} class="oth-item-btn" data-element-type="${ovItemB.link ? "link": "button"}>
                                                             <span class="oth-link-content">
                                                                 <span class="oth-link-con-n">${ovItemB.content.length > 13 ? ovItemB.content.slice(0, 13) + "..." : ovItemB.content}</span>
                                                                 <span class="statusCir ${ovItemB.status}"></span>
@@ -298,7 +326,7 @@ let postsDataShow = Posts.AllPost
 function ShowPost(posts){
     ShowPosts.innerHTML = ""
     posts.forEach((post, index) => {
-        let randomDefaultImg = Math.floor(Math.random() * ShowDefaultImg.length)
+        let randomDefaultImg = index > (ShowDefaultImg.length - 1) ? Math.floor(Math.random() * ShowDefaultImg.length) : index
         let createPost = document.createElement("div");
         createPost.className = "post"
         createPost.innerHTML = `
@@ -355,7 +383,14 @@ function ShowPost(posts){
             }
         })
 
-
+        const postHashTags = createPost.querySelector(".post-hash-tags")
+        postHashTags.innerHTML = ""
+        post.tag.forEach((tag, indexTag) => {
+            let createTag = document.createElement("span")
+            createTag.innerHTML = `#${tag}`
+            createTag.className = 'hashTag'
+            postHashTags.appendChild(createTag)
+        })
 
         const linksShow = createPost.querySelector(".linksShow")
         post.links.filter(link => link !== "").forEach((link, index)=> {
@@ -520,6 +555,7 @@ PostDetailsViewIs(postClicked)
 function PostDetailsViewIs(status){
     if (status === "add"){
         postDetailsView.classList.remove("HideAnimateScale0")
+        SidebarToggle("remove")
     } else if (status === "remove"){
         postDetailsView.classList.add("HideAnimateScale0")
         localStorage.setItem("clicked", "remove")
@@ -602,7 +638,6 @@ document.addEventListener("click", (e) => {
                 postDetailsView.classList.remove(b.dataset.font)
             })
             FontFamily(addClass)
-            console.log(addClass)
         })
     })
 
@@ -658,3 +693,359 @@ ShowPost(postsDataShow)
 window.addEventListener("load", () => {
     searchInput.value = ""
 })
+
+// postShowType
+
+let whichBtnActive = Number(localStorage.getItem("whichBtnActive")) || 0
+
+postShowType.forEach((btn, index) => {
+    btn.addEventListener("click", () => {
+        postShowType.forEach(b => b.classList.remove("selected"))
+        btn.classList.add("selected")
+        localStorage.setItem("whichBtnActive", index)
+    })
+    if (whichBtnActive === index){
+        postShowType.forEach(b => b.classList.remove("selected"))
+        btn.classList.add("selected")
+    }
+})
+
+// ShowChanelTypes
+
+ShowChanelTypes.innerHTML = ""
+
+ChannelsTypes.forEach((t, index) => {
+    if (t == "") return
+    let createBtn = document.createElement("button")
+    createBtn.className = "chan_type"
+    createBtn.dataset.type = t
+    createBtn.innerHTML = ` <span class="indicate">
+                                <span class="circle_indicate"></span>
+                                </span>
+                    <span>${t.toUpperCase().slice(0, 1) + t.toLowerCase().slice(1)}</span>`
+    ShowChanelTypes.appendChild(createBtn)
+})
+
+let ShowChanelTypesBtns = ShowChanelTypes.querySelectorAll("button")
+let selectedBtn =  0
+
+try {
+    selectedBtn = Number(localStorage.getItem("selectedBtn")) || 0
+} catch(err){
+    localStorage.removeItem("selectedBtn")
+    selectedBtn = 0
+}
+
+let dataCC = ShowChanelTypesBtns[selectedBtn > (ShowChanelTypesBtns.length - 1) ? 0 : selectedBtn].dataset.type
+let filterSavedChannels = FilterChannels(dataCC)
+
+
+
+let selectedChannelsContainer = localStorage.getItem("selectedChannelsContainer", "true") || "false"
+ShowChannnelsX(allYoutubeChannels)
+
+function ShowChannnelsX(channels){
+    ShowAllChannelsFromData.innerHTML = ""
+    ShowChannels.innerHTML = ""
+    channels.forEach((c, index) => {
+    let createShowChannels = document.createElement("div") 
+
+    ShowAllChannelsFromData.appendChild(createShowChannels)
+
+    if (channels && channels.length > 2 && index === 2){
+               
+            createShowChannels.innerHTML = `<div class="channelHead">
+                                <button class="ShowAll">
+                                    All
+                                </button>
+                                    <p class="ChannelName">See All</p>
+                                    <p class="description">see all youtube channels</p>
+                                </div>`
+                                
+                ShowChannels.appendChild(createShowChannels)
+
+
+                let ShowAll = ShowChannels.querySelector(".ShowAll")
+                ShowAll.addEventListener("click", () => {
+                    ShowAllChannelsOverlyIs("add")
+                })
+            }
+
+        if (index > 1) return
+        let createChannel = document.createElement("div")
+        createChannel.className = "channel"
+        createChannel.innerHTML = ` <div class="channelHead">
+                                <a href="${c.link.split("://")[0]==="http" ? c.link : "http://" + c.link}" target="_blank">
+                                    <img src="${c.profile_img ? c.profile_img : `imgs/default_img/${ShowDefaultImg[index > (ShowDefaultImg.length - 1) ? Math.floor(Math.random() * ShowDefaultImg.length) : index]}`}" alt="">
+                                </a>
+                                <p class="ChannelName">${c.channel}</p>
+                                <p class="description">${c.description}</p>
+                            </div>`
+        ShowChannels.appendChild(createChannel)
+        
+
+        
+    })
+    channels.forEach((c, index) => {
+                let createChannel = document.createElement("div")
+        createChannel.className = "channel"
+        createChannel.innerHTML = ` <div class="channelHead">
+                                <a href="${c.link.split("://")[0]==="http" ? c.link : "http://" + c.link}" target="_blank">
+                                    <img src="${c.profile_img ? c.profile_img : `imgs/default_img/${ShowDefaultImg[index > (ShowDefaultImg.length - 1) ? Math.floor(Math.random() * ShowDefaultImg.length) : index]}`}" alt="">
+                                </a>
+                                <p class="ChannelName">${c.channel}</p>
+                                <p class="description">${c.description}</p>
+                            </div>`
+        ShowAllChannelsFromData.appendChild(createChannel)
+    })
+
+
+}
+function SetStatus(Name, status, data)
+{
+    if (status === "set"){
+        localStorage.setItem(Name, data)
+    } else if (status === "remove"){
+        localStorage.removeItem(Name)
+    }
+}
+function GetStatus(Name, defaultData){
+    if (defaultData === "json"){
+        return JSON.parse(localStorage.getItem(Name)) || []
+    } else {
+        return localStorage.getItem(Name) 
+    }
+}
+
+
+
+function ShowAllChannelsOverlyIs(status){
+    if (status === "add" || status === "true"){
+        ShowAllChannelsOverly.classList.remove("hideAnimate0")
+        SetStatus("selectedChannelsContainer", "set", 'true')
+    } else if (status === "remove" || status === "false"){
+        ShowAllChannelsOverly.classList.add("hideAnimate0")
+        SetStatus("selectedChannelsContainer", "remove", "false")
+    }
+}
+CloseChannelsFolder.addEventListener("click", () => {
+    ShowAllChannelsOverlyIs("remove")
+})
+ShowAllChannelsOverlyIs(selectedChannelsContainer)
+
+
+function FilterChannels(search){
+    if (search === "All"){
+        return allYoutubeChannels
+    }
+    let data = null
+   data = allYoutubeChannels.filter(item => item.topics.some(i => i.includes(search.toLowerCase())) || item.keyword.some(i => i.includes(search.toLowerCase()) || item.keyword.some(i => search.toLowerCase().includes(i.toLowerCase()))))
+   return data
+}
+
+
+
+
+ShowChanelTypesBtns.forEach((b, index) => {
+
+
+    b.addEventListener("click", () => {
+        ShowChanelTypesBtns.forEach(b2 => b2.classList.remove("selected"))
+        b.classList.add("selected")
+        localStorage.setItem("selectedBtn", index)
+
+
+        let channelsArr = FilterChannels(b.dataset.type)
+        ShowChannnelsX(b.dataset.type === "All" ? allYoutubeChannels : channelsArr)
+    })
+    if (index === selectedBtn){
+        ShowChanelTypesBtns.forEach(b2 => b2.classList.remove("selected"))
+        b.classList.add("selected")
+    }
+})
+
+ShowChannnelsX(filterSavedChannels)
+
+
+
+document.addEventListener("click", (e) => {
+    ClickLinkEvent(e.target)
+})
+
+function ClickLinkEvent(element){
+
+    let linkBtn = element.closest(".item-btn") || element.closest(".oth-item-btn")
+    if (!linkBtn) return
+    if (linkBtn.dataset.elementType === "link"){
+        SidebarToggle("remove")
+        Overly(false)
+    }   
+
+}
+
+
+// Show social links from data
+
+
+
+let socialLinksAllData = allYoutubeChannels.flatMap(l => l.links).filter(link => link.link !== "")
+
+
+SocialLinksFromDataIn(socialLinksAllData)
+
+
+function SocialLinksFromDataIn(socialLinks){
+    ShowAllLinksFromData.innerHTML = ""
+ShowChannelsBestVideosList.innerHTML = ""
+socialLinks.forEach((link, index) => {
+
+    let icon = icons.find(i => i.platform.toLowerCase().includes(link.platform.toLowerCase()) || link.platform.toLowerCase().includes(i.platform.toLowerCase()))
+    let createLink = document.createElement("li")
+    createLink.innerHTML = `
+                                        <div class="ShowLink">
+                                            <div class="videoPic">
+                                                <a href="${link.link}" target="${link.target ? link.target : "_balnk"}">
+                                                    <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                                                </a>
+                                            </div>
+                                            <div class="videoDetails">
+                                                <h4>${link.content.length > 18 ? link.content.slice(0, 15) + "..." : link.content}</h4>
+                                                <p>
+                                                    <span>${link.channel}</span>
+                                                    <span class="dotPoint"></span>
+                                                    <span class="platformName"><span class="icon">${icon.icon}</span></span>
+                                                    <span class="dotPoint"></span>
+                                                    <span class="platformName">${icon.platform}</span>
+                                                </p>
+                                            </div>
+                                    </div>`
+    ShowAllLinksFromData.appendChild(createLink)
+
+
+
+    if (index > 1) return
+    let createLinkAB = document.createElement("li")
+    let createBorder = document.createElement("div")
+    createBorder.className = "border-b1-w1"
+    createLinkAB.className = "ShowLinkItem"
+    createLinkAB.innerHTML = `
+                                    <div class="ShowLink">
+                                            <div class="videoPic">
+                                                <a href="${link.link}" target="${link.target ? link.target : "_balnk"}">
+                                                    <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                                                </a>
+                                            </div>
+                                            <div class="videoDetails">
+                                                <h4>${link.content.length > 18 ? link.content.slice(0, 18) + "..." : link.console}</h4>
+                                                <p>
+                                                    <span>${link.channel.length > 16 ? link.channel.slice(0, 16) + "..." : link.channel}</span>
+                                                    <span class="dotPoint"></span>
+                                                    <span class="platformName">${link.platform}</span>
+                                                </p>
+                                            </div>
+                                    </div>`
+    ShowChannelsBestVideosList.appendChild(createLinkAB)
+    if (index < 1){
+        ShowChannelsBestVideosList.appendChild(createBorder)
+    }
+})
+}
+
+
+let savedLinkSection = GetStatus("savedOverlyLinkShowStatus", "") 
+ShowLinkSection(savedLinkSection)
+
+
+function ShowLinkSection(status){
+    if(status === "add"){
+        ShowAllLinksOverly.classList.remove("hideAnimate0")
+        SetStatus("savedOverlyLinkShowStatus", "set", "add")
+    } else {
+        ShowAllLinksOverly.classList.add("hideAnimate0")
+        SetStatus("savedOverlyLinkShowStatus", "remove", "remove")
+    }
+}
+
+CloseLinksFolder.addEventListener("click", () => {
+    ShowLinkSection("remove")
+})
+ShowChannelsBestVideosList.addEventListener("click", (e) => {
+    if (!e.target.closest("a")){
+       ShowLinkSection("add") 
+    }
+})
+
+
+
+// Blogs
+
+
+
+let postsDataShowBlogs = Blogs.AllBlogs
+let allBlogTopic = [...new Set(postsDataShowBlogs.flatMap(t => t.type))]
+let searchBlogInputSaved = GetStatus("savedSearchBlogInput", "")
+
+function SearchBlogs(searchData){
+   SetStatus("savedSearchBlogInput", "set", searchData)
+   let searchValue = GetStatus("savedSearchBlogInput", "")
+   ChangeSearchDisplay(searchValue)
+
+
+}
+
+
+suggestSearch(allBlogTopic)
+function suggestSearch(typesAll, search){
+    searchSuggest.innerHTML = ""
+    if (!search) return
+    typesAll.filter(t => t.toLowerCase().includes(search.toLowerCase()) || search.toLowerCase().includes(t.toLowerCase())).forEach(type => {
+            let createSuggest = document.createElement("li")
+            createSuggest.innerHTML = `
+            <button data-suggest="${type}">
+             <i class="fa-solid fa-magnifying-glass"></i>
+             ${type}
+            </button>`
+            searchSuggest.appendChild(createSuggest)
+
+            let btn = createSuggest.querySelector("button")
+
+            btn.addEventListener("click", () => {
+                SearchBlogs(btn.dataset.suggest)
+            })
+    })
+}
+
+
+
+SearchBlogInput.addEventListener("input", () => {
+    let searchdata = SearchBlogInput.value.trim()  
+    SetStatus("savedSearchBlogInput", "set", searchdata)
+    hidePlaceholder(searchdata.length)
+    
+    let ti = setTimeout(() => {
+        suggestSearch(allBlogTopic, searchdata)
+        clearTimeout(ti)
+    }, 200)
+})
+
+SearchBlogbtn.addEventListener("click", () => {
+    let searchdata = SearchBlogInput.value.trim()
+    SearchBlogs(searchdata)
+    SearchBlogInput.focus()
+})
+
+hidePlaceholder(searchBlogInputSaved.length)
+SearchBlogInput.value = seargichBlogInputSaved
+suggestSearch(allBlogTopic, searchBlogInputSaved)
+
+
+function hidePlaceholder(length){
+    if (length > 0){
+        searchBlogPlaceholder.style.opacity = "0"
+    } else {
+        searchBlogPlaceholder.style.opacity = "1"
+    }
+}
+function ChangeSearchDisplay(search){
+    SearchBlogInput.value = search
+}

@@ -47,7 +47,7 @@ body {
     .searchContainer .inputsearch input {
         width: 360px !important;
     }
-    
+
 
 
 }
@@ -60,10 +60,12 @@ body {
     flex-direction: row !important;
     gap: 20px;
     padding: 20px;
+    
 }
 
 .postDetailsheader {
     width: 50%;
+    margin-top: 25px;
 }
 .viewPostDetailsMain{
     width: 50%;
@@ -109,12 +111,77 @@ body {
 }
 .postDetailsheader.close {
     width: 59px !important;
+    
 }
 .viewPostDetailsMain.isclose{
     width: calc( 100% - 59px) !important;
-}
+    
 }
 
+.YoutubeChannelsWraper {
+    padding: 30px !important;
+}
+.youtubeChannelsContainer {
+    padding: 2px !important;
+}
+.ShowChannels {
+    flex-direction: row !important;
+
+}
+
+.YoutubeChannelsWraper {
+    flex-direction: row !important;
+    justify-content: space-between;
+}
+.SelectChannels {
+    width: 40%;
+}
+.youtubeChannelsContainer {
+    width: 100%;
+}
+
+.SelectChannels {
+    justify-content: start !important;
+}
+
+#ShowAllChannelsOverly {
+    position: fixed;
+    display: flex;
+    flex-wrap: wrap;
+    text-wrap: wrap;
+    white-space: wrap;
+    align-items: start !important;
+    flex-direction: row !important;
+}
+.ShowChannelsPics {
+    display: flex !important;
+    flex-direction: row !important;
+    height: 100%;
+    gap: 35px !important;
+    margin-top: 10px !important;
+}
+.ShowChannelsBestVideos {
+    width: 50%;
+}
+#ShowChannelsBestVideosList li .channelnameShow{
+    display: none;
+}
+.addChannelsFoot {
+    display: block !important;
+}
+#ShowAllLinksFromData li .videoPic a{
+    font-size: 1.6rem;
+}
+#ShowAllLinksFromData li {
+    width: max-content !important;
+
+}
+#ShowAllLinksFromData {
+    flex-direction: row !important;
+}
+
+
+}
 @media (min-width: 1024px){
     .viewPostDetailsMain{
     width: 100% !important;
@@ -123,5 +190,43 @@ body {
 .postDetailsheader {
     width: 40% !important;
 }
+
+}
+@media (max-width: 839px){
+   #ShowPosts {
+    padding: 20px 70px !important;
+   }
+}
+@media (max-width: 580px){
+   #ShowPosts {
+    padding: 20px !important;
+   }
+
+}
+@media (max-width: 480px){
+   #ShowChanelTypes {
+    background: transparent !important;
+    border: 1px solid transparent !important;
+   }
+   #ShowChanelTypes .chan_type {
+    background: var(--light-color-tra-25) !important;
+    border-radius: 6px !important;
+     border-bottom: 1px solid transparent !important;
+}
+#ShowChanelTypes {
+    height: 44vh !important;
+
+}
+#ShowAllLinksFromData li .videoDetails{
+    width: 100%;
+    justify-content: space-between;
+    margin-left: 10px;
+}
+#ShowAllLinksFromData li {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 
 }

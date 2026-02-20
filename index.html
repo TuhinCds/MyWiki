@@ -56,7 +56,7 @@
                 <div class="theme-setting">
                     <div class="theme-setting-btn">
                         <span class="showThemeStatus">light</span>
-                        <button id="themeTogglerBtn" class="">
+                        <button id="themeTogglerBtn">
                             <span class="btn-circle"></span>
                         </button>
                     </div>
@@ -78,6 +78,7 @@
                     </div>
                 </div>
         </section>
+        <!-- Post section -->
         <section class="posts" id="posts">
             <div class="posts_section_header">
                 <div class="posts_section_header_btns">
@@ -115,6 +116,97 @@
                             <h3>Not found <span class="changeEmptyWord"></span></h3>
                             <p>from all post not found this data</p>
                         </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Links section -->
+        <section class="YoutubeChannels" id="YoutubeChannels">
+            <div class="YoutubeChannelsSectionHead">
+                <h3><i class="fa-solid fa-tower-broadcast"></i>Youtube Channels</h3>
+                <p>You can learn from these channels.</p>
+            </div>
+
+            <!-- Show Overlys -->
+            <div id="ShowAllChannelsOverly" class="hideAnimate0">
+                <div class="ShowAllChannelsOverlyHeader">
+                    <button id="CloseChannelsFolder">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </div>
+                <div class="ShowAllChannelsOverlyMain">
+                    <div id="ShowAllChannelsFromData">
+                       <!-- show all channels -->
+                        
+                    </div>
+                </div>
+            </div>
+
+            <div id="ShowAllLinksOverly" class="hideAnimate0">
+                <div class="ShowAllLinksOverlyHead">
+                    <button id="CloseLinksFolder">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </div>
+                <div class="ShowAllLinksOverlyMain">
+                    <ul id="ShowAllLinksFromData">
+                       <!-- show all links -->
+                        
+                    </ul>
+                </div>
+            </div>
+
+            <!-- End overlys -->
+            <div class="YoutubeChannelsWraper">
+                <div class="SelectChannels">
+                    <div class="SelectChannelsWraper">
+                        <div id="ShowChanelTypes">
+                            <!-- Types btns -->
+                        </div>
+                    </div>
+                </div>
+                <div class="youtubeChannelsContainer">
+                    <div class="ShowChannels" id="ShowChannels">
+                        <!-- show channels -->
+                          
+                    </div>
+                    <div class="ShowChannelsPics">
+                        <div class="ShowChannelsBestVideos">
+                            <ul id="ShowChannelsBestVideosList">
+
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="Blogs" class="Blogs">
+            <div class="blogsSectionWraper">
+                <div class="blogHead">
+                    <div class="blogheadText">
+                        <h3 class="blogHeadHeading"><i class="fa-solid fa-blog"></i>Blogs</h3>
+                    </div>
+                </div>
+                <div class="blogsMain">
+                    <div class="SearchBlogs">
+                       <div class="searchBlogsWraper">
+                         <div class="searchInputGroup">
+                            <div class="searchContainer">
+                              <input type="text" id="SearchBlogInput">
+                              <span class="searchplaceholder"><i class="fa-solid fa-magnifying-glass"></i> Search Blogs..</span>
+                           </div>
+                           <button id="SearchBlogbtn"><i class="fa-solid fa-magnifying-glass"></i></button>
+                         </div>
+                         <div class="searchSuggestContainer">
+                            <ul id="searchSuggest">
+                                
+                            </ul>
+                         </div>
+                       </div>
+                    </div>
+                    <div class="blogsMainContainer" id="blogsMainContainer">
+                        <!-- show blogs -->
                     </div>
                 </div>
             </div>
