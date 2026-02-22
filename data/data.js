@@ -31,6 +31,76 @@ let allYoutubeChannels = [
                 target: "_blank",
                 platform: "youtube"
             },
+            {
+                content: "C++ Programing Course - Full Tutorial for Beginners",
+                channel: "CS50",
+                link: "https://youtu.be/8jLOx1hD3_o?si=2tqHrYK9JFRme5Y4",
+                target: "_blank",
+                platform: "youtube"
+            },
+            {
+                content: "C++ Programing Course - Full Tutorial for Beginners",
+                channel: "CS50",
+                link: "https://youtu.be/8jLOx1hD3_o?si=2tqHrYK9JFRme5Y4",
+                target: "_blank",
+                platform: "youtube"
+            },
+            {
+                content: "C++ Programing Course - Full Tutorial for Beginners",
+                channel: "CS50",
+                link: "https://youtu.be/8jLOx1hD3_o?si=2tqHrYK9JFRme5Y4",
+                target: "_blank",
+                platform: "youtube"
+            },
+            {
+                content: "C++ Programing Course - Full Tutorial for Beginners",
+                channel: "CS50",
+                link: "https://youtu.be/8jLOx1hD3_o?si=2tqHrYK9JFRme5Y4",
+                target: "_blank",
+                platform: "youtube"
+            },
+            {
+                content: "C++ Programing Course - Full Tutorial for Beginners",
+                channel: "CS50",
+                link: "https://youtu.be/8jLOx1hD3_o?si=2tqHrYK9JFRme5Y4",
+                target: "_blank",
+                platform: "youtube"
+            },
+            {
+                content: "C++ Programing Course - Full Tutorial for Beginners",
+                channel: "CS50",
+                link: "https://youtu.be/8jLOx1hD3_o?si=2tqHrYK9JFRme5Y4",
+                target: "_blank",
+                platform: "youtube"
+            },
+            {
+                content: "C++ Programing Course - Full Tutorial for Beginners",
+                channel: "CS50",
+                link: "https://youtu.be/8jLOx1hD3_o?si=2tqHrYK9JFRme5Y4",
+                target: "_blank",
+                platform: "youtube"
+            },
+            {
+                content: "C++ Programing Course - Full Tutorial for Beginners",
+                channel: "CS50",
+                link: "https://youtu.be/8jLOx1hD3_o?si=2tqHrYK9JFRme5Y4",
+                target: "_blank",
+                platform: "youtube"
+            },
+            {
+                content: "C++ Programing Course - Full Tutorial for Beginners",
+                channel: "CS50",
+                link: "https://youtu.be/8jLOx1hD3_o?si=2tqHrYK9JFRme5Y4",
+                target: "_blank",
+                platform: "youtube"
+            },
+            {
+                content: "C++ Programing Course - Full Tutorial for Beginners",
+                channel: "CS50",
+                link: "https://youtu.be/8jLOx1hD3_o?si=2tqHrYK9JFRme5Y4",
+                target: "_blank",
+                platform: "youtube"
+            },
         ]
     },
     {   
@@ -64,7 +134,8 @@ let allYoutubeChannels = [
                 link: "https://www.youtube.com/playlist?list=PLhQjrBD2T380DH9nYJq7n9i8VjLwXqg",
                 target: "_blank",
                 platform: "youtube"
-            }
+            },
+            
         ]
     },
 

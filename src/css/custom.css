@@ -62,3 +62,42 @@
     height: 1px;
     background: var(--light-color-tra-25);
 }
+.height0 {
+    height: 0 !important;
+    overflow: hidden !important; 
+    padding: 0 !important;
+    margin: 0 !important;
+}
+.height0AndOp0 {
+    height: 0 !important;
+    overflow: hidden !important; 
+    padding: 0 !important;
+    margin: 0 !important;
+    opacity: 0; 
+}
+.error {
+    background: rgb(255, 229, 229) !important;
+}
+.showMoreBtn {
+    color: var(--text-color-80)
+}
+.b-link{
+    color: var(--text-color);
+    
+}
+.b-link.deco-none{
+    color: var(--text-color);
+    text-decoration: none;
+}
+.b-link.red {
+    color: rgb(203, 0, 0);
+}
+.b-link.blue {
+    color: rgb(0, 131, 238);
+}
+.b-link.orange {
+    color: rgb(225, 112, 0);
+}
+.b-link.light-blue {
+    color: rgb(0, 206, 182);
+}

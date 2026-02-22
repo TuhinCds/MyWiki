@@ -81,19 +81,7 @@
         <!-- Post section -->
         <section class="posts" id="posts">
             <div class="posts_section_header">
-                <div class="posts_section_header_btns">
-                    <button id="SearchBtn"><i class="fa-solid fa-magnifying-glass"></i></button>
-                    <span class="border-w1-strok"></span>
-                    <button><i class="fa-regular fa-bookmark"></i></button>
-                    <button><i class="fa-solid fa-plus"></i></button>
-                    <button><i class="fa-regular fa-pen-to-square"></i></button>
-                    <button><i class="fa-solid fa-feather-pointed"></i></button>
-                </div>
-                <div class="post-show-type">
-                    <button class="selected">All</button>
-                    <button>My Posts</button>
-                </div>
-                <div class="searchContainer hideAnimate0">
+                <div class="searchContainer">
                     <button id="filterPost"><i class="fa-solid fa-filter"></i></button>
                     <div class="inputsearch">
                         <div class="searchcontainersec">
@@ -145,9 +133,38 @@
 
             <div id="ShowAllLinksOverly" class="hideAnimate0">
                 <div class="ShowAllLinksOverlyHead">
-                    <button id="CloseLinksFolder">
-                        <i class="fa-solid fa-xmark"></i>
-                    </button>
+
+                    <div class="ShowAllLinkOverlyHeadWraper">
+                        <span class="ShowAllOverlyheadtext"><i class="fa-solid fa-link"></i>All Links</span>
+                        <div class="AllLinkheadRightSide">
+                            <button id="CreateNewBtn"><i class="fa-solid fa-plus"></i>Add Link</button>
+                            <button id="CloseLinksFolder">
+                                <i class="fa-solid fa-xmark"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="ShowAllLinksOverlyHead2 height0AndOp0">
+                    <div class="InputLinks">
+                        <div class="inputgroup1">
+                            <div class="inputsMain1 inputsX">
+                                <input type="text">
+                                <span class="placeholder">Channel Name</span>
+                            </div>
+                            <div class="inputsMain2 inputsX">
+                                <input type="text">
+                                <span class="placeholder">Title</span>
+                            </div>
+                        </div>
+                        <div class="inputTitle inputsX">
+                            <input type="text">
+                            <span class="placeholder"><i class="fa-solid fa-link"></i>Link</span>
+                        </div>
+                        <div class="inputLinksBtns">
+                            <button id="AddLinkBtn"><i class="fa-solid fa-plus"></i>Add</button>
+                            <button id="RemoveAddLinkSec"><i class="fa-solid fa-chevron-up"></i></button>
+                        </div>
+                    </div>
                 </div>
                 <div class="ShowAllLinksOverlyMain">
                     <ul id="ShowAllLinksFromData">
@@ -207,6 +224,38 @@
                     </div>
                     <div class="blogsMainContainer" id="blogsMainContainer">
                         <!-- show blogs -->
+                         <div id="showBlogs">
+                            <div class="blog">
+                                
+                            </div>
+                         </div>
+                         <div id="showAllBlogsOverly" class="hideAnimate0">
+                            <div class="showAllBlogsOverlyHeader">
+                                <div class="blogsOverlyLefthead">
+                                    <span><i class="fa-solid fa-blog"></i></span>
+                                </div>
+                                <div class="blogsOverlyRighthead">
+                                    <div class="searchContainerInBlog">
+                                        <div class="searchInputs">
+                                            <input type="text">
+                                            <span class="placeholder">
+                                                <i class="fa-solid fa-magnifying-glass"></i>
+                                                Search blog...
+                                            </span>
+                                        </div>
+                                        <button id="SearchInGoggle"><i class="fa-brands fa-google"></i></button>
+                                    </div>
+                                    <button id="HideBlogs">
+                                        <i class="fa-solid fa-xmark"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="blogsOverlyMain">
+                                <div class="showAllBlogsOverlyMain" id="ShowAllBlogsOverlyMain">
+                                
+                            </div>
+                            </div>
+                         </div>
                     </div>
                 </div>
             </div>

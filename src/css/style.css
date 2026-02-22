@@ -62,6 +62,7 @@
     -webkit-tap-highlight-color: transparent;
     transition: background .4s ease;
     scrollbar-width: none;
+
 }
 html {
     scroll-behavior: smooth;
@@ -80,6 +81,7 @@ body {
     "footer footer"
      ;
      transition:  grid-template-columns .5s ease;
+     overflow-x: hidden;
 }
 
 
@@ -94,6 +96,7 @@ body {
     position: fixed;
     left: 0;
     right: 0;
+    width: 100%;
     top: 0;
     height: var(--header-height);
     z-index: 99999;
@@ -300,7 +303,7 @@ body {
 }
 #ShowPosts {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(390px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
     gap: 20px;
     width: 100%;
     padding: 20px;
@@ -489,7 +492,6 @@ body {
     align-items: center;
     padding: 10px;
     background: var(--light-color-tra-30);
-    border-radius: 6px;
 }
 .searchContainer .inputsearch input {
     padding: 4px;
@@ -519,19 +521,7 @@ body {
 .searchcontainersec .searchPlaceholder i {
     font-size: .78rem;
 }
-#searchBtn {
-    border: none;
-    background: none;
-    display: none;
-    color: var(--text-color)
-}
-.searchContainer #filterPost{
-    padding: 10px 15px;
-    border: none;
-    background: var(--light-color-tra-30);
-    border-radius: 10px;
-    color: var(--text-color)
-}
+
 .searchtexts {
     color: var(--text-color);
     margin-top: 10px;
@@ -1260,13 +1250,7 @@ button{
     padding: 7px;
     color: var(--text-color-80)
 }
-#ShowAllLinksFromData {
-    display: flex;
-    flex-direction: column;
-    gap: 0px;
-    overflow-y: auto;
-    overflow-x: hidden;
-}
+
 #ShowAllLinksFromData li {
     display: flex;
     align-items: center;
@@ -1375,19 +1359,7 @@ button{
     background: var(--light-color-tra-35)
 }
 
-#ShowAllLinksFromData {
-    display: flex !important;
-    align-items: center !important;
-    flex-wrap: wrap !important;
-    text-wrap: wrap;
 
-    justify-content: center;
-    gap: 20px;
-    overflow-y: auto;
-    height: calc(100vh - (var(--header-height) + 30px));
-    overflow-x: hidden;
-    padding-bottom: 15px;
-}
 #ShowAllLinksFromData li .videoPic a{
     font-size: 1.3rem;
 }
@@ -1492,11 +1464,12 @@ button{
 }
 .searchSuggestContainer {
   background: var(--bg-color);
-  min-height: 20vh;
+  height: 100%;
   max-height: 40vh;
   border-radius: 10px;
   overflow-y: auto;
   overflow-x: hidden;
+  transition: height .2s,  max-height .2s;
 }
 .searchBlogsWraper {
     background: var(--bg-color);
@@ -1539,4 +1512,464 @@ button{
 #searchSuggest {
     display: flex;
     flex-direction: column;
+}
+.searchContainer {
+    text-align: center;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+}
+.searchContainer #filterPost {
+    padding: 14px;
+}
+.searchContainer {
+    width: 90%;
+    max-width: 570px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+}
+.posts_section_header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+.inputsearch {
+    width: 100%;
+    background: var(--block-color) !important;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 100px !important;
+    padding: 5px !important;
+    box-shadow: 2px 3px 40px var(--bg-color);
+}
+.inputsearch input {
+    padding: 10px !important;
+}
+#searchBtn {
+    display: block;
+    position: relative;
+    padding: 14px;
+    border: none;
+    border-radius: 1000px;
+    background: var(--light-color-tra-25);
+    color: var(--text-color-80);
+    
+}
+.posts_section_header #filterPost {
+    height: 54px;
+    width: 57px !important;
+    background: var(--block-color);
+    border-radius: 10000px;
+    border: none;
+    color: var(--text-color-80);
+    box-shadow: 2px 3px 40px var(--bg-color);
+}
+.posts_section_header {
+    position: sticky;
+    top: calc(var(--header-height) + 20px);
+    z-index: 999;
+}
+#CreateNewBtn {
+    width: max-content;
+    padding: 2px 18px;
+    background: var(--light-color-tra-35) !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+}
+#CreateNewBtn:hover {
+    background: var(--light-color-tra-30) !important; 
+}
+.ShowAllLinksOverlyHead {
+    display: flex;
+    align-items: center;
+    justify-content: end;
+}
+.ShowAllLinkOverlyHeadWraper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 7px;
+    width: 100%;
+    padding-top: 10px;
+}
+.ShowAllLinksOverlyHead2 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 50px;
+}
+.InputLinks {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    width: 90%;
+    max-width: 500px
+}
+.inputgroup1 {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+.inputsMain1 {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+.inputsMain1 span {
+    position: absolute;
+}
+.inputsMain2 {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+.inputsMain2 span {
+    position: absolute;
+}
+.inputTitle {
+    display: flex;
+    align-items: center;
+    position: relative;
+    width: 100%;
+}
+.inputTitle input{
+    width: 100%;
+    padding: 15px 14px;
+
+}
+.inputTitle span {
+    position: absolute;
+}
+.inputsMain1 input, .inputsMain2 input{
+    padding: 15px 14px;
+    border: none;
+    outline: none;
+    background: var(--block-color);
+    color: var(--text-color);
+    width: 100%;
+}
+.inputsMain1 input {
+    border-radius: 20px 0 0 5px;
+}
+.inputsMain2 input {
+    border-radius: 0 20px 5px 0;
+}
+.inputTitle input{
+    border-radius: 5px 5px 20px 20px;
+    outline: none;
+    border: 0;
+    background: var(--block-color);
+    color: var(--text-color-80);
+}
+#AddLinkBtn {
+    padding: 16px;
+    border: none;
+    border-radius: 100px;
+    margin-top: 20px;
+}
+.inputTitle span, .inputsMain1 span, .inputsMain2 span {
+    left: 15px;
+    color: var(--text-color-60);
+    font-size: .83rem;
+    transform: translateY(-50%);
+    top: 18px;
+    font-size: .7rem;
+    transition: top .4s, font-size .4s;
+}
+.inputsMain1 {
+    width: 100%;
+}
+.inputsMain2 {
+    width: 100%;
+}
+
+
+
+
+.ShowAllLinksOverlyHead2 {
+    background: var(--bg-color);
+    width: 100%;
+}
+#ShowAllLinksFromData {
+    display: flex;
+    flex-direction: column;
+    height: calc(100vh - var(--header-height));
+    padding-top: 40px;
+}
+
+#ShowAllLinksOverly {
+    display: flex;
+    flex-direction: column;
+}
+.ShowAllLinksOverlyMain {
+    max-height: 100%;   
+    overflow-y: auto;    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.ShowLink .countLinks{
+    color: var(--text-color-60);
+    font-size: .8rem;
+}
+body.overflowHid {
+    overflow: hidden !important;
+}
+
+.inputsMain1 {
+    background: var(--block-color);
+    padding-top: 15px;
+    border-radius: 20px 5px 5px 5px;
+}
+.inputsMain2 {
+    background: var(--block-color);
+    padding-top: 16px;
+    border-radius: 5px 20px 5px 5px;
+}
+.inputTitle {
+    padding-top: 16px;
+    background: var(--block-color);
+    border-radius: 5px 5px 20px 20px;
+}
+.ShowAllLinksOverlyHead2 {
+    opacity: 1;
+    transition: opacity .4s;
+
+}
+.placeholder {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+.ShowLink {
+    position: relative;
+}
+.ShowLink .deleteLink{
+    opacity: 0;
+    transform: scale(0);
+    border: none;
+    background: rgba(255, 0, 0, 0.093);
+    font-size: .89rem;
+    color: rgb(202, 0, 0);
+    width: 35px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+    transition: transform .1s, opacity .4s;
+    position: absolute;
+    right: -40px;
+}   
+#ShowAllLinksFromData li {
+    width: 100% !important;
+}
+#ShowAllLinksFromData li:hover .deleteLink {
+    opacity: 1;
+    transform: scale(1); 
+}
+#ShowAllLinksFromData li .deleteLink:hover {
+    background: rgba(255, 0, 0, 0.223);
+}
+.inputLinksBtns {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    margin-top: 20px;
+}
+.inputLinksBtns button:first-child {
+    width: calc(100% - 48px);
+    margin: 0 !important;
+}
+.inputLinksBtns button#RemoveAddLinkSec {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    border-radius: 100px;
+    background: var(--light-color-tra-30);
+    color: var(--text-color-80);
+}
+.AllLinkheadRightSide {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+}
+.ShowAllOverlyheadtext {
+    color: var(--text-color-80);
+    font-size: .9rem;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+#ShowAllLinksFromData.linkAddActive {
+    padding-top: 175px !important;
+}
+
+#showBlogs {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px , 1fr));
+    padding: 20px;
+    gap: 20px
+}
+.blog {
+    background: transparent;
+    padding: 20px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+.blog-main {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+.blogTitle 
+{
+    font-weight: 570;
+    font-size: 1.1rem;
+    color: var(--text-color-80);
+    font-family: "Quicksand", sans-serif;
+}
+.blog_content {
+    font-size: .9rem;
+    color: var(--text-color-60)
+}
+.blog-count span{
+    font-size: 1.7rem;
+    color: var(--text-color-80)
+}
+ .ShowAllBlogsBtn {
+    background: var(--text-color-80);
+    border: none;
+    border-radius: 100px;
+    font-size: 1rem;
+    color: var(--bg-color);
+    padding: 15px 20px;
+    font-family: "Quicksand", sans-serif;
+    font-weight: bold;
+}
+#showAllBlogsOverly {
+    position: fixed;
+    inset: 0;
+    background: var(--bg-color);
+    z-index: 99999;
+}
+.showAllBlogsOverlyHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+    padding-top: 15px;
+}
+.blogsOverlyRighthead {
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    gap: 10px;
+    width: 100%;
+    max-width: 500px;
+}
+.blogsOverlyLefthead span {
+    color: var(--text-color-80);
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: 3px;
+}
+.searchContainerInBlog {
+    background: var(--block-color);
+    border-radius: 1000px;
+    padding: 3px 3px;
+    width: 72%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+}
+.searchContainerInBlog span.placeholder {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 20px;
+    font-size: .89rem;
+    color: var(--text-color-60) 
+}
+.searchContainerInBlog span.placeholder i {
+    font-size: .83rem;
+}
+.searchContainerInBlog input {
+    padding: 5px;
+    padding-left: 16px;
+    width: 100%;
+    border: none;
+    background: transparent;
+    color: var(--text-color);
+    outline: none;
+}
+.searchContainerInBlog button {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    border-radius: 1000px;
+    background: none;
+    color: var(--text-color-80);
+    font-size: .99rem;
+}
+#HideBlogs {
+    height: 46px;
+    width: 46px;
+    border: none;
+    border-radius: 1000px;
+    background: var(--block-color);
+    color: var(--text-color-80);
+}
+.showAllBlogsOverlyMain {
+    border-radius: 10px;
+    width: 90%;
+    height: calc(100vh - 123px);
+    max-width: 740px;
+    color: var(--text-color);
+    
+}
+.blogsOverlyMain {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 30px;
+    border-radius: 20px;
+    overflow-y: auto;
+}
+.blog_x .blog_x_title{
+    font-size: 1.4rem;
+    font-weight: 480;
+}
+.blog_x {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+.blog_x .blog_x_main_content {
+   font-family: "Quicksand", sans-serif;
+   line-height: 27px;
+}
+#showAllBlogsOverly {
+    opacity: 1;
+    transform: scale(1);
+    transition: transform 0s, opacity .3s ease-in;
 }

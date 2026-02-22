@@ -1,7 +1,7 @@
 import { website, MyProfile, ShowDefaultImg, icons} from '../../data/website.js'
-import { Posts, Blogs } from '../../data/post.js'
+import { Posts } from '../../data/post.js'
 import {allYoutubeChannels, ChannelsTypes} from '../../data/data.js'
-
+import {Blogs} from '../../data/blogs.js'
 // ShowPosts
 
 const ShowPosts = document.getElementById("ShowPosts")
@@ -29,18 +29,28 @@ const postDetailsView = document.getElementById("postDetailsView")
 
 // searchContainer
 const searchContainer = document.querySelector(".searchContainer")
-const SearchBtn = document.getElementById("SearchBtn")
 const searchInput = document.getElementById("searchInput")
 const searchPlaceholder = document.querySelector(".searchPlaceholder")
 const EmptyPostMessage = document.querySelector(".EmptyPostMessage")
 
 // website
 
-const postShowType = document.querySelectorAll(".post-show-type button")
 const ShowChanelTypes = document.getElementById("ShowChanelTypes")
 const ShowAllChannelsOverly = document.getElementById("ShowAllChannelsOverly")
 const CloseChannelsFolder = document.getElementById("CloseChannelsFolder")
 const ShowAllChannelsFromData = document.getElementById("ShowAllChannelsFromData")
+const inputgroup1 = document.querySelector(".inputgroup1")
+const AddLinkBtn = document.getElementById("AddLinkBtn")
+const CreateNewBtn = document.getElementById("CreateNewBtn")
+const ShowAllLinksOverlyHead2 = document.querySelector(".ShowAllLinksOverlyHead2")
+const InputLinks = document.querySelector(".InputLinks")
+const RemoveAddLinkSec = document.getElementById("RemoveAddLinkSec")
+const showBlogs = document.getElementById("showBlogs")
+const HideBlogs = document.getElementById("HideBlogs")
+const searchInputs = document.querySelector(".searchInputs")
+const SearchInGoggle = document.getElementById("SearchInGoggle")
+const ShowAllBlogsOverlyMain = document.getElementById("ShowAllBlogsOverlyMain")
+const showAllBlogsOverly = document.getElementById("showAllBlogsOverly")
 
 // overlys
 const ShowAllLinksFromData = document.getElementById("ShowAllLinksFromData")
@@ -555,9 +565,11 @@ PostDetailsViewIs(postClicked)
 function PostDetailsViewIs(status){
     if (status === "add"){
         postDetailsView.classList.remove("HideAnimateScale0")
+        body.classList.add("overflowHid")
         SidebarToggle("remove")
     } else if (status === "remove"){
         postDetailsView.classList.add("HideAnimateScale0")
+        body.classList.remove("overflowHid")
         localStorage.setItem("clicked", "remove")
         postClickMemory = []
         SavedMem1(postClickMemory)
@@ -662,12 +674,7 @@ function SavedMem1(postClickMemo){
 
 
 
-function Search(){
-    searchContainer.classList.toggle("hideAnimate0")
-}
-SearchBtn.addEventListener("click", () => {
-    Search()
-})
+
 searchInput.addEventListener("input", (e) => {
     let searchData = searchInput.value.trim().toLowerCase()
     if (searchData.length > 0){
@@ -694,21 +701,6 @@ window.addEventListener("load", () => {
     searchInput.value = ""
 })
 
-// postShowType
-
-let whichBtnActive = Number(localStorage.getItem("whichBtnActive")) || 0
-
-postShowType.forEach((btn, index) => {
-    btn.addEventListener("click", () => {
-        postShowType.forEach(b => b.classList.remove("selected"))
-        btn.classList.add("selected")
-        localStorage.setItem("whichBtnActive", index)
-    })
-    if (whichBtnActive === index){
-        postShowType.forEach(b => b.classList.remove("selected"))
-        btn.classList.add("selected")
-    }
-})
 
 // ShowChanelTypes
 
@@ -801,20 +793,18 @@ function ShowChannnelsX(channels){
 
 
 }
-function SetStatus(Name, status, data)
+function SetStatus(Name, status, data, type)
 {
-    if (status === "set"){
+    if (status === "set" && type === "json"){
+        localStorage.setItem(Name, JSON.stringify(data))
+    } else if (status === "set") {
         localStorage.setItem(Name, data)
     } else if (status === "remove"){
         localStorage.removeItem(Name)
     }
 }
-function GetStatus(Name, defaultData){
-    if (defaultData === "json"){
-        return JSON.parse(localStorage.getItem(Name)) || []
-    } else {
-        return localStorage.getItem(Name) 
-    }
+function GetStatus(Name){
+    return localStorage.getItem(Name) 
 }
 
 
@@ -822,9 +812,11 @@ function GetStatus(Name, defaultData){
 function ShowAllChannelsOverlyIs(status){
     if (status === "add" || status === "true"){
         ShowAllChannelsOverly.classList.remove("hideAnimate0")
+        body.classList.add("overflowHid")
         SetStatus("selectedChannelsContainer", "set", 'true')
     } else if (status === "remove" || status === "false"){
         ShowAllChannelsOverly.classList.add("hideAnimate0")
+        body.classList.remove("overflowHid")
         SetStatus("selectedChannelsContainer", "remove", "false")
     }
 }
@@ -889,21 +881,26 @@ function ClickLinkEvent(element){
 
 
 let socialLinksAllData = allYoutubeChannels.flatMap(l => l.links).filter(link => link.link !== "")
+let socialLinksSaved;
+try {
+    socialLinksSaved = JSON.parse(GetStatus("socialLinksSaved"))
+} catch (err){
+    socialLinksSaved = null
+}
+socialLinksSaved = socialLinksSaved || socialLinksAllData
 
-
-SocialLinksFromDataIn(socialLinksAllData)
-
+SocialLinksFromDataIn(socialLinksSaved)
 
 function SocialLinksFromDataIn(socialLinks){
     ShowAllLinksFromData.innerHTML = ""
 ShowChannelsBestVideosList.innerHTML = ""
 socialLinks.forEach((link, index) => {
 
-    let icon = icons.find(i => i.platform.toLowerCase().includes(link.platform.toLowerCase()) || link.platform.toLowerCase().includes(i.platform.toLowerCase()))
     let createLink = document.createElement("li")
     createLink.innerHTML = `
                                         <div class="ShowLink">
                                             <div class="videoPic">
+                                            
                                                 <a href="${link.link}" target="${link.target ? link.target : "_balnk"}">
                                                     <i class="fa-solid fa-arrow-up-right-from-square"></i>
                                                 </a>
@@ -913,14 +910,13 @@ socialLinks.forEach((link, index) => {
                                                 <p>
                                                     <span>${link.channel}</span>
                                                     <span class="dotPoint"></span>
-                                                    <span class="platformName"><span class="icon">${icon.icon}</span></span>
-                                                    <span class="dotPoint"></span>
-                                                    <span class="platformName">${icon.platform}</span>
+                                                    <span class="platformName">${link.platform}</span>
                                                 </p>
                                             </div>
+                                            <span class="countLinks">${index + 1}</span>
+                                            ${(socialLinksAllData.length - 1) < index ? `<button class="deleteLink" data-delete-link="${index}"><i class="fa-regular fa-trash-can"></i></button>` : ""}
                                     </div>`
     ShowAllLinksFromData.appendChild(createLink)
-
 
 
     if (index > 1) return
@@ -931,6 +927,7 @@ socialLinks.forEach((link, index) => {
     createLinkAB.innerHTML = `
                                     <div class="ShowLink">
                                             <div class="videoPic">
+                                            
                                                 <a href="${link.link}" target="${link.target ? link.target : "_balnk"}">
                                                     <i class="fa-solid fa-arrow-up-right-from-square"></i>
                                                 </a>
@@ -959,9 +956,11 @@ ShowLinkSection(savedLinkSection)
 function ShowLinkSection(status){
     if(status === "add"){
         ShowAllLinksOverly.classList.remove("hideAnimate0")
+        body.classList.add("overflowHid")
         SetStatus("savedOverlyLinkShowStatus", "set", "add")
     } else {
         ShowAllLinksOverly.classList.add("hideAnimate0")
+        body.classList.remove("overflowHid")
         SetStatus("savedOverlyLinkShowStatus", "remove", "remove")
     }
 }
@@ -989,8 +988,7 @@ function SearchBlogs(searchData){
    SetStatus("savedSearchBlogInput", "set", searchData)
    let searchValue = GetStatus("savedSearchBlogInput", "")
    ChangeSearchDisplay(searchValue)
-
-
+   SearchBlogsFilter(searchValue)
 }
 
 
@@ -998,7 +996,7 @@ suggestSearch(allBlogTopic)
 function suggestSearch(typesAll, search){
     searchSuggest.innerHTML = ""
     if (!search) return
-    typesAll.filter(t => t.toLowerCase().includes(search.toLowerCase()) || search.toLowerCase().includes(t.toLowerCase())).forEach(type => {
+    typesAll.filter(u => u !== "").filter(t => t.toLowerCase().includes(search.toLowerCase() === "all" ? "" : search.toLowerCase()) || search.toLowerCase().includes(t.toLowerCase())).forEach(type => {
             let createSuggest = document.createElement("li")
             createSuggest.innerHTML = `
             <button data-suggest="${type}">
@@ -1024,6 +1022,7 @@ SearchBlogInput.addEventListener("input", () => {
     
     let ti = setTimeout(() => {
         suggestSearch(allBlogTopic, searchdata)
+        SearchBlogsFilter(searchdata)
         clearTimeout(ti)
     }, 200)
 })
@@ -1034,8 +1033,8 @@ SearchBlogbtn.addEventListener("click", () => {
     SearchBlogInput.focus()
 })
 
-hidePlaceholder(searchBlogInputSaved.length)
-SearchBlogInput.value = seargichBlogInputSaved
+hidePlaceholder(searchBlogInputSaved.length || 0)
+SearchBlogInput.value = searchBlogInputSaved
 suggestSearch(allBlogTopic, searchBlogInputSaved)
 
 
@@ -1048,4 +1047,208 @@ function hidePlaceholder(length){
 }
 function ChangeSearchDisplay(search){
     SearchBlogInput.value = search
+}
+
+let showLinkpageStatus = GetStatus("showLinkpageStatus", "")
+ShowAddLinkPopup(showLinkpageStatus)
+function ShowAddLinkPopup(status){
+    if (status === "add" || status === true){
+
+        ShowAllLinksOverlyHead2.classList.remove("height0AndOp0")
+        ShowAllLinksFromData.classList.add("linkAddActive")
+        SetStatus("showLinkpageStatus", "set", "add")
+
+    } else if (status === "remove" || status === false) {
+
+       ShowAllLinksOverlyHead2.classList.add("height0AndOp0")
+        ShowAllLinksFromData.classList.remove("linkAddActive")
+       SetStatus("showLinkpageStatus", "set", "remove") 
+
+    } else {
+        ShowAllLinksOverlyHead2.classList.toggle("height0AndOp0")
+        if (ShowAllLinksOverlyHead2.classList.contains("height0AndOp0")){
+             ShowAddLinkPopup("remove")
+        } else {
+             ShowAddLinkPopup("add")
+        }
+    }
+}   
+CreateNewBtn.addEventListener("click", () => {
+    ShowAddLinkPopup("")
+})
+RemoveAddLinkSec.addEventListener("click", () => {
+    ShowAddLinkPopup("remove")
+})
+// socialLinksAllData
+
+ function AddLinks(){
+    let channelName = inputgroup1.querySelectorAll("input")[0].value
+    let titleName = inputgroup1.querySelectorAll("input")[1].value
+    let link = document.querySelector(".InputLinks .inputTitle input").value
+    if (!channelName || !titleName || !link) return
+    let socialLink = {
+         content: titleName,
+         channel: channelName,
+         link: link,
+         target: "_blank",
+         platform: ""
+    }
+    socialLinksSaved.push(socialLink)
+    SetStatus("socialLinksSaved", "set", socialLinksSaved, "json")
+    SocialLinksFromDataIn(socialLinksSaved)
+    InputLinks.querySelectorAll("input").forEach(i => i.value = "")
+ }
+ AddLinkBtn.addEventListener("click", () => {
+    AddLinks()
+ })
+ShowAllLinksFromData.addEventListener("click", (e) => {
+    let LinkRemoveBtn = e.target.closest(".deleteLink")
+    if (LinkRemoveBtn){
+        DeleteLink(Number(LinkRemoveBtn.dataset.deleteLink))
+    }
+})
+
+function DeleteLink(index){
+    
+    socialLinksSaved.splice(index, 1)
+    SetStatus("socialLinksSaved", "set", socialLinksSaved, "json")
+    SocialLinksFromDataIn(socialLinksSaved)
+}
+
+ShowBlogs(Blogs.AllBlogs)
+
+function ShowBlogs(Allblogs, max){
+
+    showBlogs.innerHTML = ""
+    let maxShow = max || 3
+    Allblogs.forEach((blog, index) => {
+         let createBlogMoreBtn = document.createElement("button")
+         createBlogMoreBtn.innerHTML = `Show All Blogs`
+         createBlogMoreBtn.className = "ShowAllBlogsBtn"
+
+    let createBlog = document.createElement("div")
+    createBlog.className = "blog"
+    createBlog.innerHTML = `
+                                <div class="blog-count">
+                                    <span>${index + 1}</span>
+                                </div>
+                                <div class="blog-main">
+                                    <div class="blog-title">
+                                        <div class="blogTitle">${!blog.title ? blog.blog.slice(0, 30) + ".." : blog.title}</div>
+                                    </div>
+                                    <div class="border-h1-w90"></div>
+                                    <div class="blog_content">
+                                       ${blog.blog.length > 90 ? blog.blog.slice(0, 90) + `<span class="showMoreBtn">...more</span>` : blog.blog}
+                                    </div>
+                                </div>`
+    if (index < maxShow) showBlogs.appendChild(createBlog)
+
+
+        if (index === maxShow){
+         showBlogs.appendChild(createBlogMoreBtn)
+        
+     }
+
+    
+
+     createBlog.addEventListener("click", () => {
+        BlogShowOverly('add')
+        InputBlogsData(blog)
+     })
+})
+}
+
+
+function SearchBlogsFilter(search){
+    search = search.toLowerCase()
+    let filteredSearch = Blogs.AllBlogs.filter(item => item.title.toLowerCase().includes(search) || item.blog.toLowerCase().includes(search) || item.type.some(t => t.toLowerCase().includes(search)))
+    ShowBlogs(filteredSearch)
+}
+
+SearchBlogsFilter(searchBlogInputSaved)
+
+
+/* 
+
+*/
+
+let showBlogOverlyStatus = GetStatus("showBlogOverlyStatus")
+BlogShowOverly(showBlogOverlyStatus)
+function BlogShowOverly(status){
+    if (status === "add" || status === true){
+
+        showAllBlogsOverly.classList.remove("hideAnimate0")
+        body.classList.add("overflowHid")
+        SetStatus("showBlogOverlyStatus", "set", "add", "")
+
+    } else if (status === "remove" || status === false) {
+
+        showAllBlogsOverly.classList.add("hideAnimate0")
+        body.classList.remove("overflowHid")
+        SetStatus("showBlogOverlyStatus", "set", "remove", "")
+
+    } else {
+        showAllBlogsOverly.classList.toggle("hideAnimate0")
+        if (showAllBlogsOverly.classList.contains("hideAnimate0")){
+            BlogShowOverly("remove")
+        } else {
+            BlogShowOverly("add")
+        }
+    }
+}
+HideBlogs.addEventListener("click", () => {
+    BlogShowOverly('remove')
+})
+
+let SavedBlogOverly;
+try {
+    SavedBlogOverly = JSON.parse(GetStatus("SavedBlogOverly"))
+} catch(err){
+    SavedBlogOverly = null
+    SetStatus("SavedBlogOverly", "remove")
+}
+
+InputBlogsData(SavedBlogOverly)
+
+function InputBlogsData(Singleblogs, AllBlogs){
+    ShowAllBlogsOverlyMain.innerHTML = ""
+
+
+    if (Object.entries(Singleblogs).length || Singleblogs !== "" || Singleblogs !== null){
+        SetStatus("SavedBlogOverly", "set", Singleblogs, "json")
+        let createBlog = document.createElement("div")
+        createBlog.innerHTML = `
+        <div class="blog_x">
+            <div class="blog_x_title">
+                ${Singleblogs.title ? Singleblogs.title : Singleblogs.blog.slice(0, 40) + "..."}
+            </div>
+            <div class="blog_x_main_content">
+                ${Singleblogs.blog}
+            </div>
+        </div>
+        `
+        ShowAllBlogsOverlyMain.appendChild(createBlog)
+        LinkOpenInGoogle(Singleblogs.title ? Singleblogs.title : Singleblogs.blog.slice(0, 30))
+        return
+    }
+    AllBlogs.forEach((blog, index) => {
+        let createBlog = document.createElement("div")
+        createBlog.innerHTML = `
+        <div class="blog_x">
+            <div class="blog_x_title">
+                ${blog.title}
+            </div>
+            <div class="blog_x_main_content">
+                ${blog.blog}
+            </div>
+        </div>
+        `
+        ShowAllBlogsOverlyMain.appendChild(createBlog)
+    })
+}
+function LinkOpenInGoogle(search, target){
+    search = search.trim()
+    SearchInGoggle.addEventListener("click", () => {
+        window.open(`https://www.google.com/search?q=${search}`, target || "_blank")
+    })
 }

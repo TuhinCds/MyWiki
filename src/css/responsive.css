@@ -48,7 +48,12 @@ body {
         width: 360px !important;
     }
 
-
+#ShowPosts {
+        grid-template-columns: repeat(auto-fill, minmax(380px, 1fr)) !important;
+}
+#showBlogs {
+    grid-template-columns: repeat(auto-fill, minmax(360px , 1fr)) !important;
+}
 
 }
 @media (min-width: 890px){
@@ -176,9 +181,7 @@ body {
     width: max-content !important;
 
 }
-#ShowAllLinksFromData {
-    flex-direction: row !important;
-}
+
 
 
 }
