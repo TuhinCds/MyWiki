@@ -22,7 +22,7 @@ const website = {
                 status: "",
                 overWrite: []
             },
-            {content: "Blogs", class: "", link: "", target: "", icon: `<i class="fa-solid fa-blog"></i>`, status: "", overWrite: []},
+            {content: "Blogs", class: "", link: "#showBlogs", target: "_self", icon: `<i class="fa-solid fa-blog"></i>`, status: "", overWrite: []},
             {
                 content: "Posts",
                 class: "posts",
@@ -37,11 +37,17 @@ const website = {
                     {content: "Elonmask speech", class: "", link: "", target: "", icon: ``, status: "", overWrite: []},
                 ]
             },
+            {
+                content: "Thiking", class: "", link: "", target: "", icon: `<i class="fa-solid fa-lightbulb"></i>`, status: "",
+                overWrite: [
+                    {content: "How to create a motor", class: "", link: "", target: "", icon: ``, status: "", overWrite: []},
+                ]
+            },
 
             {content: "Social media's", class: "", link: "#ShowChannels", target: "_self", icon: `<i class="fa-solid fa-circle-stop"></i>`, status: "", overWrite: []},
             {content: "Exarsice", class: "", link: "", target: "", icon: `<i class="fa-solid fa-person-biking"></i>`, status: "", overWrite: [
                 {
-                    content: "To be thin", class: "", link: "", target: "", icon: `<i class="fa-solid fa-person-biking"></i>`, status: "", overWrite: [
+                    content: "Go to be thin", class: "", link: "", target: "", icon: `<i class="fa-solid fa-person-biking"></i>`, status: "", overWrite: [
                         {
                             content: "7 Min 7 Planking Exercises To Make Belly Cry HARD 8 minutes, 26 seconds", class: "", link: "https://youtu.be/1t8xr7dmYTI?si=zTuFL9L-ALLZwJDr", target: "", icon: `<i class="fa-solid fa-person-biking"></i>`, status: "", overWrite: []
                         },
@@ -122,10 +128,34 @@ const website = {
             {content: "Prodcast's", class: "", link: "", target: "", icon: `<i class="fa-solid fa-podcast"></i>`, status: "", overWrite: []},
             {content: "Random Learn", class: "", link: "", target: "", icon: `<i class="fa-solid fa-shuffle"></i>`, status: "", overWrite: []},
             {content: "Tech blogs", class: "", link: "", target: "", icon: `<i class="fa-solid fa-robot"></i>`, status: "", overWrite: []},
-            {content: "Best songs", class: "", link: "", target: "", icon: `<i class="fa-solid fa-music"></i>`, status: "", overWrite: []},
+            {content: "Best songs", class: "", link: "", target: "", icon: `<i class="fa-solid fa-music"></i>`, status: "", overWrite: [
+                            {content: "English songs", class: "", link: "", target: "", icon: ``, status: "", overWrite: [
+                                            {content: "Justine Skye - collide (solo version) // sped up + reverb", class: "", link: "https://youtu.be/m1K2Dc53_wE?si=Ta3jvMfvfdXXib02", target: "", icon: ``, status: "", overWrite: []},
+                                            {content: "Justin Bieber - Sorry (Lyrics) ", class:"",   link: "https://youtu.be/8OARozUOTr4?si=_Ow8CBca1ghEUmgB", target: "", icon: ``, status: "", overWrite: []},
+                                            {content: "Renegade x under the imfuance - i was never there (slowed)", class: "", link: "https://youtu.be/tCnHcVUD5N0?si=BgUcapQrMf1den8Z", target: "", icon: ``, status: "", overWrite: []},
+                                            {content: "Youka - Hm Hm Hm ( s l o w e d + r e v e r b )", class: "", link: "https://youtu.be/fIFIvuazGNw?si=h2z4G4X2wRgrRx7s", target: "", icon: ``, status: "", overWrite: []},
+                                            {content: "Erika Lundmoen - Яд (slowed + reverb)", class: "", link: "https://youtu.be/Wpv1h-8cA14?si=lqCy6xofEFCZk7Re", target: "", icon: ``, status: "", overWrite: []},
+                                            {content: "Alan Walker - Darkside [slowed + reverb]", class: "", link: "https://youtu.be/SrW5qm34wdc?si=e20ZqNZ0YVBq366H", target: "", icon: ``, status: "", overWrite: []},
+                                            {content: "Unity - Alan Walker - (Slowed + Reverb)", class: "", link: "https://youtu.be/dVPBr-DIQaI?si=--dF-wiAkkYhaM2O", target: "", icon: ``, status: "", overWrite: []},
+                                            {content: "Tout Donner (TikTok Trending Guitar Remix) - Naza, SDM, Ingénieurfull (slowed to perfection)", class: "", link: "https://youtu.be/wWvzJth1PxA?si=8qt3KE_wCx31vkkS", target: "", icon: ``, status: "", overWrite: []},
+                                            {content: "SUPARO - wayne flenory (sped up)", class: "", link: "https://youtu.be/Gj1j8FunazA?si=H84HJrLuiLVBbgg6", target: "", icon: ``, status: "", overWrite: []},
+                                            {content: "(Slowed) Justin Bieber - Sorry X Keiani (slowed & reverb)", class: "", link: "https://youtu.be/bG7smpvM0ao?si=8ENq6j9H1FvBizPI", target: "", icon: ``, status: "", overWrite: []},
+                                            {content: "under the influence x I was never there // (tiktok remix)", class: "", link: "https://youtu.be/eZE8U-tGuk0?si=PWVDI-l39nOlOVB8", target: "", icon: ``, status: "", overWrite: []},
+                                            {content: "The Chainsmokers, Daya - Don't Let Me Down (slowed & reverb)", class: "", link: "https://youtu.be/hScJibb0-ns?si=Dx7ftilf85uI43XB", target: "", icon: ``, status: "", overWrite: []},
+                            ]},
+                             {
+                                content: "Hindi songs", class: "", link: "", target: "", icon: ``, status: "", overWrite: [
+                                             {content: "Tu Hi Haqeeqat (Slowed & Reverb)", class: "", link: "https://youtu.be/IGUbX4ROAkc?si=J55JY2yi6Hnm_JB4", target: "", icon: ``, status: "", overWrite: []},                                   
+                                ]
+                            }
+            ]},
             {content: "My goals", class: "", link: "", target: "", icon: `<i class="fa-solid fa-bullseye"></i>`, status: "", overWrite: []},
             {content: "Brain practice's", class: "", link: "", target: "", icon: `<i class="fa-solid fa-code-merge"></i>`, status: "", overWrite: []},
-            {content: "Math", class: "", link: "", target: "", icon: `<i class="fa-solid fa-square-root-variable"></i>`, status: "pro", overWrite: []},
+            {content: "Math", class: "", link: "", target: "", icon: `<i class="fa-solid fa-square-root-variable"></i>`, status: "pro", overWrite: [
+                {
+                    content: "Random Quastion in math", class: "", link: "", target: "", icon: `<i class="fa-solid fa-square-root-variable"></i>`, status: "pro", overWrite: []
+                }
+            ]},
             {content: "Learn Outside too", class: "", link: "", target: "", icon: `<i class="fa-solid fa-building-circle-arrow-right"></i>`, status: "old", overWrite: []},
             {content: "Learn Talk", class: "", link: "", target: "", icon: `<i class="fa-solid fa-square-poll-horizontal"></i>`, status: "", overWrite: []},
             {content: "Course's", class: "", link: "", target: "", icon: `<i class="fa-brands fa-youtube"></i>`, status: "", overWrite: []},

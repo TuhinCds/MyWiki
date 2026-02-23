@@ -51,6 +51,7 @@ const searchInputs = document.querySelector(".searchInputs")
 const SearchInGoggle = document.getElementById("SearchInGoggle")
 const ShowAllBlogsOverlyMain = document.getElementById("ShowAllBlogsOverlyMain")
 const showAllBlogsOverly = document.getElementById("showAllBlogsOverly")
+const ConfigBlogs = document.getElementById("ConfigBlogs")
 
 // overlys
 const ShowAllLinksFromData = document.getElementById("ShowAllLinksFromData")
@@ -166,7 +167,7 @@ website.sidebar.sidebarLinks.forEach((item, index) => {
     <div class="wraper">
                         <${item.overWrite.length > 0 ? "button" : item.link ?  `a href="${item.link}" ${item.target ? `target="${item.target}"` : `target="_blank"`}` : "button"} class="item-btn" data-element-type="${item.link ? "link": "button"}">
                             <span class="link-content">
-                                <span class="link-con-n">${item.icon} ${item.status ? item.content.length > 13 ? item.content.slice(0, 13) + "..." : item.content : item.content.length > 13 ? item.content.slice(0, 13) + '...' : item.content}</span>
+                                <span class="link-con-n">${item.icon} ${item.status ? item.content.length > 21 ? item.content.slice(0, 21) + "..." : item.content : item.content.length > 13 ? item.content.slice(0, 13) + '...' : item.content}</span>
                                 <span class="status ${item.status === "new" ? item.status : item.status + "-space"}">${item.status === "new" ? item.status : ""}</span>
                             </span>
                             ${item.overWrite.length < 1 ? "" : `<span class="arrow-icon ${item.overWrite.length > 10 ? "rotateY0" : ""}"><i class="fa-solid fa-angle-down"></i></span>`}
@@ -194,7 +195,7 @@ website.sidebar.sidebarLinks.forEach((item, index) => {
                                         <div class="oth-wraper">
                                             <${ovItemA.overWrite.length > 0 ? "button" : ovItemA.link ? `a href="${ovItemA.link}" ${ovItemA.target ? `target="${ovItemA.target}"` : `target="_blank"`}` : "button"}  data-element-length="${ovItemA.overWrite.length}"class="oth-item-btn" data-element-type="${ovItemA.link ? "link": "button"}>
                                                 <span class="oth-link-content">
-                                                    <span class="oth-link-con-n conMain ${ovItemA.overWrite.length < 1 ? "link" : ""}">${ovItemA.content.length > 13 ? ovItemA.content.slice(0, 13) + "..." : ovItemA.content}</span>
+                                                    <span class="oth-link-con-n conMain ${ovItemA.overWrite.length < 1 ? "link" : ""}">${ovItemA.content.length > 19 ? ovItemA.content.slice(0, 19) + "..." : ovItemA.content}</span>
                                                     <span class="statusCir ${ovItemA.status}"></span>
                                                 </span>
                                                 <span class="arrow-icon"></span>
@@ -222,7 +223,7 @@ website.sidebar.sidebarLinks.forEach((item, index) => {
                                                     <li>
                                                         <${ovItemB.link === "" ? "button" : "a"} ${ovItemB.link === "" ? "" : `href=${ovItemB.link} target="${ovItemB.target ? ovItemB.target : "_blank"}"`} class="oth-item-btn" data-element-type="${ovItemB.link ? "link": "button"}>
                                                             <span class="oth-link-content">
-                                                                <span class="oth-link-con-n">${ovItemB.content.length > 13 ? ovItemB.content.slice(0, 13) + "..." : ovItemB.content}</span>
+                                                                <span class="oth-link-con-n">${ovItemB.content.length > 17 ? ovItemB.content.slice(0, 17) + "..." : ovItemB.content}</span>
                                                                 <span class="statusCir ${ovItemB.status}"></span>
                                                             </span>
                                                             
@@ -982,7 +983,7 @@ ShowChannelsBestVideosList.addEventListener("click", (e) => {
 
 let postsDataShowBlogs = Blogs.AllBlogs
 let allBlogTopic = [...new Set(postsDataShowBlogs.flatMap(t => t.type))]
-let searchBlogInputSaved = GetStatus("savedSearchBlogInput", "")
+let searchBlogInputSaved = GetStatus("savedSearchBlogInput", "") || ""
 
 function SearchBlogs(searchData){
    SetStatus("savedSearchBlogInput", "set", searchData)
@@ -1115,16 +1116,59 @@ function DeleteLink(index){
     SocialLinksFromDataIn(socialLinksSaved)
 }
 
-ShowBlogs(Blogs.AllBlogs)
 
-function ShowBlogs(Allblogs, max){
+
+// Blogs show cliked by btns
+ let isshowAllBlog = GetStatus("isshowAllBlog") || "true"
+ const maxshowLength = 3
+ let maxShow = maxshowLength
+ 
+ ConfigBlogs.addEventListener("click", () => {
+       if(isshowAllBlog !== "true")
+        {
+            isshowAllBlog = "true"
+            
+        } else {
+            isshowAllBlog = "false";
+            
+        }
+        ShowAllBlogsData(isshowAllBlog)
+        SetStatus("isshowAllBlog", "set", isshowAllBlog)
+        ShowBlogs(Blogs.AllBlogs)
+
+})
+ShowAllBlogsData(isshowAllBlog)
+
+function ShowAllBlogsData(status){
+    if (status !== "true")
+    {   
+        maxShow = maxshowLength 
+    } else {
+        maxShow = Blogs.AllBlogs.length
+    }
+}
+
+ShowBlogs(Blogs.AllBlogs)
+function ShowBlogs(Allblogs){
 
     showBlogs.innerHTML = ""
-    let maxShow = max || 3
+
+    if (Allblogs.length < maxShow){
+        ConfigBlogs.style.display = "none"
+    } else {
+
+        ConfigBlogs.style.display = "block"
+        if(maxShow > maxshowLength)
+        {
+           ConfigBlogs.classList.add("showLess")
+           ConfigBlogs.innerHTML = "Show Less Blogs"
+        } else {
+           ConfigBlogs.classList.remove("showLess")
+           ConfigBlogs.innerHTML = "Show More Blogs"    
+        }
+    }
+
     Allblogs.forEach((blog, index) => {
-         let createBlogMoreBtn = document.createElement("button")
-         createBlogMoreBtn.innerHTML = `Show All Blogs`
-         createBlogMoreBtn.className = "ShowAllBlogsBtn"
 
     let createBlog = document.createElement("div")
     createBlog.className = "blog"
@@ -1143,14 +1187,6 @@ function ShowBlogs(Allblogs, max){
                                 </div>`
     if (index < maxShow) showBlogs.appendChild(createBlog)
 
-
-        if (index === maxShow){
-         showBlogs.appendChild(createBlogMoreBtn)
-        
-     }
-
-    
-
      createBlog.addEventListener("click", () => {
         BlogShowOverly('add')
         InputBlogsData(blog)
@@ -1161,7 +1197,7 @@ function ShowBlogs(Allblogs, max){
 
 function SearchBlogsFilter(search){
     search = search.toLowerCase()
-    let filteredSearch = Blogs.AllBlogs.filter(item => item.title.toLowerCase().includes(search) || item.blog.toLowerCase().includes(search) || item.type.some(t => t.toLowerCase().includes(search)))
+    let filteredSearch = Blogs.AllBlogs.filter(i => i.blog !== "").filter(item => item.title.toLowerCase().includes(search) || item.blog.toLowerCase().includes(search) || item.type.some(t => t.toLowerCase().includes(search)))
     ShowBlogs(filteredSearch)
 }
 
@@ -1252,3 +1288,5 @@ function LinkOpenInGoogle(search, target){
         window.open(`https://www.google.com/search?q=${search}`, target || "_blank")
     })
 }
+
+

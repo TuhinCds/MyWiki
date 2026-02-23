@@ -68,13 +68,21 @@
     <main class="main">
         <section class="hero_section" id="hero_section_main">
                 <div class="hero_center">
+                    <div class="hero-sec-top-popups">
+                        <div class="smallPopups">
+                            <div class="showSmallTitle">
+                                <span class="showActiveIndicator"></span>
+                                <span>Learn Everything</span>
+                            </div>
+                        </div>
+                    </div>
                     <div class="hero-text">
                         <h2 class="hero-heading-text"><span class="invisble-effect-left">Learn and</span> <span class="color-g-1-effect">boost your brain in every</span><span class="invisble-effect-right"> situation</span></h2>
                         <p class="hero-sub-text">Build real skills step by step with simple lessons, practical examples, and hands-on practice that actually improves how you think, solve problems, and grow every single day.</p>
                     </div>
                     <div class="hero-btns">
                         <button class="start-btn"><i class="fa-solid fa-book-open"></i>Start Learning</button>
-                        <button class="ReadBlogs"><i class="fa-solid fa-blog"></i></button>
+                        <a href="#showBlogs" class="ReadBlogs"><i class="fa-solid fa-blog"></i></a>
                     </div>
                 </div>
         </section>
@@ -212,7 +220,7 @@
                             <div class="searchContainer">
                               <input type="text" id="SearchBlogInput">
                               <span class="searchplaceholder"><i class="fa-solid fa-magnifying-glass"></i> Search Blogs..</span>
-                           </div>
+                            </div>
                            <button id="SearchBlogbtn"><i class="fa-solid fa-magnifying-glass"></i></button>
                          </div>
                          <div class="searchSuggestContainer">
@@ -224,11 +232,11 @@
                     </div>
                     <div class="blogsMainContainer" id="blogsMainContainer">
                         <!-- show blogs -->
-                         <div id="showBlogs">
-                            <div class="blog">
-                                
+                        <div class="ShowMainBlogsAll">
+                             <div id="showBlogs">
                             </div>
-                         </div>
+                            <button id="ConfigBlogs">Show More Blogs</button>
+                        </div>
                          <div id="showAllBlogsOverly" class="hideAnimate0">
                             <div class="showAllBlogsOverlyHeader">
                                 <div class="blogsOverlyLefthead">
