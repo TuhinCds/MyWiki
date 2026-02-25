@@ -22,7 +22,7 @@ const website = {
                 status: "",
                 overWrite: []
             },
-            {content: "Blogs", class: "", link: "#showBlogs", target: "_self", icon: `<i class="fa-solid fa-blog"></i>`, status: "", overWrite: []},
+            {content: "Blogs", class: "", link: "#Blogs", target: "_self", icon: `<i class="fa-solid fa-blog"></i>`, status: "", overWrite: []},
             {
                 content: "Posts",
                 class: "posts",

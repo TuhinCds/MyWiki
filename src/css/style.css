@@ -2796,3 +2796,9 @@ body.overflowHid {
         transform: scale(1);
     }
 }
+#Blogs {
+    scroll-margin-top: 100px;
+}
+#posts {
+    scroll-margin-top: 100px; 
+}
