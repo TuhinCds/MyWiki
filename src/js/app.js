@@ -2,6 +2,31 @@ import { website, MyProfile, ShowDefaultImg, icons} from '../../data/website.js'
 import { Posts } from '../../data/post.js'
 import {allYoutubeChannels, ChannelsTypes} from '../../data/data.js'
 import {Blogs} from '../../data/blogs.js'
+
+let allPost = Posts.AllPost.filter(p => p.blog !== "")
+
+
+//  storages 
+
+let AllBlogsData
+try {
+    AllBlogsData = JSON.parse(GetStatus("AllBlogsData")) || Blogs.AllBlogs
+} catch (err){
+    AllBlogsData = []
+    SetStatus("AllBlogsData", "remove")
+}
+
+// blog history storage
+
+let AllDeletedBlogs
+
+try {
+    AllDeletedBlogs = JSON.parse(GetStatus("AllDeletedBlogs")) || []
+} catch (err) {
+    AllDeletedBlogs = []
+    GetStatus("AllDeletedBlogs", "remove")
+}
+
 // ShowPosts
 
 const ShowPosts = document.getElementById("ShowPosts")
@@ -52,11 +77,43 @@ const SearchInGoggle = document.getElementById("SearchInGoggle")
 const ShowAllBlogsOverlyMain = document.getElementById("ShowAllBlogsOverlyMain")
 const showAllBlogsOverly = document.getElementById("showAllBlogsOverly")
 const ConfigBlogs = document.getElementById("ConfigBlogs")
+const showPopup = document.querySelector(".showPopup")
+const ShowNotFoundMessage = document.getElementById("ShowNotFoundMessage")
+const createNewBlog = document.getElementById("createNewBlog")
+const CreateBlogsOverly = document.getElementById("CreateBlogsOverly")
+const HideCreateBlogsOverly = document.getElementById("HideCreateBlogsOverly")
+const BlogsDeletedHistoryOverly = document.getElementById("BlogsDeletedHistoryOverly")
+const ShowBlogsDeleteHistory = document.getElementById("ShowBlogsDeleteHistory")
+const deletedBlogs = document.getElementById("deletedBlogs")
+const HideDeleteHistory = document.getElementById("HideDeleteHistory")
+const showEmptyDeleteHistory = document.getElementById("showEmptyDeleteHistory")
+const CreateBlogsbtnFromHistory = document.getElementById("CreateBlogsbtnFromHistory")
+const DeleteAllBlogBtn = document.getElementById("DeleteAllBlogBtn")
+
+// permission overly
+
+const permissionTitle = document.querySelector(".permissionTitle")
+const permissionBody = document.querySelector(".permissionBody")
+const PermissioncancelBtn = document.getElementById("PermissioncancelBtn")
+const PermissionConfirmBtn = document.getElementById("PermissionConfirmBtn")
+const GetPermissionFromUser = document.getElementById("GetPermissionFromUser")
+// create blogs section
+
+const showAllTag = document.getElementById("showAllTag")
+const tagsInput = document.getElementById("tagsInput")
+const blogsInput = document.getElementById("blogsInput")
+const titleInput = document.getElementById("titleInput")
+const createNewBlogBtn = document.getElementById("createNewBlogBtn")
+const BlogOverlyleftheadText = document.getElementById("BlogOverlyleftheadText")
+
+const SaveBlogBtn = document.getElementById("SaveBlogBtn")
+const ContinueEditingBtn = document.getElementById("ContinueEditingBtn")
+const DiscardBlogBtn = document.getElementById("DiscardBlogBtn")
 
 // overlys
 const ShowAllLinksFromData = document.getElementById("ShowAllLinksFromData")
 const ShowAllLinksOverly = document.getElementById("ShowAllLinksOverly")
-
+const getSomePermissionOverly = document.getElementById("getSomePermissionOverly")
 // links show section
 
 const ShowChannelsBestVideosList = document.getElementById("ShowChannelsBestVideosList")
@@ -152,7 +209,9 @@ function Overly(status){
 }
 overly.addEventListener("click", () => {
     SidebarToggle("remove")
+    getSomePermissionOverlyStatus("remove")
     Overly(false)
+    GetPermission()
 })
 
 closeSidebar.addEventListener("click", () => {
@@ -332,7 +391,7 @@ let randomImgLen = Number(localStorage.getItem("randomImgLen")) || 0
 
 
 // Show posts 
-let postsDataShow = Posts.AllPost
+let postsDataShow = allPost
 
 function ShowPost(posts){
     ShowPosts.innerHTML = ""
@@ -365,7 +424,7 @@ function ShowPost(posts){
                                     </div>
                                 </div>
                                 <div class="post-details">
-                                    <div class="post-title">${post.title}</div>
+                                    <div class="post-title">${post.title ? post.title : post.blog.slice(0, 43) + "..."}</div>
                                     <div class="border-h1"></div>
                                     <div class="post-blog">
                                         <button>blogs <i class="fa-solid fa-sort-down"></i></button>
@@ -375,8 +434,7 @@ function ShowPost(posts){
                                     </div>
                                     <div class="post-foot">
                                         <div class="post-hash-tags">
-                                            <span class="hashTag">#hello</span>
-                                            <span class="hashTag">#world</span>
+
                                         </div>
                                         <div class="linksShow">
 
@@ -397,6 +455,9 @@ function ShowPost(posts){
         const postHashTags = createPost.querySelector(".post-hash-tags")
         postHashTags.innerHTML = ""
         post.tag.forEach((tag, indexTag) => {
+
+            if (!tag) return
+
             let createTag = document.createElement("span")
             createTag.innerHTML = `#${tag}`
             createTag.className = 'hashTag'
@@ -427,7 +488,6 @@ if (postClickMemory && Object.entries(postClickMemory).length > 1) {
     PostDetailsViewFunc(postClickMemory, randomImgLen)
 }
 
-console.log(postClickMemory)
 
 function PostDetailsViewFunc(post, randomDefaultImg){
     if (!post) return
@@ -494,7 +554,7 @@ function PostDetailsViewFunc(post, randomDefaultImg){
                         </div>
                         <div class="viewPostDetailsMain">
                             <div class="viewPostDetailsAll">
-                                <div class="postTitle">${post.title}</div>
+                                <div class="postTitle">${post.title ? post.title.length > 40 ? post.title.slice(0, 40) + "..." : post.title : post.blog.slice(0, 40) + "..."}</div>
                                 <div class="postblogs">
                                     ${post.blog}
                                 </div>
@@ -684,7 +744,7 @@ searchInput.addEventListener("input", (e) => {
         searchPlaceholder.style.display = "flex"
     }
     
-    postsDataShow = Posts.AllPost.filter(p => p.title.toLowerCase().includes(searchData) || p.blog.toLowerCase().includes(searchData) || p.link.toLowerCase().includes(searchData))
+    postsDataShow = allPost.filter(p => p.title.toLowerCase().includes(searchData) || p.blog.toLowerCase().includes(searchData) || p.link.toLowerCase().includes(searchData))
     ShowPost(postsDataShow)
     if (postsDataShow.length > 0){
         EmptyPostMessage.classList.add("hideAnimate0")
@@ -841,7 +901,6 @@ function FilterChannels(search){
 
 ShowChanelTypesBtns.forEach((b, index) => {
 
-
     b.addEventListener("click", () => {
         ShowChanelTypesBtns.forEach(b2 => b2.classList.remove("selected"))
         b.classList.add("selected")
@@ -981,9 +1040,14 @@ ShowChannelsBestVideosList.addEventListener("click", (e) => {
 
 
 
-let postsDataShowBlogs = Blogs.AllBlogs
-let allBlogTopic = [...new Set(postsDataShowBlogs.flatMap(t => t.type))]
+
+let allBlogTopic
 let searchBlogInputSaved = GetStatus("savedSearchBlogInput", "") || ""
+
+function AllBlogTypeShow(){
+   allBlogTopic = [...new Set(AllBlogsData.flatMap(t => t.type))]
+   suggestSearch(allBlogTopic)
+}
 
 function SearchBlogs(searchData){
    SetStatus("savedSearchBlogInput", "set", searchData)
@@ -993,7 +1057,8 @@ function SearchBlogs(searchData){
 }
 
 
-suggestSearch(allBlogTopic)
+
+AllBlogTypeShow()
 function suggestSearch(typesAll, search){
     searchSuggest.innerHTML = ""
     if (!search) return
@@ -1017,6 +1082,11 @@ function suggestSearch(typesAll, search){
 
 
 SearchBlogInput.addEventListener("input", () => {
+    InputSearchBlog()
+})
+
+function InputSearchBlog()
+{
     let searchdata = SearchBlogInput.value.trim()  
     SetStatus("savedSearchBlogInput", "set", searchdata)
     hidePlaceholder(searchdata.length)
@@ -1026,7 +1096,7 @@ SearchBlogInput.addEventListener("input", () => {
         SearchBlogsFilter(searchdata)
         clearTimeout(ti)
     }, 200)
-})
+}
 
 SearchBlogbtn.addEventListener("click", () => {
     let searchdata = SearchBlogInput.value.trim()
@@ -1134,7 +1204,7 @@ function DeleteLink(index){
         }
         ShowAllBlogsData(isshowAllBlog)
         SetStatus("isshowAllBlog", "set", isshowAllBlog)
-        ShowBlogs(Blogs.AllBlogs)
+        ShowBlogs(AllBlogsData)
 
 })
 ShowAllBlogsData(isshowAllBlog)
@@ -1144,12 +1214,16 @@ function ShowAllBlogsData(status){
     {   
         maxShow = maxshowLength 
     } else {
-        maxShow = Blogs.AllBlogs.length
+        maxShow = AllBlogsData.length
+        ShowBlogs(AllBlogsData)
     }
 }
 
-ShowBlogs(Blogs.AllBlogs)
+ShowBlogs(AllBlogsData)
 function ShowBlogs(Allblogs){
+
+    // Saved blogs
+    SetStatus("AllBlogsData", "set", AllBlogsData, "json")
 
     showBlogs.innerHTML = ""
 
@@ -1169,46 +1243,103 @@ function ShowBlogs(Allblogs){
     }
 
     Allblogs.forEach((blog, index) => {
-
     let createBlog = document.createElement("div")
     createBlog.className = "blog"
-    createBlog.innerHTML = `
-                                <div class="blog-count">
-                                    <span>${index + 1}</span>
-                                </div>
+    createBlog.innerHTML = `    ${ blog.isBuildIn === false || blog.id !== 0 ? `
+                                <div class="BlogConfigBtns">
+                                    <button class="EditBlog" data-uuid="${blog.id}"><i class="fa-regular fa-pen-to-square"></i></button>
+                                    <button class="BlogTitleSearchInGoogle" data-title="${blog.title ? blog.title : blog.blog.slice(0, 30)}"><i class="fa-brands fa-google"></i></button>
+                                    <p class="border-b1-m0"></p>
+                                    <button class="deleteBlog" data-uuid="${blog.id}"><i class="fa-regular fa-trash-can"></i></button>
+                                </div>` : ""}
+                                <div class="blogContent">
+                                    <div class="blog-count">
+                                      <span>${index + 1}</span>
+                                    </div>
                                 <div class="blog-main">
                                     <div class="blog-title">
                                         <div class="blogTitle">${!blog.title ? blog.blog.slice(0, 30) + ".." : blog.title}</div>
                                     </div>
                                     <div class="border-h1-w90"></div>
-                                    <div class="blog_content">
-                                       ${blog.blog.length > 90 ? blog.blog.slice(0, 90) + `<span class="showMoreBtn">...more</span>` : blog.blog}
-                                    </div>
+                                    <div class="blog_content">${blog.blog.length > 90 ? blog.blog.slice(0, 90) + `<span class="showMoreBtn">...more</span>` : blog.blog}</div>
+                                </div>
                                 </div>`
     if (index < maxShow) showBlogs.appendChild(createBlog)
 
-     createBlog.addEventListener("click", () => {
+     createBlog.addEventListener("click", (e) => {
+        if (e.target.closest(".BlogConfigBtns")) return
         BlogShowOverly('add')
         InputBlogsData(blog)
      })
+
 })
 }
 
-
 function SearchBlogsFilter(search){
     search = search.toLowerCase()
-    let filteredSearch = Blogs.AllBlogs.filter(i => i.blog !== "").filter(item => item.title.toLowerCase().includes(search) || item.blog.toLowerCase().includes(search) || item.type.some(t => t.toLowerCase().includes(search)))
+    let filteredSearch = AllBlogsData.filter(i => i.blog !== "").filter(item => item.title.toLowerCase().includes(search) || item.blog.toLowerCase().includes(search) || item.type.some(t => t.toLowerCase().includes(search)))
     ShowBlogs(filteredSearch)
+
+    if (filteredSearch.length < 1){
+        ShowNotFoundMessage.innerHTML = `Not found "${search.length > 20 ? search.slice(0, 20) + "..." : search}"`
+        showPopup.classList.remove("hideAnimate0")
+    } else {
+         showPopup.classList.add("hideAnimate0")
+    }
+     
+
+    if (search.length > 0){
+        createNewBlog.classList.add("convertCrose")
+    } else {
+        createNewBlog.classList.remove("convertCrose")
+    }
 }
 
 SearchBlogsFilter(searchBlogInputSaved)
 
 
-/* 
+// configar blog
 
-*/
+document.addEventListener("click", (e) => {
+    let deleteBlogBtn = e.target.closest(".deleteBlog")
+    let BlogTitleSearchInGoogle = e.target.closest(".BlogTitleSearchInGoogle")
+    let EditBlogBtn = e.target.closest(".EditBlog")
 
-let showBlogOverlyStatus = GetStatus("showBlogOverlyStatus")
+    if(deleteBlogBtn){
+        let uuid = deleteBlogBtn.dataset.uuid
+
+        AllDeletedBlogs.push(AllBlogsData.find(b => b.id === uuid))
+        DeleteHistoryBlogRender(AllDeletedBlogs)
+
+        AllBlogsData = AllBlogsData.filter(b => b.id !== uuid)
+        ShowBlogs(AllBlogsData)
+        ShowAllBlogsData(isshowAllBlog)
+        AllBlogTypeShow()
+        
+    }
+    if (BlogTitleSearchInGoogle){
+        let BlogTitle = BlogTitleSearchInGoogle.dataset.title
+        SearchInGoogle(BlogTitle)
+    }
+    if (EditBlogBtn){
+        let blogUUID = EditBlogBtn.dataset.uuid
+        EditBlogStatus("add")
+        EditBlogs(blogUUID)
+    }
+
+})
+
+let SavedBlogOverly;
+try {
+    SavedBlogOverly = JSON.parse(GetStatus("SavedBlogOverly")) || null
+} catch(err){
+    SavedBlogOverly = null
+    SetStatus("SavedBlogOverly", "remove")
+}
+
+
+
+let showBlogOverlyStatus = GetStatus("showBlogOverlyStatus") || "remove"
 BlogShowOverly(showBlogOverlyStatus)
 function BlogShowOverly(status){
     if (status === "add" || status === true){
@@ -1223,12 +1354,19 @@ function BlogShowOverly(status){
         body.classList.remove("overflowHid")
         SetStatus("showBlogOverlyStatus", "set", "remove", "")
 
+        SavedBlogOverly = null
+        InputBlogsData(SavedBlogOverly)
+
     } else {
         showAllBlogsOverly.classList.toggle("hideAnimate0")
         if (showAllBlogsOverly.classList.contains("hideAnimate0")){
-            BlogShowOverly("remove")
+            showAllBlogsOverly.classList.remove("hideAnimate0")
+            body.classList.add("overflowHid")
+            SetStatus("showBlogOverlyStatus", "set", "add", "")
         } else {
-            BlogShowOverly("add")
+           showAllBlogsOverly.classList.remove("hideAnimate0")
+            body.classList.add("overflowHid")
+            SetStatus("showBlogOverlyStatus", "set", "add", "")
         }
     }
 }
@@ -1236,37 +1374,36 @@ HideBlogs.addEventListener("click", () => {
     BlogShowOverly('remove')
 })
 
-let SavedBlogOverly;
-try {
-    SavedBlogOverly = JSON.parse(GetStatus("SavedBlogOverly"))
-} catch(err){
-    SavedBlogOverly = null
-    SetStatus("SavedBlogOverly", "remove")
-}
+
 
 InputBlogsData(SavedBlogOverly)
 
 function InputBlogsData(Singleblogs, AllBlogs){
     ShowAllBlogsOverlyMain.innerHTML = ""
 
-
-    if (Object.entries(Singleblogs).length || Singleblogs !== "" || Singleblogs !== null){
-        SetStatus("SavedBlogOverly", "set", Singleblogs, "json")
+    SetStatus("SavedBlogOverly", "set", Singleblogs, "json")
+    if (Singleblogs !== null){
+        
         let createBlog = document.createElement("div")
         createBlog.innerHTML = `
         <div class="blog_x">
             <div class="blog_x_title">
                 ${Singleblogs.title ? Singleblogs.title : Singleblogs.blog.slice(0, 40) + "..."}
             </div>
-            <div class="blog_x_main_content">
-                ${Singleblogs.blog}
-            </div>
+            <div class="blog_x_main_content">${Singleblogs.blog}</div>
         </div>
         `
         ShowAllBlogsOverlyMain.appendChild(createBlog)
         LinkOpenInGoogle(Singleblogs.title ? Singleblogs.title : Singleblogs.blog.slice(0, 30))
+
+        if (Singleblogs.id === 0) return
+        createBlog.addEventListener("dblclick", () => {
+            EditBlogStatus("add")
+            EditBlogs(Singleblogs.id)
+        })
         return
     }
+    if (!AllBlogs) return
     AllBlogs.forEach((blog, index) => {
         let createBlog = document.createElement("div")
         createBlog.innerHTML = `
@@ -1280,13 +1417,393 @@ function InputBlogsData(Singleblogs, AllBlogs){
         </div>
         `
         ShowAllBlogsOverlyMain.appendChild(createBlog)
+
+
     })
 }
 function LinkOpenInGoogle(search, target){
     search = search.trim()
     SearchInGoggle.addEventListener("click", () => {
-        window.open(`https://www.google.com/search?q=${search}`, target || "_blank")
+        SearchInGoogle(search, target)
     })
 }
 
+function SearchInGoogle(search, target){
+    window.open(`https://www.google.com/search?q=${search}`, target || "_blank")
+}
 
+let createBlogOverlyIs = GetStatus("createBlogOverlyIs") || "remove"
+
+function CreateBlogs(status){
+    if (status === "add" || status === "true"){
+        CreateBlogsOverly.classList.remove("hideAnimate0")
+        body.classList.add("overflowHid")
+    } else if (status === "remove" || status === "false"){
+        CreateBlogsOverly.classList.add("hideAnimate0")
+        body.classList.remove("overflowHid")
+
+    } else {
+        CreateBlogsOverly.classList.toggle("hideAnimate0")
+    }
+    SetStatus("createBlogOverlyIs", "set", status)
+}
+
+
+
+createNewBlog.addEventListener("click", () => {
+    if (createNewBlog.classList.contains("convertCrose")){
+        SearchBlogInput.value = ""
+        InputSearchBlog()
+        return
+    }
+
+    CreateBlogs("add")
+})
+
+HideCreateBlogsOverly.addEventListener("click", () => {
+    let titleInputValue = titleInput.value.trim()
+    let blogsInputValue = blogsInput.value.trim()
+
+    if (titleInputValue || blogsInputValue){
+        getSomePermissionOverlyStatus("add")
+        return
+    }
+        CreateBlogs("remove")
+        EditBlogStatus("remove")
+
+    
+})
+
+
+let SavedAllTags = JSON.parse(GetStatus("SavedAllTags")) || []
+
+tagsInput.addEventListener("keydown", (e) => {
+    let tagsInputValue = tagsInput.value
+    if (e.key === "Enter"){
+
+        if (!tagsInputValue.trim()) return
+        PushTags(tagsInputValue)
+    }
+})
+
+function PushTags(tags){
+    SavedAllTags.push(tags)
+    RenderAllTags(SavedAllTags)
+    tagsInput.value = ""
+}
+
+RenderAllTags(SavedAllTags)
+
+function RenderAllTags(tags){
+
+    SetStatus("SavedAllTags", "set", tags, "json")
+    showAllTag.innerHTML = ""
+
+    tags.forEach((tag, index) => {
+        let createTag = document.createElement("div")
+        createTag.className = "tag"
+        createTag.innerHTML = `
+                    ${tag}
+                    <button class="deleteTag" data-delete-index="${index}">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>`
+
+        showAllTag.appendChild(createTag)
+    })
+}   
+
+document.addEventListener("click", (e) => {
+    let deleteTagBtn = e.target.closest(".deleteTag")
+    if (deleteTagBtn){
+        let dataIndex = Number(deleteTagBtn.dataset.deleteIndex)
+        SavedAllTags.splice(dataIndex, 1)
+        RenderAllTags(SavedAllTags)
+        
+    }
+})
+
+let blogUUid
+
+
+function EditBlogs(uuid) {
+    let blog = AllBlogsData.find(b => b.id === uuid)
+    if (!blog) return
+    titleInput.value = blog.title
+    blogsInput.value = blog.blog
+    blogUUid = uuid
+    SavedAllTags = blog.type
+    RenderAllTags(SavedAllTags)
+}
+
+
+
+function CreateNewBlogProccess(){
+    let titleInputValue = titleInput.value.trim()
+    let blogsInputValue = blogsInput.value.trim()
+    let allInputTags = tagsInput.value.trim()
+
+    if (allInputTags !== ""){
+        PushTags(allInputTags)
+    }
+
+    if (createNewBlogBtn.classList.contains("edit_blog")) {
+        // edit code 
+        AllBlogsData = AllBlogsData.map(b => b.id === blogUUid ? {...b, title: titleInputValue, blog: blogsInputValue, type: SavedAllTags} : b)
+        ShowBlogs(AllBlogsData)
+        EditBlogStatus("remove")
+        InputBlogsData(AllBlogsData.find(b => b.id === blogUUid))
+        SavedAllTags = []
+        RenderAllTags(SavedAllTags)
+        AllBlogTypeShow()
+        console.log(AllBlogsData)
+        return
+    } 
+
+    
+     
+    if (!blogsInputValue.trim()) {
+        blogsInput.focus()
+        return
+    }
+
+    // Saved Blogs
+    AllBlogsData.push({
+        id: generateSafeUUID(),
+        title: titleInputValue,
+        blog: blogsInputValue,
+        type: SavedAllTags,
+        isBuildIn: false,
+
+    })
+    
+    ShowBlogs(AllBlogsData)
+
+
+    titleInput.value = ""
+    blogsInput.value = ""
+    SavedAllTags = []
+    RenderAllTags(SavedAllTags)
+    CreateBlogs("remove")
+    ShowAllBlogsData(isshowAllBlog)
+    AllBlogTypeShow()
+}
+
+createNewBlogBtn.addEventListener("click", () => {
+    CreateNewBlogProccess()
+})
+
+
+let getSavedEditBlogSec = GetStatus("savedEditBlogSec") || "remove"
+
+EditBlogStatus(getSavedEditBlogSec)
+function EditBlogStatus(status){ 
+    if (status === "add" || status === "true"){
+        createNewBlogBtn.classList.add("edit_blog")
+        BlogOverlyleftheadText.innerHTML = `<i class="fa-regular fa-pen-to-square"></i>Edit Blogs`
+        CreateBlogsOverly.classList.remove("hideAnimate0")
+        body.classList.add("overflowHid")
+        CreateBlogs("add")
+        createNewBlogBtn.innerHTML = `<i class="fa-regular fa-bookmark"></i>Save Blogs`
+    } else {
+        createNewBlogBtn.classList.remove("edit_blog")
+        BlogOverlyleftheadText.innerHTML= "Create New Blogs"
+        CreateBlogs("remove")
+        createNewBlogBtn.innerHTML = `<i class="fa-solid fa-plus"></i>Create Now`
+        titleInput.value = ""
+        blogsInput.value = ""
+    }
+    SetStatus("savedEditBlogSec", "set", status)
+
+}
+
+
+function generateSafeUUID() {
+  const timestamp = Date.now().toString(36); // base36 timestamp
+  const randomPart = Math.random().toString(36).substring(2, 10); // 8 char random
+  const extraRandom = Math.floor(Math.random() * 1e6).toString(36); // extra random 4-5 char
+  return `${timestamp}-${randomPart}-${extraRandom}`;
+}
+
+let getsavedSomePermisionSec = GetStatus("savedSomePermisionSec") || "remove"
+
+getSomePermissionOverlyStatus(getsavedSomePermisionSec)
+
+function getSomePermissionOverlyStatus(status){
+    if (status === "add" || status === "true"){
+        getSomePermissionOverly.classList.remove("hideAnimate0")
+        Overly(true)
+    } else {
+        getSomePermissionOverly.classList.add("hideAnimate0")
+        Overly(false)
+    }
+    SetStatus("savedSomePermisionSec", "set", status)
+}
+
+SaveBlogBtn.addEventListener("click", () => {
+    CreateNewBlogProccess()
+    getSomePermissionOverlyStatus("remove")
+})
+
+DiscardBlogBtn.addEventListener("click", () => {
+    CreateBlogs("remove")
+    EditBlogStatus("remove")
+    getSomePermissionOverlyStatus("remove")
+})
+ContinueEditingBtn.addEventListener("click", () => {
+    getSomePermissionOverlyStatus("remove")
+    titleInput.focus()
+})
+CreateBlogs(createBlogOverlyIs)
+
+// blog history 
+let SavedStatusBlogsDeletedHistoryOverly = GetStatus("SavedStatusBlogsDeletedHistoryOverly") || "remove"
+
+function BlogsDeletedHistoryOverlyStatus(status){
+    if (status === "add" || status === "true"){
+        BlogsDeletedHistoryOverly.classList.remove("hideAnimate0")
+        body.classList.add("overflowHid")
+    } else {
+        BlogsDeletedHistoryOverly.classList.add("hideAnimate0")
+        body.classList.remove("overflowHid")
+    }
+
+    SetStatus("SavedStatusBlogsDeletedHistoryOverly", "set", status)
+}
+
+
+ShowBlogsDeleteHistory.addEventListener('click', () => {
+   BlogsDeletedHistoryOverlyStatus("add") 
+})
+HideDeleteHistory.addEventListener("click", () => {
+    BlogsDeletedHistoryOverlyStatus("remove")
+})
+
+BlogsDeletedHistoryOverlyStatus(SavedStatusBlogsDeletedHistoryOverly)
+//deletedBlogs
+
+
+function DeleteHistoryBlogRender(blogs){
+
+    deletedBlogs.innerHTML = ""
+    if (blogs === null) return
+
+    SetStatus("AllDeletedBlogs", "set", blogs, "json")
+
+    if (blogs.length < 1){
+        showEmptyDeleteHistory.classList.remove("hideAnimate0")
+        DeleteAllBlogBtn.style.display = "none"
+    } else {
+        showEmptyDeleteHistory.classList.add("hideAnimate0")
+        DeleteAllBlogBtn.style.display = "block"
+    }
+
+    blogs.forEach((blog, index) => {
+        let createBlog = document.createElement("div")
+        let createBorder = document.createElement("div")
+        createBorder.className = "border-w1c1"
+        createBlog.className = "blog"
+        createBlog.innerHTML = `
+                                        <div class="deleteBlogPopups">
+                                            <button data-id="${blog.id}" class="recoverBlogFromDeleteBtn"><i class="fa-solid fa-diamond-turn-right"></i>Recover</button>
+                                            <div class="border-w1-h1"></div>
+                                            <button data-id="${blog.id}" class="historysBlogdeleteBtn"><i class="fa-regular fa-trash-can"></i>Permanently delete</button>
+                                            </div>
+                                            <div class="blog-main">
+                                            <div class="blog-title">
+                                            <div class="blogTitle">${blog.title ? blog.title : blog.blog.length > 30 ? blog.blog.slice(0, 40) + "..." : blog.blog}</div>
+                                            </div>
+                                            <div class="border-h1-w90"></div>
+                                            <div class="blog_content">${blog.blog}${blog.blog.length > 47 ? `<span class="showMoreBtn">...more</span>` : ""}</div>
+                                        </div>`
+        
+
+        deletedBlogs.appendChild(createBlog)
+        if (index !== (blogs.length - 1)){
+            deletedBlogs.appendChild(createBorder)
+        }
+    })
+}
+
+DeleteHistoryBlogRender(AllDeletedBlogs)
+
+document.addEventListener("click", (e) => {
+    let recoverBlogFromDeleteBtn = e.target.closest(".recoverBlogFromDeleteBtn")
+    let historysBlogdeleteBtn = e.target.closest(".historysBlogdeleteBtn")
+
+    
+    if (historysBlogdeleteBtn){
+        let deleteBlogId = historysBlogdeleteBtn.dataset.id
+        AllDeletedBlogs = AllDeletedBlogs.filter(b => b.id !== deleteBlogId)
+        DeleteHistoryBlogRender(AllDeletedBlogs)
+
+    } 
+    
+    if (recoverBlogFromDeleteBtn){
+        let recoverId = recoverBlogFromDeleteBtn.dataset.id
+        
+        AllBlogsData.push(AllDeletedBlogs.find(b => b.id === recoverId))
+        
+        ShowAllBlogsData(isshowAllBlog)
+        ShowBlogs(AllBlogsData)
+        AllDeletedBlogs = AllDeletedBlogs.filter(b => b.id !== recoverId)
+        DeleteHistoryBlogRender(AllDeletedBlogs)
+
+        
+    }
+})
+CreateBlogsbtnFromHistory.addEventListener('click', () => {
+    CreateBlogs("add")
+    BlogsDeletedHistoryOverlyStatus("remove")
+})
+
+
+DeleteAllBlogBtn.addEventListener("click", () => {
+    GetPermission("delete")
+})
+
+function GetPermission(permissionType, title, body, mainBtnName){
+
+    if (permissionType){
+        switch (permissionType){
+            case "delete":
+                permissionTitle.innerHTML = "Are You Sure You Want to Delete All Your Blogs from History?"
+                permissionBody.innerHTML = "'Permanently Delete' to remove all blogs, or 'Cancel' to keep them."
+                PermissionConfirmBtn.innerHTML = "Permanently Delete"
+                GetPermissionFromUser.classList.remove("hideAnimate0") 
+                Overly(true)  
+            break
+        }
+        return
+    }
+    if (!permissionType && !title && !body){
+        permissionTitle.innerHTML = ""
+        permissionBody.innerHTML = ""
+        PermissionConfirmBtn.innerHTML = ""
+        GetPermissionFromUser.classList.add("hideAnimate0")
+        Overly(false) 
+    } else {
+        permissionTitle.innerHTML = title
+        permissionBody.innerHTML = body
+        PermissionConfirmBtn.innerHTML = mainBtnName
+        GetPermissionFromUser.classList.remove("hideAnimate0")
+        Overly(true) 
+    }
+}
+
+
+PermissioncancelBtn.addEventListener("click", () => {
+    GetPermission()
+})
+
+// All Permission to 
+PermissionConfirmBtn.addEventListener("click", () => {
+    GetPermission()
+    AllDeletedBlogs = []
+    DeleteHistoryBlogRender(AllDeletedBlogs)
+})
+document.addEventListener("click", (e) => {
+    if (GetPermissionFromUser.classList.contains("hideAnimate0")) return
+    if (!e.target.closest("#GetPermissionFromUser") && !e.target.closest("#DeleteAllBlogBtn")){
+        GetPermission()
+    }
+})

@@ -2,6 +2,7 @@ let Blogs = {
     AllBlogs:
     [
         {
+            id: 0,
             title: "How to Work google",
             blog: `
 
@@ -118,9 +119,12 @@ If you want, I can also explain:
 What vibe are we going with? 😎
 
             `,
+            id: 0,
             type: ["tech", "programming"],
+            isBuildIn: true,
         },
         {
+            if: 0,
             title: "",
             blog: `The Future of Technology: How Innovation is Changing Our World**
 
@@ -180,9 +184,12 @@ AI মানুষের কাজ সহজ করছে, তবে এর স�
 
 ---
             `,
+            id: 0,
             type: ["tech", "programming"],
+            isBuildIn: true
         },
         {
+            id: 0,
             title: "",
             blog: `
             How Sound Works: The Science Behind What We Hear**
@@ -271,9 +278,11 @@ AI মানুষের কাজ সহজ করছে, তবে এর স�
 
 চাও হলে আমি এর সাথে diagram explain করা version, বা একদম সহজ class 6 level version, বা একদম advanced physics version বানিয়ে দিতে পারি 😌🔥
 `,
-            type: ["human", "how to work sound", "what is sound", "sound", ""]
+            type: ["human", "how to work sound", "what is sound", "sound", ""],
+            isBuildIn: true
         },
         {
+            id: 0,
             title: "",
             blog: `হ্যাঁ হ্যাঁ 😄 তোমার analogyটা একদম on point 🔥
 চলো এটাকে একটু clean করে বুঝিয়ে দিই — মনে রাখার মতো করে 🧠✨
@@ -355,9 +364,123 @@ Cache = ফ্রিজ 🤣 এভাবেও বোঝাতে পারি
             type: ["server", "what is server", "how server work", "how to server work", "api"]
         },
         {
+         id: 0,
          title: "",
-         blog: ``,
-         type: []   
+         blog: `Binary Number System
+
+The binary number system, also known as the base-2 numeral system, is a positional system that represents numeric values using only two symbols: 0 and 1. Each binary digit (bit) corresponds to a power of two. It underpins nearly all modern computing and digital electronics because of its compatibility with on–off electronic states.
+Key facts
+
+    Base: 2
+
+    Digits used: 0 and 1
+
+    Smallest information unit: Bit (binary digit)
+
+    Grouping: 8 bits = 1 byte
+
+    Primary domain: Computing, data storage, and digital communication
+
+Structure and representation
+
+Binary is a positional notation system: each bit’s value depends on its position. Starting from the right, each position represents powers of 2 (2⁰, 2¹, 2², …). For example, the binary number 1011₂ equals (1 * 2³) + (0 * 2²) + (1 * 2¹) + (1 * 2⁰) = 11₁₀. Because it requires only two states, it aligns perfectly with digital circuits that register “on/off,” “high/low,” or “true/false” signals.
+Role in computing and electronics
+
+Binary provides the foundation for digital logic and data processing. Every type of information—numbers, characters, images, and sound—is encoded in binary form. Hardware components such as transistors and logic gates perform binary operations to execute calculations, control systems, and memory storage. Bits are combined into bytes and larger units (kilobytes, megabytes) to handle complex data structures.
+Arithmetic and conversions
+
+Operations in binary arithmetic mirror those in decimal arithmetic but use simple rules limited to 0 and 1.
+
+    Addition: 0+0=0, 0+1=1, 1+0=1, 1+1=10 (carry 1).
+
+    Subtraction, multiplication, and division follow analogous binary logic.
+    Conversions between binary and other bases—decimal, octal, hexadecimal—are routine in computing. Each relies on the relationship between their base values (powers of 2, 8, or 16).
+
+Historical and theoretical background
+
+The modern binary system was formalized by 17th-century mathematician Gottfried Wilhelm Leibniz, though similar dual concepts appeared earlier in ancient Chinese texts such as the I Ching. Leibniz demonstrated that all numbers and logical propositions could be expressed using 0 and 1—a principle that later became essential to electronic computing.`,
+         type: ["binary", "programing", "computer", "base"],
+         isBuildIn: true
+        },
+        {
+            id: 0,
+            title: "",
+            blog: `কম্পিউটার মানুষ না — ও ১০টা সংখ্যা (0–9) বোঝে না। ও বোঝে শুধু **২টা জিনিস: 0 আর 1**।
+
+এই সিস্টেমটার নাম **Binary number system**।
+
+---
+
+## 💡 কেন 1, 4, 8, 16, 32, 64 এমন হয়?
+
+কারণ বাইনারি মানে base 2।
+মানে প্রতিটা ধাপ আগেরটার **দুই গুণ**।
+
+যেমন দশমিক (base 10) এ হয়ঃ
+1, 10, 100, 1000 → 10 এর গুণ
+
+আর বাইনারি (base 2) এ হয়ঃ
+1, 2, 4, 8, 16, 32, 64 → 2 এর গুণ
+
+মানে:
+
+| Power | মান |
+| ----- | --- |
+| 2⁰    | 1   |
+| 2¹    | 2   |
+| 2²    | 4   |
+| 2³    | 8   |
+| 2⁴    | 16  |
+| 2⁵    | 32  |
+| 2⁶    | 64  |
+
+এটা আসলে 2 এর পাওয়ার (2ⁿ)।
+
+---
+
+## 🧠 তাহলে 1,2,3,4 কেন না?
+
+কারণ কম্পিউটার ভিতরে ভিতরে হিসাব করে এমনভাবে:
+
+ধরো একটা ৩ বিট সংখ্যা:
+
+
+101
+
+এটার মান বের হবে:
+
+(1 * 4) + (0 * 2) + (1 * 1)
+= 4 + 0 + 1
+= 5
+
+
+দেখলে? 4, 2, 1 — সবই 2 এর গুণ।
+
+---
+
+## 🔥 র‍্যাম কেন 8GB, 16GB, 32GB?
+
+কারণ মেমরি অ্যাড্রেসিং পুরোটা **2 এর পাওয়ার** ভিত্তিক।
+
+2³ = 8
+2⁴ = 16
+2⁵ = 32
+2⁶ = 64
+
+তাই স্টোরেজ, র‍্যাম সব জায়গায় এই pattern।
+
+---
+
+## 🎯 এক লাইনে কনসেপ্ট
+
+কম্পিউটার base 2 এ চলে
+তাই সবকিছু 2 এর গুণে বাড়ে
+তাই 1, 2, 4, 8, 16, 32, 64
+
+এটা আসলে ম্যাথ না — এটা ইলেকট্রনিক্সের ভাষা 
+
+`,
+            type: ["binary", "programing", "computer"]
         }
         
         

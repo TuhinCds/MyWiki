@@ -68,6 +68,7 @@ const website = {
                 },
             ]},
             {content: "Importent videos", class: "", link: "", target: "", icon: `<i class="fa-solid fa-play"></i>`, status: "new", overWrite: []},
+            {content: "Wether", class: "", link: "", target: "", icon: `<i class="fa-solid fa-cloud-moon-rain"></i>`, status: "new", overWrite: []},
             {
             content: "Wikipedia importent links", class: "", link: "", target: "", icon: `<i class="fa-solid fa-globe"></i>`, status: "", 
             overWrite: [
@@ -142,6 +143,7 @@ const website = {
                                             {content: "(Slowed) Justin Bieber - Sorry X Keiani (slowed & reverb)", class: "", link: "https://youtu.be/bG7smpvM0ao?si=8ENq6j9H1FvBizPI", target: "", icon: ``, status: "", overWrite: []},
                                             {content: "under the influence x I was never there // (tiktok remix)", class: "", link: "https://youtu.be/eZE8U-tGuk0?si=PWVDI-l39nOlOVB8", target: "", icon: ``, status: "", overWrite: []},
                                             {content: "The Chainsmokers, Daya - Don't Let Me Down (slowed & reverb)", class: "", link: "https://youtu.be/hScJibb0-ns?si=Dx7ftilf85uI43XB", target: "", icon: ``, status: "", overWrite: []},
+                                            {content: "The Weeknd - The Hills x I Was Never There (Gobaith Remix)", class: "", link: "https://youtu.be/haNrw-FH0Gs?si=6w8sNOlbUeVct9tG", target: "", icon: ``, status: "", overWrite: []},
                             ]},
                              {
                                 content: "Hindi songs", class: "", link: "", target: "", icon: ``, status: "", overWrite: [
@@ -161,6 +163,7 @@ const website = {
             {content: "Course's", class: "", link: "", target: "", icon: `<i class="fa-brands fa-youtube"></i>`, status: "", overWrite: []},
             {content: "Science", class: "", link: "", target: "", icon: `<i class="fa-solid fa-rocket"></i>`, status: "", overWrite: []},
             {content: "Solve MCQ", class: "", link: "", target: "", icon: `<i class="fa-solid fa-question"></i>`, status: "", overWrite: []},
+            {content: "Learn from img", class: "", link: "", target: "", icon: `<i class="fa-solid fa-image"></i>`, status: "", overWrite: []},
             
         ]
     }

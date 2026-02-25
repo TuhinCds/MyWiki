@@ -15,6 +15,23 @@
    .sidebar {
    width: var(--mobile-sidebar-width) !important;
 }
+.MainInputsContents {
+    border: 1px solid var(--light-color-tra-25) !important;
+    width: 95% !important;
+    background: var(--light-color-tra-25) !important;
+}
+.MainInputsContents .titleinputs{
+    border: 1px solid transparent !important;
+    background: var(--light-color-tra-25) !important;
+}
+
+.MainInputsContents .titleinputs span {
+    padding: 15px 15px !important;
+    border-bottom: 1px solid var(--light-color-tra-25) !important;
+}
+.MainInputsContents .titleinputs input {
+    background: transparent !important;
+}
 body {
     grid-template-columns: 0 1fr !important;
     grid-template-rows: var(--header-height) 1fr auto;
@@ -49,9 +66,21 @@ body {
     }
 
 #ShowPosts {
-        grid-template-columns: repeat(auto-fill, minmax(380px, 1fr)) !important;
+    grid-template-columns: repeat(auto-fill, minmax(380px, 1fr)) !important;
 }
-
+#readingBooksAll .Book {
+    background: var(--block-color) !important;
+    border-radius: 10px;
+}
+#readingBooksAll .Book.borderLeft {
+    border-radius: 20px 5px 5px 20px !important;
+}
+#readingBooksAll .Book.borderRight {
+    border-radius: 5px 20px 20px 5px !important;
+}
+#readingBooksAll {
+    gap: 7px !important;
+}
 }
 @media (min-width: 890px){
     body.closeSidebar {
@@ -227,6 +256,8 @@ body {
     justify-content: center;
     align-items: center;
 }
-
+#deletedBlogs {
+    height: calc(100vh - (var(--header-height) + 100px)) !important;
+}
 
 }

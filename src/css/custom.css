@@ -62,6 +62,11 @@
     height: 1px;
     background: var(--light-color-tra-25);
 }
+.border-b1-m0 {
+    margin: 0 3px;
+    height: 1px;
+    background: var(--light-color-tra-30);
+}
 .height0 {
     height: 0 !important;
     overflow: hidden !important; 
@@ -100,4 +105,18 @@
 }
 .b-link.light-blue {
     color: rgb(0, 206, 182);
+}
+.blog_url {
+    color: rgb(38, 107, 255);
+}
+.border-w1-h1 {
+    height: 1px;
+    background: var(--light-color-tra-25);
+}
+.primary-btn-c {
+    color: rgb(37, 113, 255) !important;
+}
+.border-w1c1 {
+    height: 1px;
+    background: var(--light-color-tra-35);
 }

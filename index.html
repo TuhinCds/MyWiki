@@ -15,6 +15,22 @@
 </head>
 <body>
     <div id="overly"></div>
+    <div id="GetPermissionFromUser" class="hideAnimate0">
+        <div class="GetPermissionFromUserWraper">
+            <div class="permissionTextContent">
+                <div class="permissionTitle">
+                    Are You Sure You Want to Delete All Your Blogs from History?
+                </div>
+                <div class="permissionBody">
+                   Click 'Permanently Delete' to remove all blogs, or 'Cancel' to keep them.
+                </div>
+            </div>
+            <div class="permissionBodyAllBtns">
+                <button id="PermissioncancelBtn">Cancel</button>
+                <button id="PermissionConfirmBtn" class="delete">Permanently Delete</button>
+            </div>
+        </div>
+    </div>
     <header class="header">
         <div class="leftSideHead">
             <span class="LogoSee"></span>
@@ -221,7 +237,10 @@
                               <input type="text" id="SearchBlogInput">
                               <span class="searchplaceholder"><i class="fa-solid fa-magnifying-glass"></i> Search Blogs..</span>
                             </div>
-                           <button id="SearchBlogbtn"><i class="fa-solid fa-magnifying-glass"></i></button>
+                           <div class="searchBlogsAllBtns">
+                            <button id="SearchBlogbtn"><i class="fa-solid fa-magnifying-glass"></i></button>
+                            <button id="createNewBlog"><i class="fa-solid fa-plus"></i></button>
+                           </div>
                          </div>
                          <div class="searchSuggestContainer">
                             <ul id="searchSuggest">
@@ -235,7 +254,14 @@
                         <div class="ShowMainBlogsAll">
                              <div id="showBlogs">
                             </div>
-                            <button id="ConfigBlogs">Show More Blogs</button>
+                            <div class="showPopup hideAnimate0">
+                                <p id="ShowNotFoundMessage">Not found "tuhin"</p>
+                                <p>Please Enter valid search...</p>
+                            </div>
+                            <div class="showBlogsDownBtns">
+                                    <button id="ConfigBlogs">Show More Blogs</button>
+                                    <button id="ShowBlogsDeleteHistory"><i class="fa-solid fa-clock-rotate-left"></i></button>
+                            </div>
                         </div>
                          <div id="showAllBlogsOverly" class="hideAnimate0">
                             <div class="showAllBlogsOverlyHeader">
@@ -263,7 +289,126 @@
                                 
                             </div>
                             </div>
+
                          </div>
+                             <div class="blogsAllConfigOverlys">
+                                <div id="CreateBlogsOverly" class="hideAnimate0">
+                                    <div class="CreateBlogsOverlyHead">
+                                        <div class="CreateBlogsOverlyHeadLeft">
+                                            <span id="BlogOverlyleftheadText">Create New Blogs</span>
+                                        </div>
+                                        <div class="CreateBlogsOverlyHeadRight">
+                                            <button id="HideCreateBlogsOverly">
+                                                <i class="fa-solid fa-xmark"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="CreateBlogsOverlyMain">
+                                        <div class="MainInputsContents">
+                                            <div class="inputsGroups">
+                                            <div class="inputGroup titleinputs">
+                                                <span>Title</span>
+                                                <input type="text" id="titleInput">
+                                            </div>
+                                            <div class="inputGroup">
+                                                <span>Write Blogs</span>
+                                                <textarea type="text" id="blogsInput"></textarea>
+                                            </div>
+                                            <div class="inputGroup taginputs">
+                                                <span>Enter tags (optional)</span>
+                                                <input type="text" id="tagsInput">
+                                            </div>
+                                            <div class="inputGroup tagShow">
+                                                <div id="showAllTag">
+                                                <!-- all tags -->
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <button id="createNewBlogBtn"><i class="fa-solid fa-plus"></i>Create Now</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="getSomePermissionOverly" class="hideAnimate0">
+                                    <div class="getSomePermissionOverlyWraper">
+                                        <button id="DiscardBlogBtn">Discard</button>
+                                        <button id="ContinueEditingBtn">Continue Editing</button>
+                                        <div class="border-w1-h1"></div>
+                                        <button id="SaveBlogBtn" class="primary-btn-c">Save</button>
+                                    </div>
+                                </div>
+                                <div id="BlogsDeletedHistoryOverly" class="hideAnimate0">
+                                        <div class="BlogsDeletedHistoryWraper">
+                                            <div class="BlogsDeleteHistoryHead">
+                                                <div class="BlogDeleteHistoryLeftHead">
+                                                   Delete History
+                                                </div>
+                                                <div class="BlogDeleteHistoryRightHead">
+                                                    <div class="BlogsConfigsBtns">
+                                                        <button id="DeleteAllBlogBtn"><i class="fa-regular fa-trash-can"></i>Delete All</button>
+                                                    </div>
+                                                    <div class="ovelyCloseBtns">
+                                                        <button id="HideDeleteHistory">
+                                                            <i class="fa-solid fa-xmark"></i>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="DeletedblogsContainer">
+                                                    <div id="deletedBlogs">  
+                                                        <!-- show deleted blogs -->
+                                                    </div>
+                                                    <div id="showEmptyDeleteHistory" class="hideAnimate0">
+                                                        <h4>Empty Delete History</h4>
+                                                        <p>your delete history is empty if you create blog click create new</p>
+                                                        <div class="showEmptydeleteHisPopBtns">
+                                                            <button id="CreateBlogsbtnFromHistory"><i class="fa-solid fa-plus"></i>Create new</button>
+                                                        </div>
+                                                    </div>
+                                            </div>  
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="Reading" id="Reading">
+            <div class="readingWraper">
+                <div class="readingHead">
+                    <div class="readingHeadAllContent">
+                        <p class="ReadingHeadText"><i class="fa-brands fa-delicious"></i>Your Books</p>
+                        <span class="AnimatedBooksSec">
+                            <span class="AnimatedBooksSecChild"></span>
+                        </span>
+                    </div>
+                </div>
+                <div class="readingMain">
+                    <div class="readingBooksContainer">
+                        <div id="readingBooksAll">
+                            <!-- All books -->
+                             <div class="Book borderLeft">
+                                <div class="bookTitle"><i class="fa-solid fa-book-open"></i>Technology Reading</div>
+                                <div class="bookBody">
+                                    Lorem, ipsum dolor eius ab veniam quam tenetur ratione assumenda molestiae corporis obcaecati praesentium?
+                                </div>
+                                <div class="bookType">Type <span class="indicator-circle-2"></span>Technology</div>
+                             </div>
+                             <div class="Book borderRight">
+                                <div class="bookTitle"><i class="fa-solid fa-book-open"></i>Technology Reading</div>
+                                <div class="bookBody">
+                                    Lorem, ipsum dolor eius ab veniam quam tenetur ratione assumenda molestiae corporis obcaecati praesentium?
+                                </div>
+                                <div class="bookType">Type <span class="indicator-circle-2"></span>Technology</div>
+                             </div>
+                        </div>
+                        <div class="createBooksContainer">
+                            <button id="CreateNewBook">
+                                <i class="fa-solid fa-plus"></i>
+                                Create Book
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
