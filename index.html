@@ -388,20 +388,6 @@
                     <div class="readingBooksContainer">
                         <div id="readingBooksAll">
                             <!-- All books -->
-                             <div class="Book borderLeft">
-                                <div class="bookTitle"><i class="fa-solid fa-book-open"></i>Technology Reading</div>
-                                <div class="bookBody">
-                                    Lorem, ipsum dolor eius ab veniam quam tenetur ratione assumenda molestiae corporis obcaecati praesentium?
-                                </div>
-                                <div class="bookType">Type <span class="indicator-circle-2"></span>Technology</div>
-                             </div>
-                             <div class="Book borderRight">
-                                <div class="bookTitle"><i class="fa-solid fa-book-open"></i>Technology Reading</div>
-                                <div class="bookBody">
-                                    Lorem, ipsum dolor eius ab veniam quam tenetur ratione assumenda molestiae corporis obcaecati praesentium?
-                                </div>
-                                <div class="bookType">Type <span class="indicator-circle-2"></span>Technology</div>
-                             </div>
                         </div>
                         <div class="createBooksContainer">
                             <button id="CreateNewBook">
@@ -409,6 +395,66 @@
                                 Create Book
                             </button>
                         </div>
+                    </div>
+                </div>
+            </div>
+            <div class="AllBooksOverly">
+                <div id="ReadBooksOverly" class="hideAnimate0">
+                    <div class="readBooksOverlyHead">
+                        <div class="leftBooksOvelyHead">
+                            <span class="mobile-x-text">Book</span>
+                            <span class="desktop-x-text">Read Book</span>
+                        </div>
+                        <div class="rightBooksOvelyHead">
+                            <div class="rightSideBookOverly">
+                                <button id="OpenInChatGpt">
+                                  <i class="fa-brands fa-openai"></i>
+                                </button>
+                            <div class="searchContainer">
+                                <div class="searchContainerWraper">
+                                    <input type="text" placeholder="Search Books..." id="SearchBooks">
+                                </div>
+                            </div>
+                            </div>
+                            <button id="hideBooksOverly">
+                                <i class="fa-solid fa-xmark"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="bookOverlyMainContainer">
+                        <div id="title">
+                            
+                        </div>
+                        <div id="mainbookContent">
+                            
+                        </div>
+                    </div>
+                </div>
+                <div id="CreateNewBooksOverly" class="hideAnimate0">
+                    <div class="CreateNewBookOverlyWraper">
+                            <div class="BookDatainputs">
+                                <div class="inputGroups">
+                                <input type="text" id="InputBookName">
+                                <span><i class="fa-solid fa-file-signature"></i>Book Name</span>
+                            </div>
+                            <div class="inputGroups">
+                                <textarea name="" id="inputBook"></textarea>
+                                <span><i class="fa-solid fa-rectangle-list"></i>Book Content</span>
+                            </div>
+                            <div class="inputGroups">
+                                <input type="text" id="BooksType">
+                                <span>Type</span>
+                            </div>
+                          </div>
+                          <div class="bookCreateOverlyBtns">
+                            <button id="CreateBookBtnInitial">
+                                <i class="fa-solid fa-plus"></i>
+                                <span>Create Book</span>
+                            </button>
+                            <button id="hidecreateBookOverly">
+                                <i class="fa-solid fa-xmark"></i>
+                            </button>
+                          </div>
                     </div>
                 </div>
             </div>

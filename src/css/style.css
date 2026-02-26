@@ -87,7 +87,7 @@ body {
 
 
 .header {
-    background: var(--header-color);
+    background: var(--bg-color);
     grid-area: header;
     display: flex;
     align-items: center;
@@ -96,8 +96,8 @@ body {
     position: fixed;
     left: 0;
     right: 0;
-    width: 100%;
     top: 0;
+    width: 100%;
     height: var(--header-height);
     z-index: 99999;
 }
@@ -2588,7 +2588,7 @@ body.overflowHid {
 
 #Reading {
     margin-top: 30px;
-    height: 100vh;
+    height: auto;
     padding-top: 150px;
     position: relative;
 }
@@ -2621,9 +2621,10 @@ body.overflowHid {
     flex-direction: column;
     gap: 20px;
     align-items: center;
+    padding-bottom: 30px;
 }
 #readingBooksAll {
-    width: 90%;
+    width: 100%;
     padding: 5px;
 }
 #readingBooksAll .Book {
@@ -2632,6 +2633,7 @@ body.overflowHid {
     display: flex;
     flex-direction: column;
     gap: 10px;
+    height: 26vh;
 }
 #readingBooksAll .Book .bookTitle{
     font-size: 1.1rem;
@@ -2661,8 +2663,8 @@ body.overflowHid {
     justify-content: center;
 }
 .createBooksContainer button {
-    width: 90%;
-    height: 6vh;
+    width: 100%;
+    padding: 15px 18px;
     border-radius: 100px;
     border: none;
     font-size: 1rem;
@@ -2675,7 +2677,7 @@ body.overflowHid {
 }
 #readingBooksAll {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: 15px;
 }
 .bookType {
@@ -2683,7 +2685,8 @@ body.overflowHid {
     padding-top: 10px;
     border-top: 1px solid var(--light-color-tra-25);
 }
-.bookType span {
+
+.bookType .showTypesofBook span {
     color: var(--text-color-80);
     font-size: .83rem;
 }
@@ -2693,8 +2696,9 @@ body.overflowHid {
     display: flex;
     align-items: center;
     gap: 7px;
+    padding-top: 15px;
 }
-.bookType span {
+.bookType .showTypesofBook span {
     width: 3.5px;
     height: 3.5px;
     border-radius: 100px;
@@ -2801,4 +2805,259 @@ body.overflowHid {
 }
 #posts {
     scroll-margin-top: 100px; 
+}
+.showTypesofBook {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    background: var(--light-color-tra-25) ;
+    padding: 9px 12px;
+    border-radius: 100px;
+}
+#ReadBooksOverly {
+    position: fixed;
+    inset: 0;
+    background: var(--bg-color);
+    z-index: 999999;
+    opacity: 1;
+    transform: scale(1);
+    transition: transform .1s, opacity .4s;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+#ReadBooksOverly .readBooksOverlyHead {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+    position: sticky;
+    top: 0;
+    background: var(--bg-color);
+}
+#ReadBooksOverly .readBooksOverlyHead .rightBooksOvelyHead {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.rightSideBookOverly {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.AllBooksOverly {
+    font-family: "Quicksand",sans-serif;
+}
+.leftBooksOvelyHead {
+    font-size: 1.1rem;
+    font-weight: 570;
+    color: var(--text-color-80);
+    position: sticky;
+    top: 0;
+}
+.rightSideBookOverly button {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+.rightBooksOvelyHead {
+    width: max-content;
+}
+#OpenInChatGpt {
+    width: 44px;
+    height: 44px;
+    border-radius: 100px;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    color: var(--text-color-80);
+    background: var(--block-color);
+}
+.searchContainer {
+    display: flex;
+    align-items: center;
+}
+.bookOverlyMainContainer {
+    margin-top: 30px;
+}
+#hideBooksOverly {
+    width: 44px;
+    height: 44px;
+    border-radius: 1000px;
+    border: none;
+    background: var(--block-color);
+    color: var(--text-color-80)
+}
+.searchContainer {
+    background: var(--block-color);
+    padding: 5px;
+    border-radius: 100px;
+    width: calc(100% - 55px);
+}
+.searchContainer input {
+    border: none;
+    background: transparent;
+    padding: 9px;
+}
+.rightBooksOvelyHead {
+    width: max-content;
+}
+.mobile-x-text {
+    display: none;
+}
+.bookOverlyMainContainer #mainbookContent {
+    color: var(--text-color-60);
+    padding: 10px 24px;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+    font-size: 1.05rem;
+    width: 100%;
+    max-width: 800px;
+}
+.bookOverlyMainContainer #title{
+    padding: 10px 24px;
+    color: var(--text-color-80);
+    font-size: 1.44rem;
+    font-weight: 570;
+    border-bottom: 1px solid var(--light-color-tra-35);
+    padding-bottom: 30px;
+    width: 100%;
+    max-width: 800px;
+}
+.bookOverlyMainContainer {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 10px;
+    justify-content: center;
+    width: 100%;
+    height: max-content;
+}
+#CreateNewBooksOverly {
+    position: fixed;
+    inset: 0;
+    z-index: 9999999;
+    background: var(--bg-color); 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 1;
+    transform: scale(1);
+    transition: transform .1s, opacity .4s;
+}
+.CreateNewBookOverlyWraper {
+    width: 90%;
+    max-width: 700px;
+    background: transparent;
+    border-radius: 40px;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    border: 1px solid var(--light-color-tra-30);
+}
+.BookDatainputs {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+.inputGroups {
+    position: relative;
+}
+.inputGroups input {
+    width: 100%;
+    padding: 20px;
+    padding-top: 46px;
+    border: none;
+    outline: none;
+    border-radius: 0;
+    background: transparent;
+    color: var(--text-color-80);
+    border-bottom: 1px solid var(--light-color-tra-30);
+    font-size: 1rem;
+}
+.inputGroups textarea {
+    font-size: 1rem;
+    width: 100%;
+    padding: 20px;
+    border: none;
+    outline: none;
+    padding-top: 33px;
+    border-radius: 10px;
+    resize: none;
+    height: 25vh;
+    color: var(--text-color-80);
+    font-family: "Quicksand", sans-serif;
+    background: transparent;
+    margin-top: 10px;
+}
+.inputGroups span {
+    position: absolute;
+    left: 20px;
+    top: 10px;
+    font-size: .8rem;
+    pointer-events: none;
+    color: var(--text-color-80);
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+.inputGroups span i {
+    color: var(--text-color-60);
+}
+#CreateBookBtnInitial {
+    padding: 20px;
+    border: none;
+    border-radius: 100px;
+    font-size: .94rem;
+    font-weight: 540;
+}
+.bookCreateOverlyBtns {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+}
+.bookCreateOverlyBtns button:first-child{
+    width: calc(100% - 56px);
+}
+.bookCreateOverlyBtns button:last-child {
+    width: 56px;
+    height: 56px;
+    border-radius: 1000px;
+    border: none;
+    background: var(--light-color-tra-30);
+    color: var(--text-color-80);
+}
+.Book .BookConfig {
+    width: 180px;
+    background: var(--sidebar-color);
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    padding: 15px 14px;
+    border-radius: 14px;
+    position: absolute;
+    left: 10px;
+    transform: scale(0);
+    opacity: 0;
+    transition: transform .2s, opacity .4s;
+}
+
+.Book:hover .BookConfig{
+    transform: scale(1);
+    opacity: 1;
+}
+.Book .BookConfig button {
+    padding: 5px;
+    border: none;
+    background: transparent;
+    text-align: start;
+    color: var(--text-color-80);
+}
+.Book {
+    position: relative;
+}
+.Book .BookConfig button.BookDeleteBtn {
+    color: rgba(213, 0, 0, 0.896);
 }

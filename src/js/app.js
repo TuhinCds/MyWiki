@@ -2,7 +2,7 @@ import { website, MyProfile, ShowDefaultImg, icons} from '../../data/website.js'
 import { Posts } from '../../data/post.js'
 import {allYoutubeChannels, ChannelsTypes} from '../../data/data.js'
 import {Blogs} from '../../data/blogs.js'
-
+import {Books} from '../../data/books.js'
 let allPost = Posts.AllPost.filter(p => p.blog !== "")
 
 
@@ -23,9 +23,39 @@ let AllDeletedBlogs
 try {
     AllDeletedBlogs = JSON.parse(GetStatus("AllDeletedBlogs")) || []
 } catch (err) {
-    AllDeletedBlogs = []
+    AllDeletedBlogs = null
     GetStatus("AllDeletedBlogs", "remove")
 }
+
+
+
+
+// language identify
+
+
+function WhichLang(text){
+    if (!text) return
+
+    const banglaRegex = /[\u0980-\u09FF]/;
+    const englishRegex = /[A-Za-z]/
+    let countBn = 0, countEn = 0
+
+    for(let c of text){
+        if (banglaRegex.test(c)){
+            countBn++
+        } else if (englishRegex.test(c)){
+            countEn++
+        }
+    }
+
+    if (countBn > countEn) return "BN"
+    if (countEn > countBn) return "EN"
+    if (countBn === countEn) return "EN and BN Mixed"
+}   
+
+
+
+
 
 // ShowPosts
 
@@ -90,6 +120,30 @@ const showEmptyDeleteHistory = document.getElementById("showEmptyDeleteHistory")
 const CreateBlogsbtnFromHistory = document.getElementById("CreateBlogsbtnFromHistory")
 const DeleteAllBlogBtn = document.getElementById("DeleteAllBlogBtn")
 
+
+// books 
+const ReadBooksOverly = document.getElementById("ReadBooksOverly")
+const Booktitle = document.getElementById("title")
+const readingBooksAll = document.getElementById("readingBooksAll")
+const mainbookContent = document.getElementById("mainbookContent")
+const hideBooksOverly = document.getElementById("hideBooksOverly")
+const OpenInChatGpt = document.getElementById("OpenInChatGpt")
+const SearchBooks = document.getElementById("SearchBooks")
+const CreateNewBook = document.getElementById("CreateNewBook")
+const CreateNewBooksOverly = document.getElementById("CreateNewBooksOverly")
+const hidecreateBookOverly = document.getElementById("hidecreateBookOverly")
+const CreateBookBtnInitial = document.getElementById("CreateBookBtnInitial")
+const inputBook = document.getElementById("inputBook")
+const InputBookName = document.getElementById("InputBookName")
+const BooksType = document.getElementById("BooksType")
+
+let allBooks
+try {
+    allBooks = JSON.parse(GetStatus("allBooks")) || Books
+} catch(err) {
+    allBooks = []
+    SetStatus("allBooks", "remove")
+}
 // permission overly
 
 const permissionTitle = document.querySelector(".permissionTitle")
@@ -171,6 +225,11 @@ function Theme(getTheme){
 
 
 // sidebar 
+
+function RemoveSidebar(){
+    if (!sidebar.classList.contains("open")) return
+    SidebarToggle()
+}
 function SidebarToggle(status){
     if (status === "add"){
         sidebar.classList.add("open")
@@ -1270,6 +1329,7 @@ function ShowBlogs(Allblogs){
         if (e.target.closest(".BlogConfigBtns")) return
         BlogShowOverly('add')
         InputBlogsData(blog)
+        
      })
 
 })
@@ -1380,6 +1440,7 @@ InputBlogsData(SavedBlogOverly)
 
 function InputBlogsData(Singleblogs, AllBlogs){
     ShowAllBlogsOverlyMain.innerHTML = ""
+    RemoveSidebar()
 
     SetStatus("SavedBlogOverly", "set", Singleblogs, "json")
     if (Singleblogs !== null){
@@ -1446,6 +1507,7 @@ function CreateBlogs(status){
         CreateBlogsOverly.classList.toggle("hideAnimate0")
     }
     SetStatus("createBlogOverlyIs", "set", status)
+    RemoveSidebar()
 }
 
 
@@ -1668,6 +1730,7 @@ function BlogsDeletedHistoryOverlyStatus(status){
     }
 
     SetStatus("SavedStatusBlogsDeletedHistoryOverly", "set", status)
+    RemoveSidebar()
 }
 
 
@@ -1807,3 +1870,180 @@ document.addEventListener("click", (e) => {
         GetPermission()
     }
 })
+
+
+RenderBooks(allBooks)
+
+
+function RenderBooks(books){
+    readingBooksAll.innerHTML = ""
+
+    books.forEach((book, index) => {
+        let createBook = document.createElement("div")
+        createBook.className = "Book"
+        
+        createBook.innerHTML = `
+                                <div class="BookConfig">
+                                    <button class="InOpenChatGPT" data-texts="${encodeURIComponent(book.book)}"><i class="fa-brands fa-openai"></i> Open Book</button>
+                                    ${book.isBuildIn ? "" : `<div class="border-w1c1"></div>
+                                    <button class="BookDeleteBtn" data-id="${book.id}"><i class="fa-regular fa-trash-can"></i> Delete Book</button>`}
+                                </div>
+                                <div class="bookTitle"><i class="fa-solid fa-book-open"></i>${book.name ? book.name.length > 28 ? book.name.slice(0, 28) + "..." : book.name : book.book.length > 30 ? book.book.slice(0, 20) + "..." : book.book}</div>
+                                <div class="bookBody">
+                                   ${(book.book || "").length > 90 ? book.book.slice(0, 90) + "..." : book.book} 
+                                </div>
+                                <div class="bookType"><span class="showTypesofBook">Type <span class="indicator-circle-2"></span> ${book.type && book.type.trim() !== "" ? book.type : book.book.slice(0, 20) + "..."} <span class="indicator-circle-2"></span> ${WhichLang(book.book.length > 600 ? book.book.slice(0, 600) : book.book)}</span></div>
+                             `
+
+
+        if ((index + 1) % 2 !== 0){
+            createBook.classList.add("borderLeft")
+        } else {
+            createBook.classList.add("borderRight")
+        }
+
+        createBook.addEventListener("click", (e) => {
+            if (e.target.closest(".BookConfig")) return
+            ReadBooks(book)
+            BookPageActive("add")
+        })
+
+        readingBooksAll.appendChild(createBook)
+
+        
+        
+    })
+}
+
+
+document.addEventListener("click", (e) => {
+    const BookDeleteBtn = e.target.closest(".BookDeleteBtn")
+    const InOpenChatGPT = e.target.closest(".InOpenChatGPT")
+
+    if (BookDeleteBtn){
+        const BookDeleteId = BookDeleteBtn.dataset.id
+        allBooks = allBooks.filter(b => b.id !== BookDeleteId)
+        SavedAllCreatedBooks(allBooks)
+        RenderBooks(allBooks)
+    } 
+    if (InOpenChatGPT){
+        let InOpenChatGptId = decodeURIComponent(InOpenChatGPT.dataset.texts)
+        OpenInChatGPTAsk(InOpenChatGptId.length > 800 ? InOpenChatGptId.slice(0, 800) : InOpenChatGptId)
+    }
+})
+
+
+
+
+let SavedBooks = JSON.parse(GetStatus("SavedBooks")) || []
+let isBookPageActive = GetStatus("isBookPageActive") || "remove"
+
+function ReadBooks(book){
+    if (book === null) return
+
+
+    Booktitle.innerHTML = book.name ? book.name.length > 80 ? book.name.slice(0, 79) + "..." : book.name : (book.book || "").length > 80 ? book.book.slice(0, 79) + "..." : book.book
+    mainbookContent.innerHTML = book.book
+
+    SavedBooks = book
+    SetStatus("SavedBooks", "set", SavedBooks, "json")
+
+    OpenInChatGpt.addEventListener("click", () => {
+      OpenInChatGPTAsk(book.book)   
+    })
+}
+function BookPageActive(status){
+    if (status === "add"){
+        ReadBooksOverly.classList.remove("hideAnimate0")
+        body.classList.add("overflowHid")
+    } else if (status === "remove"){
+        ReadBooksOverly.classList.add("hideAnimate0")
+        body.classList.remove("overflowHid")
+        ReadBooks(null)
+    }
+
+    SetStatus("isBookPageActive", "set", status)
+}
+
+
+
+hideBooksOverly.addEventListener("click", () => {
+    BookPageActive("remove")
+})
+
+BookPageActive(isBookPageActive)
+
+ReadBooks(SavedBooks)
+
+SearchBooks.addEventListener("input", () => {
+    let searchValue = SearchBooks.value.trim().toLowerCase()
+    let filterBooks = allBooks.filter(b => b.name.toLowerCase().trim().includes(searchValue) || b.book.toLowerCase().trim().includes(searchValue)) || SavedBooks
+    ReadBooks(filterBooks[0])
+})
+
+
+let createBookOverlyis = GetStatus("createBookOverlyis") || "remove"
+
+function CreateBooksOverlyStatus(status){
+    if (status === "add"){
+        CreateNewBooksOverly.classList.remove("hideAnimate0")
+    } else {
+        CreateNewBooksOverly.classList.add("hideAnimate0")
+    }
+
+    SetStatus("createBookOverlyis", "set", status)
+}
+
+CreateBooksOverlyStatus(createBookOverlyis)
+
+
+
+function CreateBook(){
+    let InputBookNamevalue = InputBookName.value.trim()
+    let InputBookValue = inputBook.value.trim()
+    let BooksTypeValue = BooksType.value.trim()
+
+
+    if(!InputBookValue){
+        inputBook.focus()
+        return
+    }
+    let createBookOb = {
+        name: InputBookNamevalue, 
+        type: BooksTypeValue,
+        isBuildIn: false,
+        id: generateSafeUUID(),
+        book: InputBookValue
+    }
+    allBooks.push(createBookOb)
+    SavedAllCreatedBooks(allBooks)
+    RenderBooks(allBooks)
+    CreateBooksOverlyStatus("remove")
+
+
+    InputBookName.value = ""
+    inputBook.value = ""
+    BooksType.value = ""
+}
+
+// book section btns 
+CreateNewBook.addEventListener("click", () => {
+    CreateBooksOverlyStatus("add")
+})
+
+hidecreateBookOverly.addEventListener("click", () => {
+    CreateBooksOverlyStatus("remove")
+})
+
+CreateBookBtnInitial.addEventListener("click", () => {
+    CreateBook()
+})  
+
+function SavedAllCreatedBooks(books){
+    SetStatus("allBooks", "set", books , "json")
+}
+function OpenInChatGPTAsk(text, target){
+    let witchLang = WhichLang(text.length > 500 ? text.slice(0, 500) : text) === "EN" ? "Eglish" : "Bangla"
+    const url = `https://chat.openai.com/?q=${encodeURIComponent(text + "  At the end, explain the topic from first principles in simple but deep language, clarify why it works, remove jargon, address common misunderstandings, and summarize it in a crystal-clear way. language - " + witchLang)}`
+    window.open(url, target ? target : "_blank")
+}
