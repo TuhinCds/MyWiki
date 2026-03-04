@@ -158,7 +158,8 @@ const website = {
                     content: "Random Quastion in math", class: "", link: "", target: "", icon: `<i class="fa-solid fa-square-root-variable"></i>`, status: "pro", overWrite: []
                 }
             ]},
-            {content: "Learn Outside too", class: "", link: "", target: "", icon: `<i class="fa-solid fa-building-circle-arrow-right"></i>`, status: "old", overWrite: []},
+            {content: "Learn Outside too", class: "", link: "", target: "", icon: `<i class="fa-solid fa-building-circle-arrow-right"></i>`, status: "", overWrite: []},
+            {content: "Full Form Finder", class: "", link: "", target: "", icon: `<i class="fa-solid fa-building-circle-arrow-right"></i>`, status: "", overWrite: []},
             {content: "Learn Talk", class: "", link: "", target: "", icon: `<i class="fa-solid fa-square-poll-horizontal"></i>`, status: "", overWrite: []},
             {content: "Course's", class: "", link: "", target: "", icon: `<i class="fa-brands fa-youtube"></i>`, status: "", overWrite: []},
             {content: "Science", class: "", link: "", target: "", icon: `<i class="fa-solid fa-rocket"></i>`, status: "", overWrite: []},
@@ -234,6 +235,5 @@ const icons = [
         icon: `<i class="fa-solid fa-hashtag"></i>`
     },
 ]
-
 
 export {ShowDefaultImg, icons, website, MyProfile}

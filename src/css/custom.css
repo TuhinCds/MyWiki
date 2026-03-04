@@ -120,3 +120,24 @@
     height: 1px;
     background: var(--light-color-tra-35);
 }
+.styleBall {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+}
+.link {
+    color: rgb(15, 121, 235);
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    text-decoration: none;
+    font-weight: 560;
+}
+.link i {
+    font-size: .9rem;
+}
+.mark-c.blue{
+    color: rgb(49, 114, 255);
+}

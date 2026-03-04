@@ -5,6 +5,7 @@ import {Blogs} from '../../data/blogs.js'
 import {Books} from '../../data/books.js'
 let allPost = Posts.AllPost.filter(p => p.blog !== "")
 
+// all regex code 
 
 //  storages 
 
@@ -119,6 +120,10 @@ const HideDeleteHistory = document.getElementById("HideDeleteHistory")
 const showEmptyDeleteHistory = document.getElementById("showEmptyDeleteHistory")
 const CreateBlogsbtnFromHistory = document.getElementById("CreateBlogsbtnFromHistory")
 const DeleteAllBlogBtn = document.getElementById("DeleteAllBlogBtn")
+const SearchinSingleBlog = document.getElementById("SearchinSingleBlog")
+const SearchinSingleBlogPlaceholder = document.getElementById("SearchinSingleBlogPlaceholder")
+
+
 
 
 // books 
@@ -136,6 +141,9 @@ const CreateBookBtnInitial = document.getElementById("CreateBookBtnInitial")
 const inputBook = document.getElementById("inputBook")
 const InputBookName = document.getElementById("InputBookName")
 const BooksType = document.getElementById("BooksType")
+const Hide4mAllBook = document.getElementById("Hide4mAllBook")
+
+
 
 let allBooks
 try {
@@ -1444,6 +1452,7 @@ function InputBlogsData(Singleblogs, AllBlogs){
 
     SetStatus("SavedBlogOverly", "set", Singleblogs, "json")
     if (Singleblogs !== null){
+        let singleBlogD = Singleblogs.blog
         
         let createBlog = document.createElement("div")
         createBlog.innerHTML = `
@@ -1451,7 +1460,7 @@ function InputBlogsData(Singleblogs, AllBlogs){
             <div class="blog_x_title">
                 ${Singleblogs.title ? Singleblogs.title : Singleblogs.blog.slice(0, 40) + "..."}
             </div>
-            <div class="blog_x_main_content">${Singleblogs.blog}</div>
+            <div class="blog_x_main_content">${singleBlogD.replaceAll(/((https?|ftp):\/\/[^\s]+)/gi, url => `<a href="${url}" target="_blank" class="link mark-blue">${url}</a>`)}</div>
         </div>
         `
         ShowAllBlogsOverlyMain.appendChild(createBlog)
@@ -1871,12 +1880,15 @@ document.addEventListener("click", (e) => {
     }
 })
 
+const bookShowLength = 4;
+RenderBooks(allBooks, bookShowLength)
 
-RenderBooks(allBooks)
 
 
-function RenderBooks(books){
+function RenderBooks(books, length){
     readingBooksAll.innerHTML = ""
+
+    
 
     books.forEach((book, index) => {
         let createBook = document.createElement("div")
@@ -1884,15 +1896,18 @@ function RenderBooks(books){
         
         createBook.innerHTML = `
                                 <div class="BookConfig">
-                                    <button class="InOpenChatGPT" data-texts="${encodeURIComponent(book.book)}"><i class="fa-brands fa-openai"></i> Open Book</button>
+                                    <button class="InOpenChatGPT" data-texts="${encodeURIComponent(book.book)}"><i class="fa-brands fa-openai"></i> Open in chatGPT</button>
                                     ${book.isBuildIn ? "" : `<div class="border-w1c1"></div>
                                     <button class="BookDeleteBtn" data-id="${book.id}"><i class="fa-regular fa-trash-can"></i> Delete Book</button>`}
                                 </div>
-                                <div class="bookTitle"><i class="fa-solid fa-book-open"></i>${book.name ? book.name.length > 28 ? book.name.slice(0, 28) + "..." : book.name : book.book.length > 30 ? book.book.slice(0, 20) + "..." : book.book}</div>
+                                <div class="bookTitle"><i class="fa-solid fa-book-open"></i>${book.name ? book.name.length > 28 ? book.name.slice(0, 28) + "..." 
+                                    : book.name : book.book.length > 30 ? book.book.slice(0, 20) + "..." : book.book}</div>
                                 <div class="bookBody">
                                    ${(book.book || "").length > 90 ? book.book.slice(0, 90) + "..." : book.book} 
                                 </div>
-                                <div class="bookType"><span class="showTypesofBook">Type <span class="indicator-circle-2"></span> ${book.type && book.type.trim() !== "" ? book.type : book.book.slice(0, 20) + "..."} <span class="indicator-circle-2"></span> ${WhichLang(book.book.length > 600 ? book.book.slice(0, 600) : book.book)}</span></div>
+                                <div class="bookType"><span class="showTypesofBook">Type <span class="indicator-circle-2"></span> 
+                                ${book.type && book.type.trim() !== "" ? book.type : book.book.slice(0, 20) + "..."} 
+                                <span class="indicator-circle-2"></span> ${WhichLang(book.book.length > 600 ? book.book.slice(0, 600) : book.book)}</span></div>
                              `
 
 
@@ -1907,6 +1922,10 @@ function RenderBooks(books){
             ReadBooks(book)
             BookPageActive("add")
         })
+
+        if (length && index > (length - 1)){
+            return
+        }
 
         readingBooksAll.appendChild(createBook)
 
@@ -1933,8 +1952,6 @@ document.addEventListener("click", (e) => {
 })
 
 
-
-
 let SavedBooks = JSON.parse(GetStatus("SavedBooks")) || []
 let isBookPageActive = GetStatus("isBookPageActive") || "remove"
 
@@ -1943,7 +1960,13 @@ function ReadBooks(book){
 
 
     Booktitle.innerHTML = book.name ? book.name.length > 80 ? book.name.slice(0, 79) + "..." : book.name : (book.book || "").length > 80 ? book.book.slice(0, 79) + "..." : book.book
-    mainbookContent.innerHTML = book.book
+    mainbookContent.innerHTML = book.book ? book.book.replaceAll(/((https?|ftp):\/\/[^\s]+)|[\[\(\{][^\]\)\}]+[\]\)\}]/gi, match => {
+        if (/^(https?|ftp):\/\//i.test(match)){
+            return `<a href="${match}" target="_blank" class="link mark-blue"><i class="fa-solid fa-up-right-from-square"></i>${match}</a>`
+        } else if (/[\[\(\{][^\]\)\}]+[\]\)\}]/gi.test(match)) {
+            return `<span class="mark-c blue">${match}</span>`
+        }
+    }) : ""
 
     SavedBooks = book
     SetStatus("SavedBooks", "set", SavedBooks, "json")
@@ -2017,7 +2040,7 @@ function CreateBook(){
     }
     allBooks.push(createBookOb)
     SavedAllCreatedBooks(allBooks)
-    RenderBooks(allBooks)
+    RenderBooks(allBooks, bookShowLength)
     CreateBooksOverlyStatus("remove")
 
 
@@ -2037,13 +2060,81 @@ hidecreateBookOverly.addEventListener("click", () => {
 
 CreateBookBtnInitial.addEventListener("click", () => {
     CreateBook()
+    BookShowOfLen(1)
 })  
 
 function SavedAllCreatedBooks(books){
     SetStatus("allBooks", "set", books , "json")
 }
+
 function OpenInChatGPTAsk(text, target){
     let witchLang = WhichLang(text.length > 500 ? text.slice(0, 500) : text) === "EN" ? "Eglish" : "Bangla"
-    const url = `https://chat.openai.com/?q=${encodeURIComponent(text + "  At the end, explain the topic from first principles in simple but deep language, clarify why it works, remove jargon, address common misunderstandings, and summarize it in a crystal-clear way. language - " + witchLang)}`
+    const url = `https://chat.openai.com/?q=${encodeURIComponent(`${text} At the end, explain the topic from first principles in simple but deep language, clarify why it works, remove jargon, address common misunderstandings, and summarize it in a crystal-clear way. language - ${witchLang}`)}`
+    
     window.open(url, target ? target : "_blank")
 }
+
+let hideC1 = 0
+
+try {
+    hideC1 = Number(GetStatus("SavedHideShowLenBook"))
+} catch (err) {
+    hideC1 = 0
+    BookShowOfLen(hideC1)
+}
+
+Hide4mAllBook.addEventListener("click", () => {
+    hideC1++
+    if (hideC1 > 1){
+        hideC1 = 0
+    }
+
+    BookShowOfLen(hideC1)
+})
+
+SearchinSingleBlog.addEventListener("input", () => {
+    let blogSearchInput = SearchinSingleBlog.value.trim().toLowerCase()
+
+    if (blogSearchInput.length < 1){
+        SearchinSingleBlogPlaceholder.style.opacity = "1"
+    } else {
+        SearchinSingleBlogPlaceholder.style.opacity = "0"
+    }
+})
+
+BookShowOfLen(hideC1)
+
+function BookShowOfLen(countL){
+   if (countL === 1){
+        RenderBooks(allBooks)
+        Hide4mAllBook.classList.add("rotateY")
+    } else {
+        RenderBooks(allBooks, bookShowLength)
+        Hide4mAllBook.classList.remove("rotateY")
+    }
+    SetStatus("SavedHideShowLenBook", "set", countL) 
+}
+
+let colorC1 = GetStatus("mainBookcolorSaved") || "white_60"
+
+mainbookContent.addEventListener("click", () => {
+    removeShowmainbookContentColor(colorC1)
+    if (colorC1 === "white_60"){
+        colorC1 = "white_80"
+    } else if (colorC1 === "white_80"){
+        colorC1 = "white"
+    } else if (colorC1 === "white"){
+        colorC1 = "white_60"
+    }
+
+    AddShowmainbookContentColor(colorC1)
+    SetStatus("mainBookcolorSaved", "set", colorC1)
+})
+
+function AddShowmainbookContentColor(color){
+    mainbookContent.classList.add(`${color}`)
+}
+function removeShowmainbookContentColor(color){
+    mainbookContent.classList.remove(`${color}`)
+}
+AddShowmainbookContentColor(colorC1)

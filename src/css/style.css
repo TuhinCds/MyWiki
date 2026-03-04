@@ -2830,8 +2830,6 @@ body.overflowHid {
     align-items: center;
     justify-content: space-between;
     padding: 10px 20px;
-    position: sticky;
-    top: 0;
     background: var(--bg-color);
 }
 #ReadBooksOverly .readBooksOverlyHead .rightBooksOvelyHead {
@@ -3060,4 +3058,48 @@ body.overflowHid {
 }
 .Book .BookConfig button.BookDeleteBtn {
     color: rgba(213, 0, 0, 0.896);
+}
+#Hide4mAllBook {
+    width: 49px !important;
+    height: 49px !important;
+    background: var(--block-color);
+    color: var(--text-color-80);
+    border: .1px solid var(--light-color-tra-25);
+}
+#Hide4mAllBook i {
+    transform: rotate(180deg);
+    transition: transform .4s;
+}
+#Hide4mAllBook.rotateY i {
+    transform: rotate(0deg);
+}
+.createBooksContainer {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-direction: row-reverse;
+}
+.searchContainer:not(.searchContainer.two) {
+    background: transparent;
+}
+#SearchinSingleBlogPlaceholder {
+    pointer-events: none;
+}
+
+.bookMainContentShow {
+    position: relative;
+}
+#EditTextContent {
+    position: fixed;
+    background: red;
+    bottom: 10px;
+}
+#mainbookContent.white {
+    color: var(--text-color) !important;
+}
+#mainbookContent.white_80 {
+    color: var(--text-color-80) !important;
+}
+#mainbookContent.white_60 {
+    color: var(--text-color-60) !important;
 }
