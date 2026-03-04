@@ -31,76 +31,7 @@ let allYoutubeChannels = [
                 target: "_blank",
                 platform: "youtube"
             },
-            {
-                content: "C++ Programing Course - Full Tutorial for Beginners",
-                channel: "CS50",
-                link: "https://youtu.be/8jLOx1hD3_o?si=2tqHrYK9JFRme5Y4",
-                target: "_blank",
-                platform: "youtube"
-            },
-            {
-                content: "C++ Programing Course - Full Tutorial for Beginners",
-                channel: "CS50",
-                link: "https://youtu.be/8jLOx1hD3_o?si=2tqHrYK9JFRme5Y4",
-                target: "_blank",
-                platform: "youtube"
-            },
-            {
-                content: "C++ Programing Course - Full Tutorial for Beginners",
-                channel: "CS50",
-                link: "https://youtu.be/8jLOx1hD3_o?si=2tqHrYK9JFRme5Y4",
-                target: "_blank",
-                platform: "youtube"
-            },
-            {
-                content: "C++ Programing Course - Full Tutorial for Beginners",
-                channel: "CS50",
-                link: "https://youtu.be/8jLOx1hD3_o?si=2tqHrYK9JFRme5Y4",
-                target: "_blank",
-                platform: "youtube"
-            },
-            {
-                content: "C++ Programing Course - Full Tutorial for Beginners",
-                channel: "CS50",
-                link: "https://youtu.be/8jLOx1hD3_o?si=2tqHrYK9JFRme5Y4",
-                target: "_blank",
-                platform: "youtube"
-            },
-            {
-                content: "C++ Programing Course - Full Tutorial for Beginners",
-                channel: "CS50",
-                link: "https://youtu.be/8jLOx1hD3_o?si=2tqHrYK9JFRme5Y4",
-                target: "_blank",
-                platform: "youtube"
-            },
-            {
-                content: "C++ Programing Course - Full Tutorial for Beginners",
-                channel: "CS50",
-                link: "https://youtu.be/8jLOx1hD3_o?si=2tqHrYK9JFRme5Y4",
-                target: "_blank",
-                platform: "youtube"
-            },
-            {
-                content: "C++ Programing Course - Full Tutorial for Beginners",
-                channel: "CS50",
-                link: "https://youtu.be/8jLOx1hD3_o?si=2tqHrYK9JFRme5Y4",
-                target: "_blank",
-                platform: "youtube"
-            },
-            {
-                content: "C++ Programing Course - Full Tutorial for Beginners",
-                channel: "CS50",
-                link: "https://youtu.be/8jLOx1hD3_o?si=2tqHrYK9JFRme5Y4",
-                target: "_blank",
-                platform: "youtube"
-            },
-            {
-                content: "C++ Programing Course - Full Tutorial for Beginners",
-                channel: "CS50",
-                link: "https://youtu.be/8jLOx1hD3_o?si=2tqHrYK9JFRme5Y4",
-                target: "_blank",
-                platform: "youtube"
-            },
+           
         ]
     },
     {   
@@ -138,9 +69,27 @@ let allYoutubeChannels = [
             
         ]
     },
+    {   
+        profile_img: "https://yt3.googleusercontent.com/ytc/AIdro_nFzZFPLxPZRHcE3SSwzdrbuWqfoWYwLAu0_2iO6blQYAU=s160-c-k-c0x00ffffff-no-rj",
+        channel: "3Blue1Brown",
+        link: "www.youtube.com/@3blue1brown",
+        topics: ["Mathmatics"],
+        description: "Mathmatics",
+        keyword: ["math", "learn math", "learning", "best for learn"],
+        links: [
+            {
+                content: "CS50 2023",
+                channel: "CS50",
+                link: "https://www.youtube.com/playlist?list=PLhQjrBD2T380DH9nYJq7n9i8VjLwXqg",
+                target: "_blank",
+                platform: "youtube"
+            },
+            
+        ]
+    },
 
 ]
 
-let ChannelsTypes = [ "All", "engineering", "software", "univercity", "code", "programming", "fun with teaches programming", "exarsice"]
+let ChannelsTypes = [ "All", "engineering", "software", "univercity", "code", "programming", "fun with teaches programming", "exarsice", "Math"]
 export {allYoutubeChannels, ChannelsTypes}
 
